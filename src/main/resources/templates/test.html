@@ -5,6 +5,32 @@
     <title>Title</title>
 </head>
 <body>
-aaabbb
+
+<!--<script src="../content/jquery.js">-->
+<!--</script>-->
+
+<script src="webjars/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script>
+    function fun(btn){
+        var data={
+            str:"poststring"
+        }
+        $.post("/testfun",data,function(rel){
+            if(rel=="success"){
+                alert("success")
+            }
+            else{
+                alert("abcde")
+            }
+        })
+    }
+
+</script>
+<button onclick="fun(this)" id="abc">
+    给后端post数据的button
+</button>
 </body>
 </html>
