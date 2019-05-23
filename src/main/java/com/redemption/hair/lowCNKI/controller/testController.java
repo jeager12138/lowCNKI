@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class testController {
 
-    @RequestMapping(path = {"/", "/index"}, method = {RequestMethod.GET})
+    @RequestMapping(path = {"/testfun", "/index"}, method = {RequestMethod.POST})
     @ResponseBody
-    public String index() {
-        return "Hello lowCNKI";
+    public String index(String str) {
+        System.out.println(str);
+        return "success";
     }
 
     @RequestMapping(path = {"/test"}, method = {RequestMethod.GET})
