@@ -20,4 +20,7 @@ public interface Paper_masterDAO {
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where keywords=#{keywords}"})
     List<Paper_master> getMasterByKeyword(String keywords);
 
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where rid=#{rid}"})
+    List<Paper_master> getMasterByRid(int rid);
+
 }

@@ -1,15 +1,14 @@
 package com.redemption.hair.lowCNKI.controller;
 
 
-import com.redemption.hair.lowCNKI.DAO.Co_expertsDAO;
-import com.redemption.hair.lowCNKI.DAO.ExpertsDAO;
-import com.redemption.hair.lowCNKI.DAO.Paper_masterDAO;
-import com.redemption.hair.lowCNKI.model.Paper_master;
+import com.redemption.hair.lowCNKI.DAO.*;
+import com.redemption.hair.lowCNKI.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -23,6 +22,12 @@ public class testController {
     ExpertsDAO expertsDAO;
     @Autowired
     Paper_masterDAO paper_masterDAO;
+    @Autowired
+    Paper_journalDAO paper_journalDAO;
+    @Autowired
+    Paper_meetingDAO paper_meetingDAO;
+    @Autowired
+    PatentsDAO patentsDAO;
 
     @RequestMapping(path = {"/", "/index"}, method = {RequestMethod.GET})
     @ResponseBody
@@ -48,4 +53,6 @@ public class testController {
         }
         return str;
     }
+
+
 }
