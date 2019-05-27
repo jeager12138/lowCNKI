@@ -4,6 +4,8 @@ import com.redemption.hair.lowCNKI.model.Experts;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface ExpertsDAO {
     String TABLE_NAME = " Experts ";
@@ -16,6 +18,11 @@ public interface ExpertsDAO {
     @Select({"select id from ", TABLE_NAME, " where name=#{name}"})
     int getIdbyName(String name);
 
+    @Select({"select", SELECT_FIELDS," from ", TABLE_NAME, " where Major=#{Major}"})
+    List<Experts> getExpertsByMajor(String Major);
+
+    @Select({"select", SELECT_FIELDS," from ", TABLE_NAME, " where constitution=#{constitution}"})
+    List<Experts> getExpertsByInstitution(String constitution);
 
 
 }
