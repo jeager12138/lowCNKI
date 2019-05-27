@@ -13,8 +13,13 @@ public interface ExpertsDAO {
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where name=#{name}"})
     Experts getExpertsByName(String name);
 
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, "where id=#{id}"})
+    Experts getExpertsById(int id);
+
     @Select({"select id from ", TABLE_NAME, " where name=#{name}"})
     int getIdbyName(String name);
+
+
 
 
 
