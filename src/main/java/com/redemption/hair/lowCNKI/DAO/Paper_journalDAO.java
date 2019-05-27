@@ -5,6 +5,8 @@ import com.redemption.hair.lowCNKI.model.Paper_journal;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface Paper_journalDAO {
     String TABLE_NAME = " Paper_journal ";
@@ -12,11 +14,11 @@ public interface Paper_journalDAO {
 
 
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where title=#{title}"})
-    Paper_journal getJournalByTitle(String title);
+    List<Paper_journal> getJournalByTitle(String title);
 
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where rid=#{rid}"})
-    Paper_journal getJournalByRid(int rid);
+    List<Paper_journal> getJournalByRid(int rid);
 
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where keywords=#{keywords}"})
-    Paper_journal getJournalByKeyword(String keyword);
+    List<Paper_journal> getJournalByKeyword(String keyword);
 }
