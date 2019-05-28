@@ -53,4 +53,8 @@ public class testController {
         return str;
     }
 
+    @RequestMapping(path = {"/expert"}, method = {RequestMethod.GET})
+    public String expert() {
+        return "expert";
+    }
 }
