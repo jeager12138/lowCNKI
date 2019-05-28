@@ -32,5 +32,11 @@
 <button onclick="fun(this)" id="abc">
     给后端post数据的button
 </button>
+<#list papers as paper>
+    ${paper.title}
+    ${paper.url}
+</#list>
+
+
 </body>
 </html>
