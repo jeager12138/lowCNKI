@@ -11,6 +11,8 @@ public interface Paper_masterDAO {
     String TABLE_NAME = " Paper_master ";
     String SELECT_FIELDS = " lid, title, rid, summary, keywords, time_, page_number, cited_times, class_number, download_times, references_, institution, year, tutor, url ";
 
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, "where locate('rid','rid')>0"})
+    List<Paper_master> getPaperByRid(int rid);
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where locate('title','title')>0"})
     List<Paper_master> getMasterByTitle(String title);
 
