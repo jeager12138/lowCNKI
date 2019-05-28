@@ -20,4 +20,10 @@ public class testController {
     public String testFreeMarker() {
         return "test";
     }
+
+    @RequestMapping(path = {"/expert"}, method = {RequestMethod.GET})
+    public String expert() {
+        return "expert";
+    }
+
 }
