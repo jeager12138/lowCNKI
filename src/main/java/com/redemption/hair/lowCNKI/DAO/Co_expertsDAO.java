@@ -10,7 +10,7 @@ public interface Co_expertsDAO {
     String TEST_FIELD = " co_expert_id ";
     String TABLE_NAME = " Co_experts ";
 
-    @Select({"select co_expert_id from Co_experts where expert_id=#{expert_id}"})
+    @Select({"select",TEST_FIELD ,"from",  TABLE_NAME, "where locate('expert_id','co_expert_id')>0"})
     int selectCoIdByExpertId(int expert_id);
 
 }
