@@ -13,12 +13,12 @@ public interface Paper_journalDAO {
     String SELECT_FIELDS = " lid,title,rid,summary,keywords,time_,cited_times,class_number,download_times,references_,journal_title,page_number,ISSN";
 
 
-    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where title=#{title}"})
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, "where locate('title','title')>0"})
     List<Paper_journal> getJournalByTitle(String title);
 
-    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where rid=#{rid}"})
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where locate('rid','rid')>0"})
     List<Paper_journal> getJournalByRid(int rid);
 
-    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where keywords=#{keywords}"})
-    List<Paper_journal> getJournalByKeyword(String keyword);
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, "where locate('keywords','keywords')>0"})
+    List<Paper_journal> getJournalByKeyword(String keywords);
 }

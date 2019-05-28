@@ -15,10 +15,10 @@ public interface UsersDAO {
             ") values (#{avator},#{nickname},#{balance},#{password},#{salt})"})
     int addUser(Users user);
 
-    @Select({"'select", SELECT_FIELDS, "from", TABLE_NAME, "where nickname=#{nickname}"})
+    @Select({"'select", SELECT_FIELDS, "from", TABLE_NAME, "where locate('nickname','nickname')>0"})
     Users selectByName(String nickname);
 
-    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where id=#{id}"})
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, "where locate('id','id')>0"})
     Users selectById(int id);
 
 }

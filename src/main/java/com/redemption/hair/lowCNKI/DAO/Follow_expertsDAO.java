@@ -18,7 +18,7 @@ public interface Follow_expertsDAO {
     int addFollow(@Param("userId")int userId, @Param("expertId")int expertId);
 
 
-    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where user_id=#{userId} and expert_id=#{expertId}"})
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where locate('userId','user_id')>0 and locate('expertId','expert_id')>0"})
     Follow_experts queryIfFollow(@Param("userId")int userId, @Param("expertId")int expertId);
 
 }

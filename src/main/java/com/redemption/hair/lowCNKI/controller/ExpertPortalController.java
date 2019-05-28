@@ -44,7 +44,6 @@ public class ExpertPortalController {
 
     @RequestMapping(path = {"/expert"}, method = {RequestMethod.GET})
     public String getExpertInformation(Model model, @RequestParam("ExpertId")int expertId) {
-        System.out.println(expertId);
         Experts e = expertsDAO.getExpertsById(expertId);
         model.addAttribute("expert", e);                     //专家信息
 
