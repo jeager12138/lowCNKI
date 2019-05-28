@@ -18,6 +18,9 @@ public interface ExpertsDAO {
     @Select({"select id from ", TABLE_NAME, " where name=#{name}"})
     int getIdbyName(String name);
 
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where id=#{id}"})
+    Experts getExpertsById(int id);
+
     @Select({"select", SELECT_FIELDS," from ", TABLE_NAME, " where Major=#{Major}"})
     List<Experts> getExpertsByMajor(String Major);
 

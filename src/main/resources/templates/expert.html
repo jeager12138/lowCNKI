@@ -37,10 +37,9 @@
                      <div class="ace-head-row">
                          <div id="ace-head-col1" class="ace-head-col text-left">
                              <a id="ace-logo" class="ace-logo" href="index.html">
-                                <img src="../static/img/uploads/brand/logo.svg" alt="ace resume"><span>.Certy</span>
+                                <img src="../static/img/uploads/logo.png" alt="ace resume"><span>${expert.name}</span>
                              </a>
                          </div>
-
                          <div id="ace-head-col2" class="ace-head-col text-right">
                              <div class="ace-nav-container ace-container hidden-sm hidden-xs">
                                  <nav id="ace-main-nav">
@@ -70,7 +69,7 @@
         <nav id="ace-nav-sm" class="ace-nav hidden-lg hidden-md">
             <ul class="clear-list">
 				<li>
-					<a href="index.html" data-tooltip="Home"><img class="avatar avatar-42" src="../img/uploads/avatar/avatar-58x58-default.png" alt=""></a>
+					<a href="index.html" data-tooltip="Home"><img class="avatar avatar-42" src="../static/img/uploads/logo.png" alt=""></a>
 				</li>
 				<li>
 					<a href="experience.html" data-tooltip="Experience"><span class="ace-icon ace-icon-experience"></span></a>
@@ -92,9 +91,9 @@
 
         <article id="ace-card" class="ace-card bg-primary">
 			<div class="ace-card-inner text-center">
-				<img class="avatar avatar-195" src="../img/uploads/avatar/avatar-58x58-default.png" width="195" height="195" alt="">
-				<h1>学者名</h1>
-				<p class="text-muted">所属机构</p>
+				<img class="avatar avatar-195" src="../static/img/uploads/avatar/avatar-58x58-default.png" width="195" height="195" alt="">
+				<h1>${expert.name}</h1>
+				<p class="text-muted">${expert.constitution}</p>
 				<ul class="ace-social clear-list">
 					<li><a><span class="ace-icon ace-icon-facebook"></span></a></li>
 					<li><a><span class="ace-icon ace-icon-twitter"></span></a></li>
@@ -119,7 +118,7 @@
                                 <nav id="ace-nav" class="ace-nav">
                                     <ul class="clear-list">
 										<li>
-											<a href="index.html" data-tooltip="Home"><img class="avatar avatar-42" src="../img/uploads/avatar/avatar-58x58-default.png" alt=""></a>
+											<a href="index.html" data-tooltip="Home"><img class="avatar avatar-42" src="../static/img/uploads/avatar/avatar-58x58-default.png" alt=""></a>
 										</li>									
 										<li>
 											<a href="experience.html" data-tooltip="Experience"><span class="ace-icon ace-icon-experience"></span></a>
@@ -160,7 +159,7 @@
         <section class="section brd-btm">
             <div class="row">
                 <div class="col-sm-12 clear-mrg text-box">
-                    <h2 class="title-lg text-upper">学者名</h2>
+                    <h2 class="title-lg text-upper">${expert.name}</h2>
                 </div>
             </div>
         </section><!-- .section -->
@@ -171,14 +170,14 @@
                     <h2 class="title-thin text-muted">学者信息</h2>
 
                     <dl class="dl-horizontal clear-mrg">
-                        <dt class="text-upper">XXX</dt>
-                        <dd>XXX</dd>
+                        <dt class="text-upper">机构</dt>
+                        <dd>${expert.name}</dd>
 
-                        <dt class="text-upper">XXX</dt>
-                        <dd>XXX</dd>
+                        <dt class="text-upper">年龄</dt>
+                        <dd>${expert.age}</dd>
 
-                        <dt class="text-upper">XXX</dt>
-                        <dd>XXX</dd>
+                        <dt class="text-upper">专业方向</dt>
+                        <dd>${expert.major}</dd>
 
                     </dl>
                 </div><!-- .col-sm-6 -->
@@ -186,38 +185,30 @@
                 <div class="col-sm-6 clear-mrg">
                     <h2 class="title-thin text-muted">影响</h2>
 
-                    <div class="progress-bullets ace-animate" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10">
+                    <div class="progress-bullets ace-animate" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10">
                         <strong class="progress-title">被引频次</strong>
-                        <span class="progress-bar">
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
+                        <span class="progress-bar">${refPercent}
+                            <#list 0..refPercent as i>
+                              <span class="bullet fill"></span>
+                            </#list>
+                            <#list 0..(10-refPercent) as i>
+                                <span class="bullet"></span>
+                            </#list>
                         </span>
-                        <span class="progress-text text-muted">XXX</span>
+                        <span class="progress-text text-muted">${refNumber}</span>
                     </div>
 
-                    <div class="progress-bullets ace-animate" role="progressbar" aria-valuenow="8" aria-valuemin="0" aria-valuemax="10">
+                    <div class="progress-bullets ace-animate" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10">
                         <strong class="progress-title">成果数</strong>
-                        <span class="progress-bar">
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet fill"></span>
-                            <span class="bullet"></span>
-                            <span class="bullet"></span>
+                        <span class="progress-bar">${totalPercent}
+                            <#list 0..totalPercent as i>
+                              <span class="bullet fill"></span>
+                            </#list>
+                            <#list 0..(10-totalPercent) as i>
+                                <span class="bullet"></span>
+                            </#list>
                         </span>
-                        <span class="progress-text text-muted">XXX</span>
+                        <span class="progress-text text-muted">${totalNumber}</span>
                     </div>
                 </div><!-- .col-sm-6 -->
             </div><!-- .row -->
@@ -226,34 +217,34 @@
         <section class="section brd-btm">
             <div class="row">
                 <div class="col-sm-6 clear-mrg">
-                    <h2 class="title-thin text-muted">总计：XXX篇</h2>
+                    <h2 class="title-thin text-muted">总计：${totalNumber}篇</h2>
 
                     <div class="row">
                         <div class="col-xs-4">
                             <div class="progress-chart ace-animate" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar" data-text="90%" data-value="0.9"></div>
+                                <div class="progress-bar" data-text="${journalRate}%" data-value="${journalRate/100}"></div>
                                 <strong class="progress-title">期刊</strong>
                             </div>
                         </div><!-- .col-xs-4 -->
 
                         <div class="col-xs-4">
                             <div class="progress-chart ace-animate" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar" data-text="81%" data-value="0.81"></div>
+                                <div class="progress-bar" data-text="${masterRate}%" data-value="${masterRate/100}"></div>
+                                <strong class="progress-title">博硕</strong>
+                            </div>
+                        </div><!-- .col-xs-4 -->
+
+                        <div class="col-xs-4">
+                            <div class="progress-chart ace-animate" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" data-text="${patentRate}%" data-value="${patentRate/100}"></div>
+                                <strong class="progress-title">专利</strong>
+                            </div>
+                        </div><!-- .col-xs-4 -->
+
+                        <div class="col-xs-4">
+                            <div class="progress-chart ace-animate" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" data-text="${meetingRate}%" data-value="${meetingRate/100}"></div>
                                 <strong class="progress-title">会议</strong>
-                            </div>
-                        </div><!-- .col-xs-4 -->
-
-                        <div class="col-xs-4">
-                            <div class="progress-chart ace-animate" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar" data-text="66%" data-value="0.66"></div>
-                                <strong class="progress-title">专著</strong>
-                            </div>
-                        </div><!-- .col-xs-4 -->
-
-                        <div class="col-xs-4">
-                            <div class="progress-chart ace-animate" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar" data-text="66%" data-value="0.66"></div>
-                                <strong class="progress-title">其他</strong>
                             </div>
                         </div><!-- .col-xs-4 -->
                     </div><!-- .row -->
@@ -265,22 +256,14 @@
         <section class="section brd-btm">
             <div class="row">
                 <div class="col-sm-6 clear-mrg">
-                    <h2 class="title-thin text-muted">文章</h2>
+                    <h2 class="title-thin text-muted" >文章</h2>
 
-                    <div class="progress-line ace-animate" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-                        <strong class="progress-title">文献名XXX</strong>
-                        <div class="progress-bar" data-text="引用X次" data-value="0.9"></div>
-                    </div>
-
-                    <div class="progress-line ace-animate" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                        <strong class="progress-title">文献名XXX</strong>
-                        <div class="progress-bar" data-text="引用X次" data-value="0.8"></div>
-                    </div>
-
-                    <div class="progress-line ace-animate" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                        <strong class="progress-title">文献名XXX</strong>
-                        <div class="progress-bar" data-text="引用X次" data-value="0.8"></div>
-                    </div>
+                    <#list masterList as masterpaper>
+                        <div class="progress-line ace-animate" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            <strong class="progress-title">文献名:${masterpaper.title}</strong>
+                            <div class="progress-bar" data-text="引用3次" data-value="0.3"></div>
+                        </div>
+                    </#list>
                 </div><!-- .col-sm-6 -->
 
                 <!--<div class="col-sm-6 clear-mrg">-->
@@ -469,7 +452,7 @@
 			<article class="ace-card bg-primary">
 				<div class="ace-card-inner text-center">
 					<img class="avatar avatar-195" src="../static/img/uploads/avatar/avatar-58x58-default.png" width="195" height="195" alt="">
-					<h1>学者名</h1>
+					<h1>${expert.name}</h1>
 					<p class="text-muted">学科</p>
 					<ul class="ace-social clear-list">
 						<li><a><span class="ace-icon ace-icon-facebook"></span></a></li>
