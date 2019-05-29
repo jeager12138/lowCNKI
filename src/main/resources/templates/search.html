@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOW CNKI搜索页</title>
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./css/search.css">
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.min.css"/>
+    <link rel="stylesheet" href="./css/custom.css">
+
+</head>
+<body>
+<table id="hp_table" role="none">
+    <tbody>
+    <tr>
+        <td id="hp_cellCenter" class="hp_hd">
+            <div id="hp_container">
+                <div id="bgDiv" style="width: 1519px; height: 855px; top: -128px; left: 0px;">
+                    <div id="hp_vidwrp"></div>
+                    <video id="vid" onended="_w.VM &amp;&amp; VM.pause();" autobuffer="autobuffer" preload="auto"
+                           oncontextmenu="return false"
+                           style="width: 1519px; height: 855px; top: -128px; left: 0px;"></video>
+                </div>
+                <div id="sbox" class="sw_sform" data-bm="9">
+                    <div class="hp_sw_logo hpcLogoWhite" data-bm="14">必应</div>
+                    <div id="est_switch">
+                        <div id="est_cn" class="est_selected">国内版</div>
+                        <div id="est_en" class="est_unselected">国际版</div>
+                    </div>
+                    <div class="search_controls"><a id="hpinsthk" aria-hidden="true" tabindex="-1"
+                                                    href="javascript:void(0)" h="ID=SERP,5092.1"><span></span></a>
+                        <form action="/search" onsubmit="var id = _ge('hpinsthk').getAttribute('h'); return si_T(id);"
+                              role="none" id="sb_form" class="sw_box">
+                            <div class="b_searchboxForm" role="search" data-bm="15"><input class="b_searchbox"
+                                                                                           id="sb_form_q" name="q"
+                                                                                           title="输入搜索词" type="search"
+                                                                                           value="" maxlength="100"
+                                                                                           autocapitalize="off"
+                                                                                           autocorrect="off"
+                                                                                           autocomplete="off"
+                                                                                           spellcheck="false"
+                                                                                           aria-controls="sw_as"
+                                                                                           aria-autocomplete="both"
+                                                                                           aria-owns="sw_as"><input
+                                    type="submit" class="b_searchboxSubmit" id="sb_form_go" title="搜索" tabindex="-1"
+                                    name="go"><input id="sa_qs" name="qs" value="ds" type="hidden"><input type="hidden"
+                                                                                                          value="QBLH"
+                                                                                                          name="form">
+                                <div id="sw_as" role="listbox" aria-label="建议"
+                                     style="display: block; margin-left: -1px; margin-right: 1px;">
+                                    <div class="sa_as" data-priority="2" data-bm="20"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="shader_left" data-bm="10"></div>
+                <div class="shader_right" data-bm="11"></div>
+                <div id="hp_sw_hdr" class="hp_hor_hdr" data-bm="12">
+                    <div class="sw_tb">
+                        <ul id="sc_hdu" class="sc_hl1 hp_head_nav" role="navigation">
+                            <li id="scpt0" class="" data-bm="0"><a id="scpl0" aria-owns="scpc0" aria-controls="scpc0"
+                                                                   aria-expanded="false"
+                                                                   onclick="hpulc4hdr();selectScope(this, 'images');"
+                                                                   href="/images?FORM=Z9LH" h="ID=SERP,5027.1">图片</a>
+                                <div id="scpc0" role="group" aria-labelledby="scpl0" aria-hidden="true"
+                                     aria-expanded="false"></div>
+                            </li>
+                            <li id="scpt1" class="" data-bm="1"><a id="scpl1" aria-owns="scpc1" aria-controls="scpc1"
+                                                                   aria-expanded="false"
+                                                                   onclick="hpulc4hdr();selectScope(this, 'video');"
+                                                                   href="/videos?FORM=Z9LH1" h="ID=SERP,5028.1">视频</a>
+                                <div id="scpc1" role="group" aria-labelledby="scpl1" aria-hidden="true"
+                                     aria-expanded="false"></div>
+                            </li>
+                            <li id="scpt2" class="" data-bm="2"><a id="scpl2" aria-owns="scpc2" aria-controls="scpc2"
+                                                                   aria-expanded="false"
+                                                                   onclick="hpulc4hdr();selectScope(this, 'academic');"
+                                                                   href="/academic/?FORM=Z9LH2"
+                                                                   h="ID=SERP,5029.1">学术</a>
+                                <div id="scpc2" role="group" aria-labelledby="scpl2" aria-hidden="true"
+                                     aria-expanded="false"></div>
+                            </li>
+                            <li id="scpt3" class="" data-bm="3"><a id="scpl3" aria-owns="scpc3" aria-controls="scpc3"
+                                                                   aria-expanded="false"
+                                                                   onclick="hpulc4hdr();selectScope(this, 'dictionary');"
+                                                                   href="/dict?FORM=Z9LH3" h="ID=SERP,5030.1">词典</a>
+                                <div id="scpc3" role="group" aria-labelledby="scpl3" aria-hidden="true"
+                                     aria-expanded="false"></div>
+                            </li>
+                            <li id="scpt4" class="" data-bm="4"><a id="scpl4" aria-owns="scpc4" aria-controls="scpc4"
+                                                                   aria-expanded="false"
+                                                                   onclick="hpulc4hdr();selectScope(this, 'local');"
+                                                                   href="/maps?FORM=Z9LH4" h="ID=SERP,5031.1">地图</a>
+                                <div id="scpc4" role="group" aria-labelledby="scpl4" aria-hidden="true"
+                                     aria-expanded="false"></div>
+                            </li>
+                            <li id="hdr_spl" data-bm="5">|</li>
+                            <li id="office" data-bm="6"><a aria-owns="off_menu_cont" aria-controls="off_menu_cont"
+                                                           aria-expanded="false" target="_blank" onclick="hpulc4hdr();"
+                                                           href="https://www.office.com?WT.mc_id=O16_BingHP"
+                                                           h="ID=SERP,5018.1">Office Online</a>
+                                <div id="off_menu_cont" aria-labelledby="off_link" aria-expanded="false"
+                                     aria-hidden="true" class="sc_pc" data-officemenuroot="office"
+                                     style="left: 362px; display: block; visibility: hidden;">
+                                    <ul class="om" style="display: block;">
+                                        <li><a id="officemenu_word" title="Word Online" target="_blank"
+                                               onclick="hpulc4hdr();"
+                                               href="https://office.live.com/start/Word.aspx?WT.mc_id=O16_BingHP"
+                                               h="ID=SERP,5032.1">
+                                            <div>
+                                                <div class="oml_img" id="officemenu_word_img"></div>
+                                                <div class="itm_desc">Word Online</div>
+                                            </div>
+                                        </a></li>
+                                        <li><a id="officemenu_excel" title="Excel Online" target="_blank"
+                                               onclick="hpulc4hdr();"
+                                               href="https://office.live.com/start/Excel.aspx?WT.mc_id=O16_BingHP"
+                                               h="ID=SERP,5033.1">
+                                            <div>
+                                                <div class="oml_img" id="officemenu_excel_img"></div>
+                                                <div class="itm_desc">Excel Online</div>
+                                            </div>
+                                        </a></li>
+                                        <li><a id="officemenu_powerpoint" title="PowerPoint Online" target="_blank"
+                                               onclick="hpulc4hdr();"
+                                               href="https://office.live.com/start/PowerPoint.aspx?WT.mc_id=O16_BingHP"
+                                               h="ID=SERP,5034.1">
+                                            <div>
+                                                <div class="oml_img" id="officemenu_powerpoint_img"></div>
+                                                <div class="itm_desc">PowerPoint Online</div>
+                                            </div>
+                                        </a></li>
+                                        <li><a id="officemenu_onenote" title="OneNote Online" target="_blank"
+                                               onclick="hpulc4hdr();"
+                                               href="https://www.onenote.com/notebooks?WT.mc_id=O16_BingHP"
+                                               h="ID=SERP,5035.1">
+                                            <div>
+                                                <div class="oml_img" id="officemenu_onenote_img"></div>
+                                                <div class="itm_desc">OneNote Online</div>
+                                            </div>
+                                        </a></li>
+                                        <li><a id="officemenu_sway" title="Sway" target="_blank" onclick="hpulc4hdr();"
+                                               href="https://sway.office.com?WT.mc_id=O16_BingHP&amp;utm_source=O16Bing&amp;utm_medium=Nav&amp;utm_campaign=HP"
+                                               h="ID=SERP,5036.1">
+                                            <div>
+                                                <div class="oml_img" id="officemenu_sway_img"></div>
+                                                <div class="itm_desc">Sway</div>
+                                            </div>
+                                        </a></li>
+                                        <li><a id="officemenu_onedrive" title="OneDrive" target="_blank"
+                                               onclick="hpulc4hdr();"
+                                               href="https://onedrive.live.com/?gologin=1&amp;WT.mc_id=O16_BingHP"
+                                               h="ID=SERP,5037.1">
+                                            <div>
+                                                <div class="oml_img" id="officemenu_onedrive_img"></div>
+                                                <div class="itm_desc">OneDrive</div>
+                                            </div>
+                                        </a></li>
+                                        <li><a id="officemenu_calendar" title="日历" target="_blank"
+                                               onclick="hpulc4hdr();"
+                                               href="https://calendar.live.com/?WT.mc_id=O16_BingHP" h="ID=SERP,5038.1">
+                                            <div>
+                                                <div class="oml_img" id="officemenu_calendar_img"></div>
+                                                <div class="itm_desc">日历</div>
+                                            </div>
+                                        </a></li>
+                                        <li><a id="officemenu_people" title="人脉" target="_blank" onclick="hpulc4hdr();"
+                                               href="https://outlook.live.com/owa/?path=/people&amp;WT.mc_id=O16_BingHP"
+                                               h="ID=SERP,5039.1">
+                                            <div>
+                                                <div class="oml_img" id="officemenu_people_img"></div>
+                                                <div class="itm_desc">人脉</div>
+                                            </div>
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li id="outlook" data-bm="7" style="visibility: visible;"><a aria-owns="off_menu_cont"
+                                                                                         aria-controls="off_menu_cont"
+                                                                                         aria-expanded="false"
+                                                                                         target="_blank"
+                                                                                         onclick="hpulc4hdr();"
+                                                                                         href="https://outlook.com/?WT.mc_id=O16_BingHP?mkt=zh-CN"
+                                                                                         h="ID=SERP,5019.1">Outlook.com</a>
+                            </li>
+                        </ul>
+                        <div id="hp_id_hdr">
+                            <div id="id_h" role="complementary" aria-label="帐户奖励和偏好设置" data-priority="2" data-bm="8"><a
+                                    id="id_l" class="id_button" role="button" aria-haspopup="true" aria-controls="id_d"
+                                    aria-expanded="false" data-clarity-mask="true" href="javascript:void(0);"
+                                    h="ID=SERP,5057.1"><span id="id_s" aria-hidden="false">登录</span><span
+                                    class="sw_spd id_avatar" id="id_a" aria-hidden="false" aria-label="默认个人资料图片"></span><span
+                                    id="id_n" style="display:none" aria-hidden="true"></span><img id="id_p"
+                                                                                                  class="id_avatar sw_spd"
+                                                                                                  style="display:none"
+                                                                                                  aria-hidden="true"
+                                                                                                  alt=""
+                                                                                                  aria-label="个人资料图片"
+                                                                                                  onerror="FallBackToDefaultProfilePic(this)"
+                                                                                                  data-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                                                                                                  data-alt=""
+                                                                                                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                                                                                                  data-bm="17"></a><span
+                                    id="id_d" _iid="SERP.5065"></span><a id="id_sc" class="idp_ham hphbtop"
+                                                                         aria-label="设置和快速链接" aria-expanded="false"
+                                                                         aria-controls="id_hbfo" aria-haspopup="true"
+                                                                         role="button" tabindex="0"
+                                                                         href="javascript:void(0);"
+                                                                         h="ID=SERP,5063.1"></a><span id="id_hbfo"
+                                                                                                      _iid="SERP.5064"
+                                                                                                      class="slide_up hpfo hb_hpqexp"
+                                                                                                      aria-hidden="true"
+                                                                                                      aria-labelledby="id_sc"
+                                                                                                      role="menu"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="hp_bottomCell" data-bm="13">
+                    <div id="hp_ctrls" class=" cnhpCtrls" data-tbarhidden="">
+                        <div id="sh_rdiv" data-bm="16">
+                            <div id="showBingAppQR" class="bingAppQRHide">
+                                <div id="downloadBingAppTip">下载手机必应</div>
+                                <div id="shwBingAppQR"><img class="rms_img"
+                                                            src="/rms/rms%20answers%20Homepage%20ZhCn$BingAppQR/ic/e19fde95/ce98ce99.png"
+                                                            data-bm="18"></div>
+                                <div class="bingAppQRVLine"></div>
+                            </div>
+                            <a title="扫一扫下载手机必应" href="javascript:void(0)" h="ID=SERP,5040.1">
+                                <div id="shBingAppQR"></div>
+                            </a><a role="button" id="sh_psv" class="sh_psl" title="暂停视频" aria-label="暂停视频" tabindex="-1"
+                                   aria-hidden="true" href="javascript:void(0)" h="ID=SERP,5044.1">
+                            <div id="sh_ps" class="hpcPause"></div>
+                        </a><a role="button" class="sh_pll" title="播放视频" aria-label="播放视频" tabindex="-1"
+                               aria-hidden="true" href="javascript:void(0)" h="ID=SERP,5043.1">
+                            <div id="sh_pl" class="hpcPlay"></div>
+                        </a><a role="button" id="sh_igl" title="上一个图像" aria-label="上一个图像" href="?FORM=HYLH#"
+                               h="ID=SERP,5054.1">
+                            <div class="sc_light" style="visibility: visible;">
+                                <div id="sh_lt" class="hpcPrevious"></div>
+                            </div>
+                        </a><a role="button" id="sh_igr" title="下一个图像" aria-label="下一个图像" href="?FORM=HYLH1#"
+                               h="ID=SERP,5053.1" tabindex="-1" aria-disabled="true">
+                            <div class="sc_lightdis" style="visibility: visible;">
+                                <div id="sh_rt" class="hpcNext"></div>
+                            </div>
+                        </a><a id="sh_cp" class="sc_light"
+                               title="彭布鲁克郡海岸国家公园中的Pitting Gales Point，西威尔士 (© Sebastian Wasek/Getty Images)"
+                               aria-label="主页图片信息" role="button" target="_blank"
+                               href="/search?q=Pitting+Gales+Point&amp;form=hpcapt&amp;mkt=zh-cn" h="ID=SERP,5041.1"
+                               style="cursor: pointer;">
+                            <div>
+                                <div id="sh_cp_in" class="hpcCopyInfo"></div>
+                            </div>
+                        </a></div>
+                    </div>
+                    <div>
+                        <div id="hp_notf"></div>
+                        <div id="hp_tbar" class=" hp_cnCarousel"></div>
+                    </div>
+                    <footer id="b_footer" class="b_footer" role="contentinfo" aria-label="页脚" data-priority="0">
+                        <div id="b_footerItems"><span>© 2019 Microsoft</span>
+                            <ul>
+                                <li><a id="sb_ICPLicenseText"
+                                       href="http://www.miibeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=R4InFuKgVCnVVe6HsME7Dk0p5nHgGJLn1aq5A7rT6CFmnB0-aVsB!270711513"
+                                       h="ID=SERP,5071.1">增值电信业务经营许可证：合字B2-20090007</a></li>
+                                <li><a id="sb_ICPFilingText"
+                                       href="http://www.miibeian.gov.cn/state/outPortal/loginPortal.action;jsessionid=R4InFuKgVCnVVe6HsME7Dk0p5nHgGJLn1aq5A7rT6CFmnB0-aVsB!270711513"
+                                       h="ID=SERP,5072.1">京ICP备10036305号</a></li>
+                                <li><a id="sb_MMAIS"
+                                       href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802022657"
+                                       h="ID=SERP,5073.1">京公网安备11010802022657号</a></li>
+                                <li><a id="sb_privacy" href="http://go.microsoft.com/fwlink/?LinkId=521839"
+                                       h="ID=SERP,5074.1">隐私声明和 Cookie</a></li>
+                                <li><a id="sb_legal" href="http://go.microsoft.com/fwlink/?LinkID=246338"
+                                       h="ID=SERP,5075.1">法律声明</a></li>
+                                <li><a id="sb_advertise" href="https://go.microsoft.com/fwlink/?linkid=868923"
+                                       h="ID=SERP,5076.1">广告</a></li>
+                                <li><a id="sb_report"
+                                       href="http://go.microsoft.com/fwlink/?LinkID=275671&amp;clcid=0x04"
+                                       h="ID=SERP,5077.1">报告</a></li>
+                                <li><a id="sb_help" target="_blank"
+                                       href="http://go.microsoft.com/fwlink/?LinkID=617297&amp;clcid=0x04"
+                                       h="ID=SERP,5078.1">帮助</a></li>
+                                <li><a id="sb_feedback" href="#" h="ID=SERP,5079.1" class="feedback-binded">反馈</a></li>
+                            </ul>
+                        </div><!--foo--></footer>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<script src="./js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="./js/bootstrap.min.js" type="text/javascript"></script>
+<!--    <script src="webjars/jquery/3.1.1/jquery.min.js"></script>-->
+
+<!--    <script src="webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+
+<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="./js/custom.js"></script>
+
+</body>
+</html>
