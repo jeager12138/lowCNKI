@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+<script type='text/javascript'>
+
+    /**
+     * 解析地址信息
+     * @param {String} url 地址字符串 exam: http://localhost:8080/page/login?name=测试&id=1
+     * @returns {Object} obj 返回地址信息  exam: { name: '测试', id: 1 }
+     */
+    var parseUrl = function (url) {
+        if (url.indexOf("?") === -1) {
+            return {};
+        }
+        url = decodeURIComponent(url);
+        var query = url.split("?")[1];
+        var queryArr = query.split("&");
+        var obj = {};
+        queryArr.forEach(function (item) {
+            var key = item.split("=")[0];
+            var value = item.split("=")[1];
+            obj[key] = decodeURIComponent(value);
+        });
+
+        console.log(obj);
+        return obj;
+    };
+
+    info = parseUrl(window.location.href);
+
+    info['insitName'] = info['insit'];
+
+    if(info['insitName'] == null) {
+        info['insitName'] = "北京航空航天大学";
+    }
+
+</script>
+
+<head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <title id="tittle">{{ tittle }}</title>
+
+    <style type="text/css">
+        .wrap {
+            margin: 20px 20px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .info {
+            position: relative;
+            padding: 15px 15px;
+            background-color: #efefef;
+        }
+
+        .name {
+            font-size: 34px;
+        }
+
+        .aboutIntro label {
+            display: inline-block;
+            width: 5em;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .aboutIntro a[href^="http"] {
+            color: black;
+            text-decoration: none;
+        }
+
+        .aboutIntro a:hover {
+            color: #4C8EDF;
+            text-decoration: none;
+        }
+
+        .clearfix{
+            margin-top: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap" id="app">
+
+    <div class="info">
+
+        <h2 class="name">
+            {{ insitName }}
+        </h2>
+
+        <div class="aboutIntro">
+            <p>
+                <label>曾用名：</label>
+                {{ formerName }}
+            </p>
+
+            <p>
+                <label>地域：</label>
+                {{ location }}
+            </p>
+
+            <p>
+                <label>官方网址：</label>
+                <a target="_blank" href="https://www.baidu.com">
+                    {{ officialSite }}
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="clearfix">
+
+<!--        机构主要作者 -->
+        <iframe width="100%"
+                frameborder="no"
+                scrolling="no"
+                src="insit/mainAuthor.html">
+        </iframe>
+
+<!--        主办刊物 -->
+        <iframe width="100%"
+                frameborder="no"
+                scrolling="no"
+                src="insit/sponsorJournal.html">
+        </iframe>
+
+<!--        重点学科 -->
+        <iframe width="100%"
+                frameborder="no"
+                scrolling="no"
+                src="insit/keyDiscipline.html">
+        </iframe>
+
+<!--        机构文献 -->
+        <iframe width="100%"
+                frameborder="no"
+                scrolling="no"
+                src="insit/document.html">
+        </iframe>
+
+<!--       下属及相关机构 -->
+        <iframe width="100%"
+                frameborder="no"
+                scrolling="no"
+                src="insit/affiliate.html">
+        </iframe>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+    var getInsitInfo = function (insitName) {
+        var formerName = "北京航空航天大学";
+        var location = "北京";
+        var officialSite = "https://www.baidu.com";
+
+        // TODO 获得机构基本信息
+
+        info['formerName'] = formerName;
+        info['location'] = location;
+        info['officialSite'] = officialSite;
+    }
+
+    getInsitInfo(info['insitName']);
+
+
+    var tittle = new Vue({
+        el: '#tittle',
+        data() {
+            return {
+                tittle: info['insitName'] + '——机构详情页'
+            }
+        }
+    })
+
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                tittle: info['insitName'] + '——机构详情页',
+                insitName: info['insitName'],
+                formerName: info['formerName'],
+                location: info['location'],
+                officialSite: info['officialSite']
+            }
+        }
+    })
+</script>
+
+</html>
