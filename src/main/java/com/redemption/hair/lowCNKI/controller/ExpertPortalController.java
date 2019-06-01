@@ -92,16 +92,27 @@ public class ExpertPortalController {
         model.addAttribute("totalPercent",totalPercent);   //一个前端用的百分比
 
         if (totalNumber != 0){
-            masterRate = masterNumber / totalNumber *100.0;
-            journalRate = journalNumber / totalNumber *100.0;
-            meetingRate = meetingNumber / totalNumber *100.0;
-            patentRate = patentNumber / totalNumber *100.0;
+            masterRate = masterNumber*1.0 / totalNumber *100.0;
+            journalRate = journalNumber*1.0 / totalNumber *100.0;
+            meetingRate = meetingNumber*1.0 / totalNumber *100.0;
+            patentRate = patentNumber*1.0 / totalNumber *100.0;
         }
 
         model.addAttribute("masterRate",masterRate);
         model.addAttribute("journalRate",journalRate);
         model.addAttribute("meetingRate",meetingRate);
         model.addAttribute("patentRate",patentRate);
+
+        try {
+            Follow_experts ret = follow_expertsDAO.queryIfFollow(hostHolder.getUser().getId(), expertId);
+            if(ret==null)
+                model.addAttribute("followResult",0);
+            else
+                model.addAttribute("followResult",1);
+        } catch (Exception ex) {
+            model.addAttribute("followResult",-1);
+        }
+
         return "expert";  //html name
     }
 
@@ -121,13 +132,6 @@ public class ExpertPortalController {
     @RequestMapping(path = {"/queryIfFollow"}, method = {RequestMethod.GET})
     @ResponseBody
     public int queryIfFollow(@RequestParam("ExpertId")int expertId) {
-        try {
-            Follow_experts ret = follow_expertsDAO.queryIfFollow(hostHolder.getUser().getId(), expertId);
-            return ret==null ? 0 : 1;
-        } catch (Exception e) {
-            return -1;
-        }
+        return -1;
     }
-
-
 }
