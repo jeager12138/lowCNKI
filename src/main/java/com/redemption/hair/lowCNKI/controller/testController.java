@@ -1,5 +1,6 @@
 package com.redemption.hair.lowCNKI.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.redemption.hair.lowCNKI.DAO.*;
 import com.redemption.hair.lowCNKI.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,38 @@ public class testController {
     Paper_meetingDAO paper_meetingDAO;
     @Autowired
     PatentsDAO patentsDAO;
+    @Autowired
+    Bdxs_paperDAO bdxs_paperDAO;
+    @Autowired
+    Bdxs_authorDAO bdxs_authorDAO;
+    @Autowired
+    Patent_CNKIDAO patent_cnkiDAO;
 
     @RequestMapping(path = {"/", "/index"}, method = {RequestMethod.GET})
     @ResponseBody
     public String index() {
-        int i = co_expertsDAO.selectCoIdByExpertId(1);
-        String str = "" + i;
-        return str;
+
+        /*test bdxs_authorDAO
+        List<Bdxs_author> authorList1 = bdxs_authorDAO.getAuthorByField("农业经济管理");
+        List<Bdxs_author> authorList2 = bdxs_authorDAO.getAuthorByName("其");
+        List<Bdxs_author> authorList3 = bdxs_authorDAO.getAuthorByAffiliate("北京大学");
+        System.out.println("getAuthorByField"+JSON.toJSONString(authorList1));
+        System.out.println("getAuthorByName"+JSON.toJSONString(authorList2));
+        System.out.println("selectAuthorByAffiliate"+JSON.toJSONString(authorList3));
+         */
+        /*test patent_cnkiDAO
+        System.out.println(JSON.toJSONString(patent_cnkiDAO.getPatentByName("展示盒")));
+        System.out.println(JSON.toJSONString(patent_cnkiDAO.getPatentByInventName("胡明珠")));
+        System.out.println(JSON.toJSONString(patent_cnkiDAO.getPatentByAgent_name("杭州君度")));
+        System.out.println(JSON.toJSONString(patent_cnkiDAO.getPatentByApply_name("九江学院")));
+        System.out.println(JSON.toJSONString(patent_cnkiDAO.getPatentByKeyword("平面镜装置")));
+         */
+        /*test bdxs_paperDAO
+        System.out.println(JSON.toJSONString(bdxs_paperDAO.getPaperByAuthorName("其")));
+        System.out.println(JSON.toJSONString(bdxs_paperDAO.getPaperByKeywords("细胞")));
+        System.out.println(JSON.toJSONString(bdxs_paperDAO.getPaperByTitle("马克思主义")));
+         */
+        return "";
     }
 
     @RequestMapping(path = {"/blabla"}, method = {RequestMethod.GET})
@@ -53,8 +79,18 @@ public class testController {
         return str;
     }
 
+    @RequestMapping(path = {"/test"}, method = {RequestMethod.GET})
+    public String test() {
+        return "test";
+    }
+
     @RequestMapping(path = {"/essay"}, method = {RequestMethod.GET})
-    public String expert() {
+    public String essay() {
         return "essay";
     }
+
+    @RequestMapping(path = {"/expertInfo"},method = {RequestMethod.GET})
+    public String expertInfo(){return "expert";}
+
+
 }
