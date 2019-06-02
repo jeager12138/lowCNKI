@@ -103,6 +103,7 @@ public class ExpertPortalController {
         model.addAttribute("meetingRate",meetingRate);
         model.addAttribute("patentRate",patentRate);
 
+
         try {
             Follow_experts ret = follow_expertsDAO.queryIfFollow(hostHolder.getUser().getId(), expertId);
             if(ret==null)
