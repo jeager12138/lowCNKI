@@ -54,11 +54,13 @@ public class testController {
         System.out.println(JSON.toJSONString(patent_cnkiDAO.getPatentByApply_name("九江学院")));
         System.out.println(JSON.toJSONString(patent_cnkiDAO.getPatentByKeyword("平面镜装置")));
          */
-        /*test bdxs_paperDAO
+        //test bdxs_paperDAO
+        /*
         System.out.println(JSON.toJSONString(bdxs_paperDAO.getPaperByAuthorName("其")));
         System.out.println(JSON.toJSONString(bdxs_paperDAO.getPaperByKeywords("细胞")));
         System.out.println(JSON.toJSONString(bdxs_paperDAO.getPaperByTitle("马克思主义")));
          */
+
         return "";
     }
 
@@ -93,4 +95,9 @@ public class testController {
     public String expertInfo(){return "expert";}
 
 
+
+    @RequestMapping(path = {"/charge"}, method = {RequestMethod.GET})
+    public String charge() {
+        return "charge";
+    }
 }

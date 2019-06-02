@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CREATE DATABASE LOWCNKI;
 USE LOWCNKI;
 
@@ -173,3 +174,180 @@ CREATE TABLE `Token` (
     PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+=======
+CREATE DATABASE LOWCNKI;
+USE LOWCNKI;
+
+CREATE TABLE `Users` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+    `avator` VARCHAR(255) NOT NULL,
+    `nickname` VARCHAR(255) NOT NULL,
+    `balance` DOUBLE NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `salt` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Experts` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+    `contact` VARCHAR(255),
+    `constitution` VARCHAR(255),
+    `name` VARCHAR(255) NOT NULL,
+    `sex` VARCHAR(255),
+    `age` int,
+    `major` VARCHAR(255),
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Applies` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+    `expert_id` BIGINT NOT NULL,
+    `created_at` TIMESTAMP NOT NULL,
+    `content` TEXT NOT NULL,
+    `user_name` VARCHAR(255) NOT NULL,
+    `expert_name` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Managers` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+    `account` VARCHAR(255) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `salt` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Paper_master` (
+	`lid` BIGINT NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(255) NOT NULL,
+    `rid` BIGINT NOT NULL,
+    `summary` TEXT NOT NULL,
+    `keywords` TEXT NOT NULL,
+    `time` TIMESTAMP NOT NULL,
+    `page_number` INTEGER NOT NULL,
+    `cited_times` VARCHAR(255) NOT NULL,
+    `class_number` TEXT NOT NULL,
+    `download_times` VARCHAR(255) NOT NULL,
+    `references` TEXT,
+    `institution` VARCHAR(255) NOT NULL,
+    `year` VARCHAR(255) NOT NULL,
+    `tutor` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`lid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Paper_meeting` (
+	`lid` BIGINT NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(255) NOT NULL,
+    `rid` BIGINT NOT NULL,
+    `summary` TEXT NOT NULL,
+    `keywords` TEXT NOT NULL,
+    `time` TIMESTAMP NOT NULL,
+    `page_number` INTEGER NOT NULL,
+    `cited_times` VARCHAR(255) NOT NULL,
+    `class_number` TEXT NOT NULL,
+    `download_times` VARCHAR(255) NOT NULL,
+    `references` TEXT,
+    `meeting_name` VARCHAR(255) NOT NULL,
+    `meeting_place` VARCHAR(255) NOT NULL,
+    `meeting_time` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`lid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Paper_journal` (
+	`lid` BIGINT NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(255) NOT NULL,
+    `rid` BIGINT NOT NULL,
+    `summary` TEXT NOT NULL,
+    `keywords` TEXT NOT NULL,
+    `time` TIMESTAMP NOT NULL,
+    `cited_times` VARCHAR(255) NOT NULL,
+    `class_number` TEXT NOT NULL,
+    `download_times` VARCHAR(255) NOT NULL,
+    `references` TEXT,
+    `journal_title` VARCHAR(255) NOT NULL,
+    `page_number` VARCHAR(255) NOT NULL,
+    `ISSN` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`lid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Patents` (
+	`pid` BIGINT NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(255) NOT NULL,
+    `rid` BIGINT NOT NULL,
+    `application_date` TIMESTAMP NOT NULL,
+    `publication_date` TIMESTAMP NOT NULL,
+    `summary` TEXT NOT NULL,
+    `class_number` TEXT NOT NULL,
+    `transfer` BOOLEAN NOT NULL,
+    PRIMARY KEY (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Messages` (
+	`message_id` BIGINT NOT NULL AUTO_INCREMENT,
+    `send_id` BIGINT NOT NULL,
+    `rec_id` BIGINT NOT NULL,
+    `title` VARCHAR(255) NOT NULL,
+    `state` BOOLEAN NOT NULL,
+    `date` TIMESTAMP NOT NULL,
+    `message` TEXT NOT NULL,
+    PRIMARY KEY (`message_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Tags` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `state` BIGINT NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Expert_tag` (
+	`expert_id` BIGINT NOT NULL,
+    `tag_id` BIGINT NOT NULL,
+    PRIMARY KEY (`expert_id`, `tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Paper_tag` (
+	`paper_id` BIGINT NOT NULL,
+    `tag_id` BIGINT NOT NULL,
+    PRIMARY KEY (`paper_id`, `tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Patent_tag` (
+	`patent_id` BIGINT NOT NULL,
+    `tag_id` BIGINT NOT NULL,
+    PRIMARY KEY (`patent_id`, `tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Co_experts` (
+	`expert_id` BIGINT NOT NULL,
+    `co_expert_id` BIGINT NOT NULL,
+    PRIMARY KEY (`expert_id`, `co_expert_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Co_constitution` (
+	`expert_id` BIGINT NOT NULL,
+    `co_constitution` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`expert_id`, `co_constitution`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Follow_experts` (
+	`user_id` BIGINT NOT NULL,
+    `expert_id` BIGINT NOT NULL,
+    PRIMARY KEY (`user_id`, `expert_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Paper_paid` (
+	`user_id` BIGINT NOT NULL,
+    `paper_id` BIGINT NOT NULL,
+    PRIMARY KEY (`user_id`, `paper_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Token` (
+	`user_id` BIGINT NOT NULL AUTO_INCREMENT,
+    `token` VARCHAR(255) NOT NULL,
+    `token_time` TIMESTAMP NOT NULL,
+    `token_valid` BOOLEAN NOT NULL,
+    PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+>>>>>>> 67e28fad6227179144f63e99430ed020dfaf0447

@@ -19,4 +19,7 @@ public interface Bdxs_authorDAO {
 
     @Select({"select",SELECT_FIELDS ,"from",  TABLE_NAME, "where locate(#{field},field)>0"})
     List<Bdxs_author> getAuthorByField(String field);
+
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where scholarId=#{id}"})
+    Bdxs_author selectAuthorById(String id);
 }
