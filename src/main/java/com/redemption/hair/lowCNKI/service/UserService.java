@@ -5,7 +5,6 @@ import com.redemption.hair.lowCNKI.DAO.UsersDAO;
 import com.redemption.hair.lowCNKI.model.Token;
 import com.redemption.hair.lowCNKI.model.Users;
 import com.redemption.hair.lowCNKI.utils.lowCNKIutils;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
