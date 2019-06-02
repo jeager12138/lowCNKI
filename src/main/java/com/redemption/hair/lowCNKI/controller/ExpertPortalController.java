@@ -102,6 +102,17 @@ public class ExpertPortalController {
         model.addAttribute("journalRate",journalRate);
         model.addAttribute("meetingRate",meetingRate);
         model.addAttribute("patentRate",patentRate);
+
+        try {
+            Follow_experts ret = follow_expertsDAO.queryIfFollow(hostHolder.getUser().getId(), expertId);
+            if(ret==null)
+                model.addAttribute("followResult",0);
+            else
+                model.addAttribute("followResult",1);
+        } catch (Exception ex) {
+            model.addAttribute("followResult",-1);
+        }
+
         return "expert";  //html name
     }
 
@@ -121,13 +132,6 @@ public class ExpertPortalController {
     @RequestMapping(path = {"/queryIfFollow"}, method = {RequestMethod.GET})
     @ResponseBody
     public int queryIfFollow(@RequestParam("ExpertId")int expertId) {
-        try {
-            Follow_experts ret = follow_expertsDAO.queryIfFollow(hostHolder.getUser().getId(), expertId);
-            return ret==null ? 0 : 1;
-        } catch (Exception e) {
-            return -1;
-        }
+        return -1;
     }
-
-
 }

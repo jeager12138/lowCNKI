@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Certy</title>
+    <title>LowCNKI</title>
     <meta name="description" content="">
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -37,7 +37,7 @@
                      <div class="ace-head-row">
                          <div id="ace-head-col1" class="ace-head-col text-left">
                              <a id="ace-logo" class="ace-logo" href="index.html">
-                                <img src="../static/img/uploads/logo.png" alt="ace resume"><span>${expert.name}</span>
+                                <img src="../static/img/uploads/logo.png" alt="ace resume"><span>LowCNKI</span>
                              </a>
                          </div>
                          <div id="ace-head-col2" class="ace-head-col text-right">
@@ -185,7 +185,7 @@
                 <div class="col-sm-6 clear-mrg">
                     <h2 class="title-thin text-muted">影响</h2>
 
-                    <div class="progress-bullets ace-animate" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10">
+                    <div class="progress-bullets ace-animate" role="progressbar" aria-valuenow="${refNumber}" aria-valuemin="${refNumber}" aria-valuemax="10">
                         <strong class="progress-title">被引频次</strong>
                         <span class="progress-bar">${refPercent}
                             <#list 0..refPercent as i>
@@ -195,10 +195,10 @@
                                 <span class="bullet"></span>
                             </#list>
                         </span>
-                        <span class="progress-text text-muted">${refNumber}</span>
+                        <!--<span class="progress-text text-muted">${refNumber}</span>-->
                     </div>
 
-                    <div class="progress-bullets ace-animate" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10">
+                    <div class="progress-bullets ace-animate" role="progressbar" aria-valuenow="${totalNumber}" aria-valuemin="${totalNumber}" aria-valuemax="10">
                         <strong class="progress-title">成果数</strong>
                         <span class="progress-bar">${totalPercent}
                             <#list 0..totalPercent as i>
@@ -208,7 +208,7 @@
                                 <span class="bullet"></span>
                             </#list>
                         </span>
-                        <span class="progress-text text-muted">${totalNumber}</span>
+                        <!--<span class="progress-text text-muted">${totalNumber}</span>-->
                     </div>
                 </div><!-- .col-sm-6 -->
             </div><!-- .row -->
@@ -419,41 +419,41 @@
 		</button>
 
 		<div id="ace-sidebar-inner">
-			<nav id="ace-main-nav-sm" class="visible-xs visible-sm text-center">
-				<ul class="clear-list">
-					<li><a href="index.html">about</a></li>
-					<li><a href="portfolio.html">portfolio</a>
-					<li><a href="testimonials.html">references</a></li>
-					<li class="has-sub-menu"><a href="#">pages</a>
-						<ul class="sub-menu">
-							<li><a href="typography.html">typography</a></li>
-							<li><a href="components.html">components</a></li>
-							<li><a href="search.html">search</a></li>
-							<li><a href="404.html">404</a></li>
-						</ul>
-					</li>
-					<li class="has-sub-menu"><a href="category.html">blog</a>
-						<ul class="sub-menu">
-							<li><a href="single.html">single</a></li>
-							<li><a href="single-image.html">single image</a></li>
-							<li><a href="single-slider.html">single slider</a></li>
-							<li><a href="single-youtube.html">single youtube</a></li>
-							<li><a href="single-vimeo.html">single vimeo</a></li>
-							<li><a href="single-dailymotion.html">single dailymotion</a></li>
-							<li><a href="single-soundcloud.html">single soundcloud</a></li>
-							<li><a href="single-video.html">single video</a></li>
-							<li><a href="single-audio.html">single audio</a></li>
-						</ul>
-					</li>
-					<li><a href="contact.html">contact</a></li>
-				</ul>
-			</nav><!-- #ace-main-nav-sm -->
+			<!--<nav id="ace-main-nav-sm" class="visible-xs visible-sm text-center">-->
+				<!--<ul class="clear-list">-->
+					<!--<li><a href="index.html">about</a></li>-->
+					<!--<li><a href="portfolio.html">portfolio</a>-->
+					<!--<li><a href="testimonials.html">references</a></li>-->
+					<!--<li class="has-sub-menu"><a href="#">pages</a>-->
+						<!--<ul class="sub-menu">-->
+							<!--<li><a href="typography.html">typography</a></li>-->
+							<!--<li><a href="components.html">components</a></li>-->
+							<!--<li><a href="search.html">search</a></li>-->
+							<!--<li><a href="404.html">404</a></li>-->
+						<!--</ul>-->
+					<!--</li>-->
+					<!--<li class="has-sub-menu"><a href="category.html">blog</a>-->
+						<!--<ul class="sub-menu">-->
+							<!--<li><a href="single.html">single</a></li>-->
+							<!--<li><a href="single-image.html">single image</a></li>-->
+							<!--<li><a href="single-slider.html">single slider</a></li>-->
+							<!--<li><a href="single-youtube.html">single youtube</a></li>-->
+							<!--<li><a href="single-vimeo.html">single vimeo</a></li>-->
+							<!--<li><a href="single-dailymotion.html">single dailymotion</a></li>-->
+							<!--<li><a href="single-soundcloud.html">single soundcloud</a></li>-->
+							<!--<li><a href="single-video.html">single video</a></li>-->
+							<!--<li><a href="single-audio.html">single audio</a></li>-->
+						<!--</ul>-->
+					<!--</li>-->
+					<!--<li><a href="contact.html">contact</a></li>-->
+				<!--</ul>-->
+			<!--</nav>&lt;!&ndash; #ace-main-nav-sm &ndash;&gt;-->
 
 			<article class="ace-card bg-primary">
 				<div class="ace-card-inner text-center">
 					<img class="avatar avatar-195" src="../static/img/uploads/avatar/avatar-58x58-default.png" width="195" height="195" alt="">
 					<h1>${expert.name}</h1>
-					<p class="text-muted">学科</p>
+					<p class="text-muted">${expert.major}</p>
 					<ul class="ace-social clear-list">
 						<li><a><span class="ace-icon ace-icon-facebook"></span></a></li>
 						<li><a><span class="ace-icon ace-icon-twitter"></span></a></li>

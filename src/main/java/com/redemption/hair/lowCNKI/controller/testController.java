@@ -53,8 +53,13 @@ public class testController {
         return str;
     }
 
-//    @RequestMapping(path = {"/expert"}, method = {RequestMethod.GET})
-//    public String expert() {
-//        return "expert";
-//    }
+    @RequestMapping(path = {"/essay"}, method = {RequestMethod.GET})
+    public String expert() {
+        return "essay";
+    }
+
+    @RequestMapping(path = {"/charge"}, method = {RequestMethod.GET})
+    public String charge() {
+        return "charge";
+    }
 }
