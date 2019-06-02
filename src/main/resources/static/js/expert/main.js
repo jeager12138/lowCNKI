@@ -64,7 +64,7 @@
                         tooltip = $('<div class="ace-tooltip"></div>');
 
                         // Init vars
-                        var top = current.offset().top;
+                        var top = current.offset().left;
                         var left = current.offset().left;
                         var right = left + current.outerWidth();
                         var width = current.outerWidth();

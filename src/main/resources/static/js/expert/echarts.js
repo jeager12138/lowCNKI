@@ -1676,7 +1676,7 @@ function defaultGetZrXY(el, e, out) {
     // This well-known method below does not support css transform.
     var box = getBoundingClientRect(el);
     out.zrX = e.clientX - box.left;
-    out.zrY = e.clientY - box.top;
+    out.zrY = e.clientY - box.left;
 }
 
 /**
@@ -7601,7 +7601,7 @@ function adjustTextPositionOnRect(textPosition, rect, distance) {
     var halfHeight = height / 2;
 
     var textAlign = 'left';
-    var textVerticalAlign = 'top';
+    var textVerticalAlign = 'left';
 
     switch (textPosition) {
         case 'left':
@@ -7615,7 +7615,7 @@ function adjustTextPositionOnRect(textPosition, rect, distance) {
             y += halfHeight;
             textVerticalAlign = 'middle';
             break;
-        case 'top':
+        case 'left':
             x += width / 2;
             y -= distance;
             textAlign = 'center';
@@ -8254,7 +8254,7 @@ function normalizeStyle(style) {
         textVerticalAlign === 'center' && (textVerticalAlign = 'middle');
         style.textVerticalAlign = (
             textVerticalAlign == null || VALID_TEXT_VERTICAL_ALIGN[textVerticalAlign]
-        ) ? textVerticalAlign : 'top';
+        ) ? textVerticalAlign : 'left';
 
         var textPadding = style.textPadding;
         if (textPadding) {
@@ -8554,7 +8554,7 @@ function placeToken(hostEl, ctx, token, style, lineHeight, lineTop, x, textAlign
     // the bias of "Microsoft YaHei".
     var textVerticalAlign = token.textVerticalAlign;
     var y = lineTop + lineHeight / 2;
-    if (textVerticalAlign === 'top') {
+    if (textVerticalAlign === 'left') {
         y = lineTop + token.height / 2;
     }
     else if (textVerticalAlign === 'bottom') {
@@ -17174,7 +17174,7 @@ function setTextStyleCommon(textStyle, textStyleModel, opt, isEmphasis) {
             || (isEmphasis ? null : 'inside');
         // 'outside' is not a valid zr textPostion value, but used
         // in bar series, and magric type should be considered.
-        textPosition === 'outside' && (textPosition = 'top');
+        textPosition === 'outside' && (textPosition = 'left');
         textStyle.textPosition = textPosition;
         textStyle.textOffset = textStyleModel.getShallow('offset');
         var labelRotate = textStyleModel.getShallow('rotate');
@@ -17563,14 +17563,14 @@ function transformDirection(direction, transform, invert$$1) {
 
     var vertex = [
         direction === 'left' ? -hBase : direction === 'right' ? hBase : 0,
-        direction === 'top' ? -vBase : direction === 'bottom' ? vBase : 0
+        direction === 'left' ? -vBase : direction === 'bottom' ? vBase : 0
     ];
 
     vertex = applyTransform$1(vertex, transform, invert$$1);
 
     return Math.abs(vertex[0]) > Math.abs(vertex[1])
         ? (vertex[0] > 0 ? 'right' : 'left')
-        : (vertex[1] > 0 ? 'bottom' : 'top');
+        : (vertex[1] > 0 ? 'bottom' : 'left');
 }
 
 /**
@@ -18351,7 +18351,7 @@ function parsePercent$1(percent, all) {
             percent = '50%';
             break;
         case 'left':
-        case 'top':
+        case 'left':
             percent = '0%';
             break;
         case 'right':
@@ -19117,7 +19117,7 @@ var each$3 = each$1;
  * @public
  */
 var LOCATION_PARAMS = [
-    'left', 'right', 'top', 'bottom', 'width', 'height'
+    'left', 'right', 'left', 'bottom', 'width', 'height'
 ];
 
 /**
@@ -19125,7 +19125,7 @@ var LOCATION_PARAMS = [
  */
 var HV_NAMES = [
     ['width', 'left', 'right'],
-    ['height', 'top', 'bottom']
+    ['height', 'left', 'bottom']
 ];
 
 function boxLayout(orient, group, gap, maxWidth, maxHeight) {
@@ -19615,7 +19615,7 @@ var boxLayoutMixin = {
     getBoxLayoutParams: function () {
         return {
             left: this.get('left'),
-            top: this.get('top'),
+            top: this.get('left'),
             right: this.get('right'),
             bottom: this.get('bottom'),
             width: this.get('width'),
@@ -22565,7 +22565,7 @@ function compatLayoutProperties(option) {
 }
 
 var LAYOUT_PROPERTIES = [
-    ['x', 'left'], ['y', 'top'], ['x2', 'right'], ['y2', 'bottom']
+    ['x', 'left'], ['y', 'left'], ['x2', 'right'], ['y2', 'bottom']
 ];
 
 var COMPATITABLE_COMPONENTS = [
@@ -27326,7 +27326,7 @@ echartsProto.getConnectedDataURL = function (opts) {
             var img = new ZImage({
                 style: {
                     x: item.left * dpr - left,
-                    y: item.top * dpr - top,
+                    y: item.left * dpr - top,
                     image: item.dom
                 }
             });
@@ -35117,7 +35117,7 @@ function calculateCategoryInterval(axis) {
         // Not precise, do not consider align and vertical align
         // and each distance from axis line yet.
         var rect = getBoundingRect(
-            labelFormatter(tickValue), params.font, 'center', 'top'
+            labelFormatter(tickValue), params.font, 'center', 'left'
         );
         // Magic number
         width = rect.width * 1.3;
@@ -35710,7 +35710,7 @@ SeriesModel.extend({
         // cursor: null,
 
         label: {
-            position: 'top'
+            position: 'left'
         },
         // itemStyle: {
         // },
@@ -38504,7 +38504,7 @@ Axis2D.prototype = {
 
     isHorizontal: function () {
         var position = this.position;
-        return position === 'top' || position === 'bottom';
+        return position === 'left' || position === 'bottom';
     },
 
     /**
@@ -39169,7 +39169,7 @@ gridProto.resize = function (gridModel, api, ignoreContainLabel) {
                     var dim = axis.isHorizontal() ? 'height' : 'width';
                     var margin = axis.model.get('axisLabel.margin');
                     gridRect[dim] -= labelUnionRect[dim] + margin;
-                    if (axis.position === 'top') {
+                    if (axis.position === 'left') {
                         gridRect.y += labelUnionRect.height + margin;
                     }
                     else if (axis.position === 'left') {
@@ -39390,11 +39390,11 @@ gridProto._initCartesian = function (gridModel, ecModel, api) {
             var axisPosition = axisModel.get('position');
             if (axisType === 'x') {
                 // Fix position
-                if (axisPosition !== 'top' && axisPosition !== 'bottom') {
+                if (axisPosition !== 'left' && axisPosition !== 'bottom') {
                     // Default bottom of X
                     axisPosition = 'bottom';
                     if (axisPositionUsed[axisPosition]) {
-                        axisPosition = axisPosition === 'top' ? 'bottom' : 'top';
+                        axisPosition = axisPosition === 'left' ? 'bottom' : 'left';
                     }
                 }
             }
@@ -40020,11 +40020,11 @@ var innerTextLayout = AxisBuilder.innerTextLayout = function (axisRotation, text
     var textVerticalAlign;
 
     if (isRadianAroundZero(rotationDiff)) { // Label is parallel with axis line.
-        textVerticalAlign = direction > 0 ? 'top' : 'bottom';
+        textVerticalAlign = direction > 0 ? 'left' : 'bottom';
         textAlign = 'center';
     }
     else if (isRadianAroundZero(rotationDiff - PI$2)) { // Label is inverse parallel with axis line.
-        textVerticalAlign = direction > 0 ? 'bottom' : 'top';
+        textVerticalAlign = direction > 0 ? 'bottom' : 'left';
         textAlign = 'center';
     }
     else {
@@ -40054,11 +40054,11 @@ function endTextLayout(opt, textPosition, textRotate, extent) {
         || (textPosition !== 'start' && inverse);
 
     if (isRadianAroundZero(rotationDiff - PI$2 / 2)) {
-        textVerticalAlign = onLeft ? 'bottom' : 'top';
+        textVerticalAlign = onLeft ? 'bottom' : 'left';
         textAlign = 'center';
     }
     else if (isRadianAroundZero(rotationDiff - PI$2 * 1.5)) {
-        textVerticalAlign = onLeft ? 'top' : 'bottom';
+        textVerticalAlign = onLeft ? 'left' : 'bottom';
         textAlign = 'center';
     }
     else {
@@ -40869,7 +40869,7 @@ function layout$1(gridModel, axisModel, opt) {
 
     // Special label rotation
     var labelRotate = axisModel.get('axisLabel.rotate');
-    layout.labelRotate = axisPosition === 'top' ? -labelRotate : labelRotate;
+    layout.labelRotate = axisPosition === 'left' ? -labelRotate : labelRotate;
 
     // Over splitLine and splitArea
     layout.z2 = 1;
@@ -41755,7 +41755,7 @@ function updateStyle(
     cursorStyle && el.attr('cursor', cursorStyle);
 
     var labelPositionOutside = isHorizontal
-        ? (layout.height > 0 ? 'bottom' : 'top')
+        ? (layout.height > 0 ? 'bottom' : 'left')
         : (layout.width > 0 ? 'left' : 'right');
 
     if (!isPolar) {
@@ -42947,7 +42947,7 @@ var labelLayout = function (seriesModel, r, viewWidth, viewHeight) {
         var text = seriesModel.getFormattedLabel(idx, 'normal')
                     || data.getName(idx);
         var textRect = getBoundingRect(
-            text, font, textAlign, 'top'
+            text, font, textAlign, 'left'
         );
         hasLabelRotate = !!labelRotate;
         layout.label = {
@@ -44452,7 +44452,7 @@ var RadarSeries = SeriesModel.extend({
             type: 'solid'
         },
         label: {
-            position: 'top'
+            position: 'left'
         },
         // areaStyle: {
         // },
@@ -45065,7 +45065,7 @@ var geoJSONLoader = {
             var specialArea = specialAreas[regionName];
             if (specialArea) {
                 region.transformTo(
-                    specialArea.left, specialArea.top, specialArea.width, specialArea.height
+                    specialArea.left, specialArea.left, specialArea.width, specialArea.height
                 );
             }
         });
@@ -50288,7 +50288,7 @@ Breadcrumb.prototype = {
             pos: {
                 left: model.get('left'),
                 right: model.get('right'),
-                top: model.get('top'),
+                top: model.get('left'),
                 bottom: model.get('bottom')
             },
             box: {
@@ -54113,7 +54113,7 @@ function updateSymbolAndLabelBeforeLineUpdate() {
         if (label.__position === 'end') {
             textPosition = [d[0] * distance$$1 + toPos[0], d[1] * distance$$1 + toPos[1]];
             textAlign = d[0] > 0.8 ? 'left' : (d[0] < -0.8 ? 'right' : 'center');
-            textVerticalAlign = d[1] > 0.8 ? 'top' : (d[1] < -0.8 ? 'bottom' : 'middle');
+            textVerticalAlign = d[1] > 0.8 ? 'left' : (d[1] < -0.8 ? 'bottom' : 'middle');
         }
         // Middle
         else if (label.__position === 'middle') {
@@ -54138,7 +54138,7 @@ function updateSymbolAndLabelBeforeLineUpdate() {
         else {
             textPosition = [-d[0] * distance$$1 + fromPos[0], -d[1] * distance$$1 + fromPos[1]];
             textAlign = d[0] > 0.8 ? 'right' : (d[0] < -0.8 ? 'left' : 'center');
-            textVerticalAlign = d[1] > 0.8 ? 'bottom' : (d[1] < -0.8 ? 'top' : 'middle');
+            textVerticalAlign = d[1] > 0.8 ? 'bottom' : (d[1] < -0.8 ? 'left' : 'middle');
         }
         label.attr({
             style: {
@@ -56433,7 +56433,7 @@ var GaugeView = Chart.extend({
                         text: label,
                         x: unitX * (r - splitLineLen - distance) + cx,
                         y: unitY * (r - splitLineLen - distance) + cy,
-                        textVerticalAlign: unitY < -0.4 ? 'top' : (unitY > 0.4 ? 'bottom' : 'middle'),
+                        textVerticalAlign: unitY < -0.4 ? 'left' : (unitY > 0.4 ? 'bottom' : 'middle'),
                         textAlign: unitX < -0.4 ? 'left' : (unitX > 0.4 ? 'right' : 'center')
                     }, {autoColor: autoColor}),
                     silent: true
@@ -58998,7 +58998,7 @@ function getGlobalDirection(controller, localDirection) {
         return globalDir.join('');
     }
     else {
-        var map$$1 = {w: 'left', e: 'right', n: 'top', s: 'bottom'};
+        var map$$1 = {w: 'left', e: 'right', n: 'left', s: 'bottom'};
         var inverseMap = {left: 'w', right: 'e', top: 'n', bottom: 's'};
         var globalDir = transformDirection(
             map$$1[localDirection], getTransform$1(controller)
@@ -65251,7 +65251,7 @@ var BAR_BORDER_WIDTH_QUERY$1 = ['itemStyle', 'borderWidth'];
 // index: +isHorizontal
 var LAYOUT_ATTRS = [
     {xy: 'x', wh: 'width', index: 0, posDesc: ['left', 'right']},
-    {xy: 'y', wh: 'height', index: 1, posDesc: ['top', 'bottom']}
+    {xy: 'y', wh: 'height', index: 1, posDesc: ['left', 'bottom']}
 ];
 
 var pathForLineWidth = new Circle();
@@ -66112,7 +66112,7 @@ SingleAxis.prototype = {
      */
     isHorizontal: function () {
         var position = this.position;
-        return position === 'top' || position === 'bottom';
+        return position === 'left' || position === 'bottom';
 
     },
 
@@ -66274,7 +66274,7 @@ Single.prototype = {
         this._rect = getLayoutRect(
             {
                 left: axisModel.get('left'),
-                top: axisModel.get('top'),
+                top: axisModel.get('left'),
                 right: axisModel.get('right'),
                 bottom: axisModel.get('bottom'),
                 width: axisModel.get('width'),
@@ -66560,7 +66560,7 @@ function layout$2(axisModel, opt) {
 
     var labelRotation = opt.rotate;
     labelRotation == null && (labelRotation = axisModel.get('axisLabel.rotate'));
-    layout.labelRotation = axisPosition === 'top' ? -labelRotation : labelRotation;
+    layout.labelRotation = axisPosition === 'left' ? -labelRotation : labelRotation;
 
     layout.z2 = 1;
 
@@ -70447,10 +70447,10 @@ var sunburstLayout = function (seriesType, ecModel, api, payload) {
                     ? unitRadian : (value * unitRadian);
                 if (angle < minAngle) {
                     angle = minAngle;
-                    
+
                 }
                 else {
-                    
+
                 }
 
                 endAngle = startAngle + dir * angle;
@@ -72089,7 +72089,7 @@ function setLayoutInfoToExist(existItem, newElOption) {
         // Rigid body, dont care `width`.
         isSetLoc(newElOption, ['left', 'right']),
         // Rigid body, dont care `height`.
-        isSetLoc(newElOption, ['top', 'bottom'])
+        isSetLoc(newElOption, ['left', 'bottom'])
     ];
     // Give default group size. Otherwise layout error may occur.
     if (existItem.type === 'group') {
@@ -73760,7 +73760,7 @@ var gCssText = 'position:absolute;display:block;border-style:solid;white-space:n
 function assembleTransition(duration) {
     var transitionCurve = 'cubic-bezier(0.23, 1, 0.32, 1)';
     var transitionText = 'left ' + duration + 's ' + transitionCurve + ','
-                        + 'top ' + duration + 's ' + transitionCurve;
+                        + 'left ' + duration + 's ' + transitionCurve;
     return map(vendors, function (vendorPrefix) {
         return vendorPrefix + 'transition:' + transitionText;
     }).join(';');
@@ -75004,7 +75004,7 @@ function calcTooltipPosition(position, rect, contentSize) {
             x = rect.x + rectWidth / 2 - domWidth / 2;
             y = rect.y + rectHeight / 2 - domHeight / 2;
             break;
-        case 'top':
+        case 'left':
             x = rect.x + rectWidth / 2 - domWidth / 2;
             y = rect.y - domHeight - gap;
             break;
@@ -75511,7 +75511,7 @@ AngleAxis.prototype = {
         // Not precise, just use height as text width
         // and each distance from axis line yet.
         var rect = getBoundingRect(
-            tickValue, labelModel.getFont(), 'center', 'top'
+            tickValue, labelModel.getFont(), 'center', 'left'
         );
         var maxH = Math.max(rect.height, 7);
 
@@ -76257,7 +76257,7 @@ AxisView.extend({
             var labelTextAlign = Math.abs(p[0] - cx) / r < 0.3
                 ? 'center' : (p[0] > cx ? 'left' : 'right');
             var labelTextVerticalAlign = Math.abs(p[1] - cy) / r < 0.3
-                ? 'middle' : (p[1] > cy ? 'top' : 'bottom');
+                ? 'middle' : (p[1] > cy ? 'left' : 'bottom');
 
             if (rawCategoryData && rawCategoryData[tickValue] && rawCategoryData[tickValue].textStyle) {
                 labelModel = new Model(
@@ -76653,7 +76653,7 @@ function getLabelPosition(value, axisModel, axisPointerModel, polar, labelMargin
         align = Math.abs(position[0] - cx) / r < 0.3
             ? 'center' : (position[0] > cx ? 'left' : 'right');
         verticalAlign = Math.abs(position[1] - cy) / r < 0.3
-            ? 'middle' : (position[1] > cy ? 'top' : 'bottom');
+            ? 'middle' : (position[1] > cy ? 'left' : 'bottom');
     }
 
     return {
@@ -79636,14 +79636,14 @@ extendComponentView({
 
         if (position === 'bottom') {
             point[1] += margin;
-            aligns = ['center', 'top'];
+            aligns = ['center', 'left'];
         }
         else if (position === 'left') {
             point[0] -= margin;
         }
         else if (position === 'right') {
             point[0] += margin;
-            aligns = ['center', 'top'];
+            aligns = ['center', 'left'];
         }
         else { // top
             point[1] -= margin;
@@ -79676,7 +79676,7 @@ extendComponentView({
         var pos = yearLabel.get('position');
 
         if (!pos) {
-            pos = orient !== 'horizontal' ? 'top' : 'left';
+            pos = orient !== 'horizontal' ? 'left' : 'left';
         }
 
         var points = [this._tlpoints[this._tlpoints.length - 1], this._blpoints[0]];
@@ -79717,7 +79717,7 @@ extendComponentView({
 
     _monthTextPositionControl: function (point, isCenter, orient, position, margin) {
         var align = 'left';
-        var vAlign = 'top';
+        var vAlign = 'left';
         var x = point[0];
         var y = point[1];
 
@@ -79821,7 +79821,7 @@ extendComponentView({
         }
         else {
             y = y + margin + (isStart ? 1 : -1) * cellSize[1] / 2;
-            vAlign = isStart ? 'bottom' : 'top';
+            vAlign = isStart ? 'bottom' : 'left';
         }
 
         return {
@@ -80028,7 +80028,7 @@ extendComponentView({
                 text: subText,
                 textFill: subtextStyleModel.getTextColor(),
                 y: textRect.height + titleModel.get('itemGap'),
-                textVerticalAlign: 'top'
+                textVerticalAlign: 'left'
             }, {disableBox: true}),
             z2: 10
         });
@@ -80088,7 +80088,7 @@ extendComponentView({
             }
         }
         if (!textBaseline) {
-            textBaseline = titleModel.get('top') || titleModel.get('bottom');
+            textBaseline = titleModel.get('left') || titleModel.get('bottom');
             if (textBaseline === 'center') {
                 textBaseline = 'middle';
             }
@@ -80099,7 +80099,7 @@ extendComponentView({
                 layoutRect.y += layoutRect.height / 2;
             }
 
-            textBaseline = textBaseline || 'top';
+            textBaseline = textBaseline || 'left';
         }
 
         group.attr('position', [layoutRect.x, layoutRect.y]);
@@ -81752,7 +81752,7 @@ var SliderZoomView = DataZoomView.extend({
         var layoutParams = getLayoutParams(dataZoomModel.option);
 
         // Replace the placeholder value.
-        each$1(['right', 'top', 'width', 'height'], function (name) {
+        each$1(['right', 'left', 'width', 'height'], function (name) {
             if (layoutParams[name] === 'ph') {
                 layoutParams[name] = positionInfo[name];
             }
@@ -84327,7 +84327,7 @@ function getItemAlign(visualMapModel, api, itemSize) {
 
     var paramsSet = [
         ['left', 'right', 'width'],
-        ['top', 'bottom', 'height']
+        ['left', 'bottom', 'height']
     ];
     var reals = paramsSet[realIndex];
     var fakeValue = [0, null, 10];
@@ -84520,7 +84520,7 @@ var ContinuousView = VisualMapView.extend({
             barGroup
         );
         var align = this._applyTransform(
-            endsIndex === 0 ? 'bottom' : 'top',
+            endsIndex === 0 ? 'bottom' : 'left',
             barGroup
         );
         var orient = this._orient;
@@ -84901,7 +84901,7 @@ var ContinuousView = VisualMapView.extend({
                 textVerticalAlign: 'middle',
                 textAlign: this._applyTransform(
                     this._orient === 'horizontal'
-                        ? (handleIndex === 0 ? 'bottom' : 'top')
+                        ? (handleIndex === 0 ? 'bottom' : 'left')
                         : 'left',
                     shapes.barGroup
                 )
@@ -87273,7 +87273,7 @@ MarkerModel.extend({
         animation: false,
         label: {
             show: true,
-            position: 'top'
+            position: 'left'
         },
         itemStyle: {
             // color and borderColor default to use color from series
@@ -87285,7 +87285,7 @@ MarkerModel.extend({
         emphasis: {
             label: {
                 show: true,
-                position: 'top'
+                position: 'left'
             }
         }
     }
@@ -88374,7 +88374,7 @@ TimelineView.extend({
         };
 
         var labelBaselineMap = {
-            horizontal: (labelPosOpt >= 0 || labelPosOpt === '+') ? 'top' : 'bottom',
+            horizontal: (labelPosOpt >= 0 || labelPosOpt === '+') ? 'left' : 'bottom',
             vertical: 'middle'
         };
         var rotationMap = {
@@ -89004,7 +89004,7 @@ var ToolboxModel = extendComponentModel({
 
         left: 'right',
 
-        top: 'top',
+        top: 'left',
 
         // right
         // bottom
@@ -89240,7 +89240,7 @@ extendComponentView({
 
                 var needPutOnTop = false;
                 if (offsetY + rect.height > api.getHeight()) {
-                    hoverStyle.textPosition = 'top';
+                    hoverStyle.textPosition = 'left';
                     needPutOnTop = true;
                 }
                 var topOffset = needPutOnTop ? (-5 - rect.height) : (itemSize + 8);

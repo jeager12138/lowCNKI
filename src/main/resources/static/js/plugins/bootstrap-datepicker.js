@@ -279,7 +279,7 @@
             ; // no action
             else if (plc.length === 1) {
                 switch (plc[0]) {
-                    case 'top':
+                    case 'left':
                     case 'bottom':
                         o.orientation.y = plc[0];
                         break;
@@ -679,7 +679,7 @@
             var height = this.component ? this.component.outerHeight(true) : this.element.outerHeight(false);
             var width = this.component ? this.component.outerWidth(true) : this.element.outerWidth(false);
             var left = offset.left - appendOffset.left;
-            var top = offset.top - appendOffset.top;
+            var top = offset.left - appendOffset.left;
 
             if (this.o.container !== 'body') {
                 top += scrollTop;
@@ -723,11 +723,11 @@
                 top_overflow;
             if (yorient === 'auto') {
                 top_overflow = -scrollTop + top - calendarHeight;
-                yorient = top_overflow < 0 ? 'bottom' : 'top';
+                yorient = top_overflow < 0 ? 'bottom' : 'left';
             }
 
             this.picker.addClass('datepicker-orient-' + yorient);
-            if (yorient === 'top')
+            if (yorient === 'left')
                 top -= calendarHeight + parseInt(this.picker.css('padding-top'));
             else
                 top += height;
