@@ -83,6 +83,7 @@ public class ExpertPortalController {
 
         model.addAttribute("user", hostHolder.getUser());
 
+
         try {
             Follow_experts ret = follow_expertsDAO.queryIfFollow(hostHolder.getUser().getId(), Integer.parseInt(expertId));
             if(ret==null)

@@ -54,7 +54,7 @@ public class testController {
     }
 
     @RequestMapping(path = {"/essay"}, method = {RequestMethod.GET})
-    public String expert() {
+    public String essay() {
         return "essay";
     }
 
