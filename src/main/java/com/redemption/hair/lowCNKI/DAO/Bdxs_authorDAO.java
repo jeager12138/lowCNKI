@@ -1,10 +1,12 @@
 package com.redemption.hair.lowCNKI.DAO;
 
 import com.redemption.hair.lowCNKI.model.Bdxs_author;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+@Mapper
 public interface Bdxs_authorDAO {
     String TABLE_NAME = " bdxs_author ";
     String SELECT_FIELDS = " scholarId,name,affiliate,cited,field,journalRatio,meetingRatio,bookRatio,otherRtio,paperNum ";
