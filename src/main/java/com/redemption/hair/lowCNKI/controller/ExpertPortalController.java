@@ -49,16 +49,13 @@ public class ExpertPortalController {
         int journalNumber = 0;  //期刊
         int meetingNumber = 0;  //会议
         int patentNumber = 0;  //专著
-        double masterRate= 0;
-        double journalRate = 0;
-        double meetingRate = 0;
-        double patentRate = 0;
 
+        System.out.println(author.getBookRatio());
         otherNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getOtherRtio().replace("%",""))*0.01);
         journalNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getJournalRatio().replace("%",""))*0.01);
         meetingNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getMeetingRatio().replace("%",""))*0.01);
         patentNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getBookRatio().replace("%",""))*0.01);
-
+        System.out.println(journalNumber);
         model.addAttribute("masterNumber", otherNumber);  //其他数
         model.addAttribute("journalNumber", journalNumber); //期刊数
         model.addAttribute("meetingNumber", meetingNumber); // 会议数
@@ -67,19 +64,20 @@ public class ExpertPortalController {
         int refNumber = Integer.parseInt(author.getCited());
         model.addAttribute("refNumber", refNumber);  //被引频次
 
-        int refPercent = refNumber/100 < 10 ? refNumber/100 : 10;
+        int refPercent = refNumber/10 < 10 ? refNumber/10 : 10;
         model.addAttribute("refPercent", refPercent);  //一个前端用的百分比
 
         int totalNumber =  Integer.parseInt(author.getPaperNum());
         model.addAttribute("totalNumber", totalNumber);  //成果数
+        System.out.println(totalNumber);
 
-        int totalPercent = totalNumber/100 < 10 ? totalNumber/100 : 10;
+        int totalPercent = totalNumber/10 < 10 ? totalNumber/10 : 10;
         model.addAttribute("totalPercent", totalPercent);   //一个前端用的百分比
 
-        model.addAttribute("masterRate", author.getOtherRtio());
-        model.addAttribute("journalRate", author.getJournalRatio());
-        model.addAttribute("meetingRate", author.getMeetingRatio());
-        model.addAttribute("patentRate", author.getBookRatio());
+        model.addAttribute("otherRate", otherNumber*1.0/totalNumber * 100);
+        model.addAttribute("journalRate", journalNumber*1.0/totalNumber * 100);
+        model.addAttribute("meetingRate", meetingNumber*1.0/totalNumber * 100);
+        model.addAttribute("patentRate", patentNumber*1.0/totalNumber * 100);
 
         model.addAttribute("user", hostHolder.getUser());
 
