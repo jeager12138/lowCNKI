@@ -2,44 +2,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
-<script type='text/javascript'>
-
-    /**
-     * 解析地址信息
-     * @param {String} url 地址字符串 exam: http://localhost:8080/page/login?name=测试&id=1
-     * @returns {Object} obj 返回地址信息  exam: { name: '测试', id: 1 }
-     */
-    var parseUrl = function (url) {
-        if (url.indexOf("?") === -1) {
-            return {};
-        }
-        url = decodeURIComponent(url);
-        var query = url.split("?")[1];
-        var queryArr = query.split("&");
-        var obj = {};
-        queryArr.forEach(function (item) {
-            var key = item.split("=")[0];
-            var value = item.split("=")[1];
-            obj[key] = decodeURIComponent(value);
-        });
-
-        console.log(obj);
-        return obj;
-    };
-
-    info = parseUrl(window.location.href);
-
-    info['insitName'] = info['insit'];
-
-    if (info['insitName'] == null) {
-        info['insitName'] = "沈阳大学";
-    }
-
-</script>
 
 <head>
     <META http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title id="tittle">{{ tittle }}</title>
+    <title id="tittle">${institution.name}机构详情页</title>
 
     <style type="text/css">
         .body {
@@ -139,23 +105,23 @@
     <div class="body">
         <div class="left">
             <h3 class="tittle">
-                {{ insitName }}
+                ${institution.name}
             </h3>
             <div class="intro">
-                {{ intro }}}
+                ${institution.introduction}
             </div>
             <div class="num">
                 <div class="each" style="border-right:1px solid #999">
                     <div class="num-text">
                         <p class="num-text-tittle">总文献量</p>
-                        <span class="liter-num">{{ paperNum }}</span>
+                        <span class="liter-num">${institution.num_papers}</span>
                     </div>
                 </div>
 
                 <div class="each" style="border-right:1px solid #999">
                     <div class="num-text">
                         <p class="num-text-tittle">总被引量</p>
-                        <span class="liter-num">{{ refNum }}</span>
+                        <span class="liter-num">${institution.num_cited}</span>
                     </div>
                 </div>
 
@@ -214,67 +180,5 @@
     </div>
 </div>
 </body>
-
-<script type="text/javascript">
-
-    var fake_getInsitInfo = function () {
-        info['intro'] = '沈阳大学（ShenyangUniversity）简称沈大，坐落在国家区域中心城市—沈阳，为教育部卓越工程师教育培养计划高校， ' +
-            '辽宁省首批深化创新创业教育改革示范高校，学校学科涵盖哲学、经济学、法学、教育学、文学、历史学、理学、工学、农学、 ' +
-            '管理学、艺术学等11大学科门类。学校创办于1980年，历经多所学校合并，可追溯到1906年建立的奉天实业学堂和新民公学堂， ' +
-            '在长期发展进程中，相继合并沈阳财经学院、原冶金工业部部属高校沈阳工业高等专科学校、沈阳教育学院、新民师范学院等院校， ' +
-            '2003年获得硕士学位授予权；2007年，学校在教育部本科教学工作水平评估中获得优秀；2012年，学校获批服务国家特殊需求 ' +
-            '博士人才培养项目。根据2018年1月官网信息显示，学校占地面积52.8万平方米，建筑面积57.3万平方米， 图书馆藏书168.2万册，' +
-            '电子图书24万种，教学科研仪器设备总值2.09亿元；设有20个教学院（部），有博士后科研工作站1个， ' +
-            '服务国家特殊需求博士人才培养项目1个，一级学科硕士学位授权点10个，硕士专业学位授权类别（领域）12个， ' +
-            '开设本科专业66个；有专任教师1261人，各类在校生1.8万余人。'
-        info['paperNum'] = '18033';
-        info['refNum'] = '18033';
-        info['core'] = '183';
-        info['scholarNum'] = '1733';
-        info['topRef'] = '123123';
-        info['author'] = '郝　哲';
-        info['major'] = '隧道工程';
-        info['paper'] = '96';
-        info['ref'] = '0';
-        info['rate'] = 123;
-    }
-
-    var getInsitInfo = function (insitName) {
-        // TODO 获得机构基本信息
-        fake_getInsitInfo();
-    }
-
-    getInsitInfo(info['insitName']);
-
-
-    var tittle = new Vue({
-        el: '#tittle',
-        data() {
-            return {
-                tittle: info['insitName'] + '——机构详情页'
-            }
-        }
-    })
-
-    var app = new Vue({
-        el: '#app',
-        data() {
-            return {
-                insitName: info['insitName'],
-                intro: info['intro'],
-                paperNum: info['paperNum'],
-                refNum: info['refNum'],
-                core: info['core'],
-                scholarNum: info['scholarNum'],
-                topRef: info['topRef'],
-                author: info['author'],
-                major: info['major'],
-                paper: info['paper'],
-                ref: info['ref'],
-                rate: info['rate']
-            }
-        }
-    })
-</script>
 
 </html>
