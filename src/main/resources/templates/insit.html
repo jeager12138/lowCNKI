@@ -1,280 +1,173 @@
-<!DOCTYPE html>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-
-<script type='text/javascript'>
-
-    /**
-     * 解析地址信息
-     * @param {String} url 地址字符串 exam: http://localhost:8080/page/login?name=测试&id=1
-     * @returns {Object} obj 返回地址信息  exam: { name: '测试', id: 1 }
-     */
-    var parseUrl = function (url) {
-        if (url.indexOf("?") === -1) {
-            return {};
-        }
-        url = decodeURIComponent(url);
-        var query = url.split("?")[1];
-        var queryArr = query.split("&");
-        var obj = {};
-        queryArr.forEach(function (item) {
-            var key = item.split("=")[0];
-            var value = item.split("=")[1];
-            obj[key] = decodeURIComponent(value);
-        });
-
-        console.log(obj);
-        return obj;
-    };
-
-    info = parseUrl(window.location.href);
-
-    info['insitName'] = info['insit'];
-
-    if (info['insitName'] == null) {
-        info['insitName'] = "沈阳大学";
-    }
-
-</script>
-
+<html lang="en" class="ace ace-card-on ace-tab-nav-on ace-main-nav-on ace-sidebar-on ace-desktop"
+      data-theme-color="#c0e3e7">
 <head>
-    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title id="tittle">{{ tittle }}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style type="text/css">
-        .body {
-            width: 1200px;
-            margin: 0 auto;
-            font-family: 'Microsoft YaHei';
-            position: relative;
-            font-size: 14px;
+    <title>LowCNKI</title>
+    <meta name="description" content="">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="../static/css/essay.css" rel="stylesheet">
+    <link href="../static/css/button.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script type="text/javascript" src="../static/js/expert/echarts.js"></script>
+    <script type="text/javascript" src="../static/js/expert/dataTool.js"></script>
+    <script type="text/javascript" src="../static/js/expert/vendor/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript"
+            src="http://ditu.google.cn/maps/api/js?key=AIzaSyDiwY_5J2Bkv2UgSeJa4NOKl6WUezSS9XA"></script>
+    <script type="text/javascript" src="../static/js/expert/modernizr-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/expert/plugins/highlight/highlight.pack.js"></script>
+    <script type="text/javascript" src="../static/js/expert/plugins/jquery.mCustomScrollbar.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+    <script type="text/javascript" src="../static/js/expert/plugins/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="../static/js/expert/plugins/progressbar.min.js"></script>
+    <script type="text/javascript" src="../static/js/expert/plugins/slick.min.js"></script>
+    <script type="text/javascript" src="../static/js/expert/options.js"></script>
+    <script type="text/javascript" src="../static/js/expert/main.js"></script>
+    <style id="style-1-cropbar-clipper">
+        .en-markup-crop-options {
+            top: 18px !important;
+            left: 50% !important;
+            margin-left: -100px !important;
+            width: 200px !important;
+            border: 2px rgba(255, 255, 255, .38) solid !important;
+            border-radius: 4px !important;
         }
 
-        .left {
-            display: inline-block;
-            width: 70%;
-            margin-top: 32px;
-        }
-
-        .right {
-            display: inline-block;
-            width: 20%;
-            overflow: auto;
-            padding-top: 100px;
-            margin-left: 9%;
-            vertical-align: top;
-        }
-
-        .tittle {
-            color: #f47c7c;
-            font-size: 24px;
-        }
-
-        .intro {
-            font-size: 14px;
-            color: #262626;
-            line-height: 30px;
-            text-indent: 2em;
-            text-align: justify;
-            height: auto;
-        }
-
-        .num {
-            margin-top: 32px;
-            padding: 1px 0;
-            /*zoom: 1;*/
-            width: 100%;
-
-        }
-
-        .each {
-            list-style: none;
-            display: inline-block;
-            width: 19%;
-        }
-
-        .num-text {
-            text-align: center;
-            width: 100%;
-            top: 4px;
-            display: inline-block;
-        }
-
-        .num-text-tittle {
-            font-size: 16px;
-            line-height: 18px;
-            color: #262626;
-        }
-
-        .liter-num {
-            color: #999;
-            font-size: 28px;
-            font-weight: 500;
-            text-align: center;
-            list-style: none;
-            font-family: 'Microsoft YaHei';
-        }
-
-        .author {
-            font-size: 18px;
-            color: #333;
-            height: 38px;
-            line-height: 38px;
-            border-left: 5px solid #ccc;
-            background: #e6e6e6;
-            margin: 0;
-            font-weight: 500;
-            text-align: center;
-        }
-
-        .author-info {
-            padding: 2px 10px 5px 10px;
-            background-color: #f0f0f0;
+        .en-markup-crop-options div div:first-of-type {
+            margin-left: 0px !important;
         }
     </style>
+    <script type="text/javascript" charset="UTF-8"
+            src="http://ditu.google.cn/maps-api-v3/api/js/37/3/intl/zh_cn/common.js"></script>
+    <script type="text/javascript" charset="UTF-8"
+            src="http://ditu.google.cn/maps-api-v3/api/js/37/3/intl/zh_cn/util.js"></script>
 </head>
-
 <body>
-<div id="app">
-    <div class="body">
-        <div class="left">
-            <h3 class="tittle">
-                {{ insitName }}
-            </h3>
-            <div class="intro">
-                {{ intro }}}
-            </div>
-            <div class="num">
-                <div class="each" style="border-right:1px solid #999">
-                    <div class="num-text">
-                        <p class="num-text-tittle">总文献量</p>
-                        <span class="liter-num">{{ paperNum }}</span>
+<div class="ace-wrapper">
+    <header id="ace-header" class="ace-container-shift ace-logo-in ace-head-boxed ace-nav-right">
+        <div class="ace-head-inner">
+            <div class="ace-head-container ace-container">
+                <div class="ace-head-row">
+                    <div id="ace-head-col1" class="ace-head-col text-left" style="width: 221px;">
+                        <a id="ace-logo" class="ace-logo" href="index.html">
+                            <img src="../static/img/uploads/logo.png" alt="ace resume"><span>LowCNKI</span>
+                        </a>
+                    </div>
+                    <div id="ace-head-col2" class="ace-head-col text-right">
+                        <div class="ace-nav-container ace-container hidden-sm hidden-xs">
+                            <nav id="ace-main-nav">
+                            </nav>
+                        </div>
+                    </div>
+
+                    <div id="ace-head-col3" class="ace-head-col text-right" style="width: 75px;">
+                        <button id="ace-sidebar-btn" class="btn btn-icon btn-light btn-shade">
+                            <span class="ace-icon ace-icon-side-bar-icon"></span>
+                        </button>
                     </div>
                 </div>
+            </div><!-- .ace-container -->
+        </div><!-- .ace-head-inner -->
+    </header><!-- #ace-header -->
 
-                <div class="each" style="border-right:1px solid #999">
-                    <div class="num-text">
-                        <p class="num-text-tittle">总被引量</p>
-                        <span class="liter-num">{{ refNum }}</span>
+
+    <nav id="ace-nav-sm" class="ace-nav hidden-lg hidden-md">
+        <ul class="clear-list">
+            <li>
+                <a href="index.html" data-tooltip="Home"><img class="avatar avatar-42"
+                                                              src="../static/img/uploads/logo.png" alt=""></a>
+            </li>
+            <li>
+                <a href="experience.html" data-tooltip="Experience"><span
+                        class="ace-icon ace-icon-experience"></span></a>
+            </li>
+            <li>
+                <a href="portfolio.html" data-tooltip="Portfolio"><span class="ace-icon ace-icon-portfolio"></span></a>
+            </li>
+            <li>
+                <a href="testimonials.html" data-tooltip="References"><span class="ace-icon ace-icon-references"></span></a>
+            </li>
+            <li>
+                <a href="contact.html" data-tooltip="Contact"><span class="ace-icon ace-icon-contact"></span></a>
+            </li>
+            <li>
+                <a href="category.html" data-tooltip="Blog"><span class="ace-icon ace-icon-blog"></span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="ace-content" class="ace-container-shift">
+        <div class="ace-container">
+            <div class="ace-paper-stock">
+                <div class="ace-paper clearfix">
+                    <div class="ace-paper-cont clear-mrg">
+                        <div class="padd-box clear-mrg">
+                            <section class="section brd-btm">
+                                <div class="row">
+                                    <div class="col-sm-12 clear-mrg text-box">
+                                        <h2 class="title-lg text-upper">机构名</h2>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="section brd-btm">
+                                <div class="row">
+                                    <div class="col-sm-6 clear-mrg">
+                                        <div class="dl-horizontal clear-mrg">
+                                            机构简介机构简介机构简介机构简介机构简介机构简介机构简介机构简介机构简介机构简介
+                                            机构简介机构简介机构简介机构简介机构简介机构简介机构简介机构简介
+                                        </div>
+                                        <div class="progress-bullets ace-animated" role="progressbar" aria-valuenow="1"
+                                             aria-valuemin="0" aria-valuemax="10"
+                                             style="padding-top: 32px"
+                                        >
+                                            <strong class="progress-title">总文献量</strong>
+                                            <span class="progress-bar">XX</span>
+                                        </div>
+                                        <div class="progress-bullets ace-animated" role="progressbar" aria-valuenow="1"
+                                             aria-valuemin="0" aria-valuemax="10">
+                                            <strong class="progress-title">总被引量</strong>
+                                            <span class="progress-bar">XX</span>
+                                        </div>
+                                        <div class="progress-bullets ace-animated" role="progressbar" aria-valuenow="1"
+                                             aria-valuemin="0" aria-valuemax="10">
+                                            <strong class="progress-title">核心收录</strong>
+                                            <span class="progress-bar">XX</span>
+                                        </div>
+                                        <div class="progress-bullets ace-animated" role="progressbar" aria-valuenow="1"
+                                             aria-valuemin="0" aria-valuemax="10">
+                                            <strong class="progress-title">最高被引量</strong>
+                                            <span class="progress-bar">XX</span>
+                                        </div>
+                                        <div class="progress-bullets ace-animated" role="progressbar" aria-valuenow="1"
+                                             aria-valuemin="0" aria-valuemax="10">
+                                            <strong class="progress-title">学者数</strong>
+                                            <span class="progress-bar">XX</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="section brd-btm">
+                                <div class="row">
+                                    <div class="col-sm-6 clear-mrg">
+                                        <h2 class="title-thin text-muted">代表作者</h2>
+                                        <span class="progress-bar">XX</span>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                     </div>
-                </div>
-
-                <div class="each" style="border-right:1px solid #999">
-                    <div class="num-text">
-                        <p class="num-text-tittle">核心收录</p>
-                        <span class="liter-num">{{ core }}</span>
-                    </div>
-                </div>
-
-                <div class="each" style="border-right:1px solid #999">
-                    <div class="num-text">
-                        <p class="num-text-tittle">最高被引量</p>
-                        <span class="liter-num">{{ topRef }}</span>
-                    </div>
-                </div>
-
-                <div class="each">
-                    <div class="num-text">
-                        <p class="num-text-tittle">学者数</p>
-                        <span class="liter-num">{{ scholarNum }}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="right">
-            <div class="author">
-                <h3>代表作者</h3>
-            </div>
-            <div class="author-info">
-                <div>
-                    <p>
-                        <span style="font-size: 18px; margin-right: 10px">{{ author }}</span>
-                        <span>{{ insitName }}</span>
-                    </p>
-                    <p>
-                        <span>学　科：</span>
-                        <span>{{ major }}</span>
-                    </p>
-                    <p>
-                        <span>发文量：</span>
-                        <span>{{ paper }}</span>
-                    </p>
-                    <p>
-                        <span>被引量：</span>
-                        <span>{{ ref }}</span>　
-                    </p>
-                    <p>
-                        <span>H指数：</span>
-                        <span>{{ rate }}</span>
-                    </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </body>
-
-<script type="text/javascript">
-
-    var fake_getInsitInfo = function () {
-        info['intro'] = '沈阳大学（ShenyangUniversity）简称沈大，坐落在国家区域中心城市—沈阳，为教育部卓越工程师教育培养计划高校， ' +
-            '辽宁省首批深化创新创业教育改革示范高校，学校学科涵盖哲学、经济学、法学、教育学、文学、历史学、理学、工学、农学、 ' +
-            '管理学、艺术学等11大学科门类。学校创办于1980年，历经多所学校合并，可追溯到1906年建立的奉天实业学堂和新民公学堂， ' +
-            '在长期发展进程中，相继合并沈阳财经学院、原冶金工业部部属高校沈阳工业高等专科学校、沈阳教育学院、新民师范学院等院校， ' +
-            '2003年获得硕士学位授予权；2007年，学校在教育部本科教学工作水平评估中获得优秀；2012年，学校获批服务国家特殊需求 ' +
-            '博士人才培养项目。根据2018年1月官网信息显示，学校占地面积52.8万平方米，建筑面积57.3万平方米， 图书馆藏书168.2万册，' +
-            '电子图书24万种，教学科研仪器设备总值2.09亿元；设有20个教学院（部），有博士后科研工作站1个， ' +
-            '服务国家特殊需求博士人才培养项目1个，一级学科硕士学位授权点10个，硕士专业学位授权类别（领域）12个， ' +
-            '开设本科专业66个；有专任教师1261人，各类在校生1.8万余人。'
-        info['paperNum'] = '18033';
-        info['refNum'] = '18033';
-        info['core'] = '183';
-        info['scholarNum'] = '1733';
-        info['topRef'] = '123123';
-        info['author'] = '郝　哲';
-        info['major'] = '隧道工程';
-        info['paper'] = '96';
-        info['ref'] = '0';
-        info['rate'] = 123;
-    }
-
-    var getInsitInfo = function (insitName) {
-        // TODO 获得机构基本信息
-        fake_getInsitInfo();
-    }
-
-    getInsitInfo(info['insitName']);
-
-
-    var tittle = new Vue({
-        el: '#tittle',
-        data() {
-            return {
-                tittle: info['insitName'] + '——机构详情页'
-            }
-        }
-    })
-
-    var app = new Vue({
-        el: '#app',
-        data() {
-            return {
-                insitName: info['insitName'],
-                intro: info['intro'],
-                paperNum: info['paperNum'],
-                refNum: info['refNum'],
-                core: info['core'],
-                scholarNum: info['scholarNum'],
-                topRef: info['topRef'],
-                author: info['author'],
-                major: info['major'],
-                paper: info['paper'],
-                ref: info['ref'],
-                rate: info['rate']
-            }
-        }
-    })
-</script>
-
 </html>
