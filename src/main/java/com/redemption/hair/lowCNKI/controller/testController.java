@@ -3,6 +3,12 @@ package com.redemption.hair.lowCNKI.controller;
 import com.alibaba.fastjson.JSON;
 import com.redemption.hair.lowCNKI.DAO.*;
 import com.redemption.hair.lowCNKI.model.*;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class testController {
@@ -80,6 +89,40 @@ public class testController {
         }
         return str;
     }
+    @RequestMapping(path = {"/testSolr"}, method = {RequestMethod.GET})
+    @ResponseBody
+    public String testSolr() {
+        final String SOLR_URL = "http://127.0.0.1:8983/solr/lowCNKI";
+        HttpSolrClient client = new HttpSolrClient.Builder(SOLR_URL).build();
+
+            List<Bdxs_paper> questionList = new ArrayList<>();
+            SolrQuery query = new SolrQuery();
+            query.setRows(10);
+            query.setStart(0);
+            query.setHighlight(true);
+            //query.set("q","Title_paper:决策树算法的系统实现与修剪优化");
+        String keyword = "人工智能";
+        query.set("q", "Title_paper:" + keyword + " OR AuthorName_paper:" + keyword + " OR keywords_paper:" + keyword);
+            //query.set("df", "title_paper");
+            QueryResponse response = null;
+            try {
+                response = client.query(query);
+            } catch (SolrServerException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println(response);
+            SolrDocumentList list = response.getResults();
+            for (SolrDocument solrDocument : list) {
+                String authorName = (String)solrDocument.getFirstValue("AuthorName_paper");
+                String title_paper = (String)solrDocument.getFirstValue("Title_paper");
+                System.out.println("\nauthorName: "+ authorName + "\ntitle_paper: " + title_paper);
+            }
+            return "123";
+        }
+
 
     @RequestMapping(path = {"/test"}, method = {RequestMethod.GET})
     public String test() {
@@ -104,4 +147,21 @@ public class testController {
     public String charge() {
         return "charge";
     }
+
+    @RequestMapping(path = {"/login"}, method = {RequestMethod.GET})
+    public String testLogin() {
+        return "login";
+    }
+
+    @RequestMapping(path = {"/institution"},method = {RequestMethod.GET})
+    public String institution(){
+        return "insit";
+    }
+
+
+    @RequestMapping(path = {"/search"}, method = {RequestMethod.GET})
+    public String testFreeMarker() {
+        return "search";
+    }
+
 }
