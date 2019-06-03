@@ -1,7 +1,7 @@
 package com.redemption.hair.lowCNKI.model;
 
 public class Bdxs_paper {
-    private String paperId;
+    private int paperId;
     private String title;
     private String sourceName;
     private String sourceUrl;
@@ -15,11 +15,11 @@ public class Bdxs_paper {
     private String journalPicture;
     private String fields;
 
-    public String getPaperId() {
+    public int getPaperId() {
         return paperId;
     }
 
-    public void setPaperId(String paperId) {
+    public void setPaperId(int paperId) {
         this.paperId = paperId;
     }
 

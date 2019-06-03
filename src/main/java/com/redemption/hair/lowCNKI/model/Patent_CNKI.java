@@ -13,7 +13,7 @@ public class Patent_CNKI {
     private String agent_man;
     private String code;
     private String abstract_;
-    private String pages;
+    private int pages;
     private String typenum;
 
     public String getName() {
@@ -112,11 +112,11 @@ public class Patent_CNKI {
         this.abstract_ = abstract_;
     }
 
-    public String getPages() {
+    public int getPages() {
         return pages;
     }
 
-    public void setPages(String pages) {
+    public void setPages(int pages) {
         this.pages = pages;
     }
 
