@@ -17,9 +17,14 @@ public class InstitutionController {
     @RequestMapping(path = {"/institutionInfo"}, method = {RequestMethod.GET})
     public String institutionInfo(Model model){
         System.out.println(JSON.toJSONString((wf_organizationDAO.getOrganizationByName("沈阳大学"))));
-        Wf_organization wf = wf_organizationDAO.getOrganizationByName("沈阳大学");
-        wf.setNum_cited("12456");
-        wf.setNum_papers("1245");
+        String name = "北京大学";
+        Wf_organization wf = wf_organizationDAO.getOrganizationByName(name);
+        wf.setNum_cited(wf_organizationDAO.getNum_citedByName(name));
+        wf.setNum_papers(wf_organizationDAO.getNum_papersByName(name));
+        wf.setCore_inclusion(wf_organizationDAO.getCore_inclusionByName(name));
+        wf.setHighest_cited(wf_organizationDAO.getHighest_citedByName(name));
+        wf.setNum_experts(wf_organizationDAO.getNum_expertsByName(name));
+        wf.setRepre_author(wf_organizationDAO.getRepre_authorByName(name));
         model.addAttribute("institution",wf);
         return "insit";
     }

@@ -12,4 +12,22 @@ public interface Wf_organizationDAO {
     @Select({"select",SELECT_FIELDS ,"from",  TABLE_NAME, "where name = #{name}"})
     Wf_organization getOrganizationByName(String name);
 
+    @Select({"select num_papers from",  TABLE_NAME, "where name = #{name}"})
+    String getNum_papersByName(String name);
+
+    @Select({"select num_cited from",  TABLE_NAME, "where name = #{name}"})
+    String getNum_citedByName(String name);
+
+    @Select({"select core_inclusion from",  TABLE_NAME, "where name = #{name}"})
+    String getCore_inclusionByName(String name);
+
+    @Select({"select highest_cited from",  TABLE_NAME, "where name = #{name}"})
+    String getHighest_citedByName(String name);
+
+    @Select({"select num_experts from",  TABLE_NAME, "where name = #{name}"})
+    String getNum_expertsByName(String name);
+
+    @Select({"select repre_author from",  TABLE_NAME, "where name = #{name}"})
+    String getRepre_authorByName(String name);
+
 }
