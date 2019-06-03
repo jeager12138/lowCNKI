@@ -68,8 +68,15 @@ public class UserService {
             map.put("msg", "密码不能为空");
             return map;
         }
-
-        Users user = usersDAO.selectByName(username);
+        
+        Users user = null;
+        try{
+            user = usersDAO.selectByName(username);
+        }
+        catch(Exception e){
+            map.put("msg", "用户名不存在");
+            return map;
+        }
 
         if (user == null) {
             map.put("msg", "用户名不存在");
