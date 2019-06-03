@@ -15,7 +15,7 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(path = {"/reg/"}, method = {RequestMethod.POST})
+    @RequestMapping(path = {"/reg/"}, method = {RequestMethod.POST}, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String reg(@RequestParam("username") String username,
                       @RequestParam("password") String password,
@@ -38,7 +38,7 @@ public class LoginController {
     }
 
 
-    @RequestMapping(path = {"/login/"}, method = {RequestMethod.POST})
+    @RequestMapping(path = {"/log/"}, method = {RequestMethod.POST}, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
