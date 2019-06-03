@@ -4,6 +4,7 @@ package com.redemption.hair.lowCNKI.controller;
 import com.redemption.hair.lowCNKI.DAO.*;
 import com.redemption.hair.lowCNKI.model.*;
 import com.redemption.hair.lowCNKI.service.FollowService;
+import com.redemption.hair.lowCNKI.service.SolrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 import java.awt.print.Paper;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,6 +41,10 @@ public class ExpertPortalController {
 
     @Autowired
     Bdxs_authorDAO bdxs_authorDAO;
+    @Autowired
+    Bdxs_paperDAO bdxs_paperDAO;
+    @Autowired
+    SolrService solrService;
 
     @RequestMapping(path = {"/expert"}, method = {RequestMethod.GET})
     public String getExpertInformation(Model model, @RequestParam("ExpertId")String expertId) {
@@ -49,10 +55,6 @@ public class ExpertPortalController {
         int journalNumber = 0;  //期刊
         int meetingNumber = 0;  //会议
         int patentNumber = 0;  //专著
-        double masterRate= 0;
-        double journalRate = 0;
-        double meetingRate = 0;
-        double patentRate = 0;
 
         otherNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getOtherRtio().replace("%",""))*0.01);
         journalNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getJournalRatio().replace("%",""))*0.01);
@@ -83,6 +85,9 @@ public class ExpertPortalController {
 
         model.addAttribute("user", hostHolder.getUser());
 
+        List<Bdxs_paper> list = new ArrayList<>();
+        list = bdxs_paperDAO.getPaperByAuthorName(author.getName());
+        model.addAttribute("paperList", list);
 
         try {
             Follow_experts ret = follow_expertsDAO.queryIfFollow(hostHolder.getUser().getId(), Integer.parseInt(expertId));

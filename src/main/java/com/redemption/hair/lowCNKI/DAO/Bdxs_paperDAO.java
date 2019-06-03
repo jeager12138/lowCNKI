@@ -10,14 +10,17 @@ import java.util.List;
 @Mapper
 public interface Bdxs_paperDAO {
     String TABLE_NAME = " bdxs_paper ";
-    String SELECT_FIELDS = "paperId,title,sourceName,sourceUrl,authorName,summary,keywords,doi,cited,downLoadUrl,journalTitle,journalPicture,fields";
+    String SELECT_FIELDS = " paperId,title,sourceName,sourceUrl,authorName,summary,keywords,doi,cited,downLoadUrl,journalTitle,journalPicture,fields ";
 
     @Select({"select",SELECT_FIELDS ,"from",  TABLE_NAME, "where locate(#{title},title)>0"})
     List<Bdxs_paper> getPaperByTitle(String title);
 
-    @Select({"select",SELECT_FIELDS ,"from",  TABLE_NAME, "where locate(#{authorName},authorName)>0"})
+    @Select({"select",SELECT_FIELDS ,"from",  TABLE_NAME, "where authorName=#{authorName}"})
     List<Bdxs_paper> getPaperByAuthorName(String authorName);
 
     @Select({"select",SELECT_FIELDS ,"from",  TABLE_NAME, "where locate(#{keywords},keywords)>0"})
     List<Bdxs_paper> getPaperByKeywords(String keywords);
+
+    @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, "where paperId=#{id}"})
+    Bdxs_paper getPaperById(int id);
 }
