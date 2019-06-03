@@ -95,6 +95,10 @@ public class testController {
     public String expertInfo(){return "expert";}
 
 
+    @RequestMapping(path = {"/result"}, method = {RequestMethod.GET})
+    public String result() {
+        return "result";
+    }
 
     @RequestMapping(path = {"/charge"}, method = {RequestMethod.GET})
     public String charge() {
