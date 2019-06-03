@@ -112,7 +112,7 @@
                             <section class="section brd-btm">
                                 <div class="row">
                                     <div class="col-sm-12 clear-mrg text-box">
-                                        <h2 class="title-lg text-upper">机构名</h2>
+                                        <h2 class="title-lg text-upper">${institution.name}</h2>
                                     </div>
                                 </div>
                             </section>
@@ -120,35 +120,34 @@
                                 <div class="row">
                                     <div class="col-sm-6 clear-mrg">
                                         <div class="dl-horizontal clear-mrg">
-                                            机构简介机构简介机构简介机构简介机构简介机构简介机构简介机构简介机构简介机构简介
-                                            机构简介机构简介机构简介机构简介机构简介机构简介机构简介机构简介
+                                            ${institution.introduction}
                                         </div>
                                         <div class="progress-bullets ace-animated" role="progressbar" aria-valuenow="1"
                                              aria-valuemin="0" aria-valuemax="10"
                                              style="padding-top: 32px"
                                         >
                                             <strong class="progress-title">总文献量</strong>
-                                            <span class="progress-bar">XX</span>
+                                            <span class="progress-bar">${institution.num_papers}</span>
                                         </div>
                                         <div class="progress-bullets ace-animated" role="progressbar" aria-valuenow="1"
                                              aria-valuemin="0" aria-valuemax="10">
                                             <strong class="progress-title">总被引量</strong>
-                                            <span class="progress-bar">XX</span>
+                                            <span class="progress-bar">${institution.num_cited}</span>
                                         </div>
                                         <div class="progress-bullets ace-animated" role="progressbar" aria-valuenow="1"
                                              aria-valuemin="0" aria-valuemax="10">
                                             <strong class="progress-title">核心收录</strong>
-                                            <span class="progress-bar">XX</span>
+                                            <span class="progress-bar">${institution.core_inclusion}</span>
                                         </div>
                                         <div class="progress-bullets ace-animated" role="progressbar" aria-valuenow="1"
                                              aria-valuemin="0" aria-valuemax="10">
                                             <strong class="progress-title">最高被引量</strong>
-                                            <span class="progress-bar">XX</span>
+                                            <span class="progress-bar">${institution.highest_cited}</span>
                                         </div>
                                         <div class="progress-bullets ace-animated" role="progressbar" aria-valuenow="1"
                                              aria-valuemin="0" aria-valuemax="10">
                                             <strong class="progress-title">学者数</strong>
-                                            <span class="progress-bar">XX</span>
+                                            <span class="progress-bar">${institution.num_experts}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +157,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 clear-mrg">
                                         <h2 class="title-thin text-muted">代表作者</h2>
-                                        <span class="progress-bar">XX</span>
+                                        <span class="progress-bar">${institution.repre_author}</span>
                                     </div>
                                 </div>
                             </section>

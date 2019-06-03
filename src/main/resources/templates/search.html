@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <link id="bgLink" rel="preload" href="../static/img/background1.png" as="image"/>
+    <link rel="preload" href="../static/img/search.png" as="image"/>
+    <link rel="preload" href="../static/img/logo.png" as="image"/>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+    <link rel="stylesheet" href="../static/css/bing.css" type="text/css" />
+    <link href="https://cdn.bootcss.com/bootstrap-select/1.12.4/css/bootstrap-select.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <title>Low CNKI搜索-国内版</title>
+    <meta name="theme-color" content="#4F4F4F"/>
+    <meta content="Low CNKI是宿舍领先的搜索引擎，为软院用户提供文献、期刊、博硕士论文、会议、专利、专家等全球信息搜索服务。" name="description"/>
+    <meta content="NOODP" name="ROBOTS"/>
+    <meta name="pinterest" content="nohover"/>
+</head>
+<body class="zhs zh-CN wkit ltr" data-priority="2" onfocus="">
+<script type="text/javascript">
+        	var background_cnt=1;
+        	div_select_id="est_paper";
+			function changeselect(div_select) {
+				var otherdiv=$(".est_selected");
+				otherdiv.removeClass('est_selected');
+				otherdiv.addClass('est_unselected');
+		        var div = $(div_select);
+				div.removeClass('est_unselected');
+				div.addClass('est_selected');
+				var id=$(div_select).attr("id");
+				if(div_select_id!=id && id =="est_expert"){
+					$("#sa_qs").empty();
+					$("#sa_qs").append('<option value="name">姓名</option>');
+					$("#sa_qs").append('<option value="field">领域</option>');
+					$("#sa_qs").append('<option value="institution">机构</option>');
+				}
+				else if(div_select_id=='est_expert' && div_select_id!=id){
+					$("#sa_qs").empty();
+					$("#sa_qs").append('<option value="all">全部</option>');
+					$("#sa_qs").append('<option value="title">标题</option>');
+					$("#sa_qs").append('<option value="author">作者</option>');
+					$("#sa_qs").append('<option value="keyword">关键词</option>');
+				}
+				div_select_id=id;
+				$("#sa_st").attr("value",$(".est_selected").attr("name"));
+		    }
+		    function changebackground(div_arrow){
+		    	if($(div_arrow).attr("id")=="sh_rt"){
+		    		if (background_cnt==3){
+		    			return ;
+		    		}
+		    		background_cnt++;
+		    		$('#sh_lt').css("cursor","pointer");
+		    		$('#sh_lt').css("opacity","1");
+		    		var url='url(../static/img/background'+background_cnt+'.png)'
+		    		$('#bgDiv').css("background-image",url);
+		    		if (background_cnt==3){
+		    			$(div_arrow).css("cursor","default");
+		    			$(div_arrow).css("opacity",".7");
+		    		}
+		    	}
+		    	else{
+		    		if (background_cnt==1){
+		    			return ;
+		    		}
+		    		background_cnt--;
+		    		$('#sh_rt').css("cursor","pointer");
+		    		$('#sh_rt').css("opacity","1");
+		    		var url='url(../static/img/background'+background_cnt+'.png)'
+		    		$('#bgDiv').css("background-image",url);
+		    		if (background_cnt==1){
+		    			$(div_arrow).css("cursor","default");
+		    			$(div_arrow).css("opacity",".7");
+		    		}
+		    	}
+		    }
+		    function submitsearch(){
+		    	var searchType=$(".est_selected").attr("name");
+		    	var searchString=$("#sb_form_q").val()
+		    	var searchBy=$("#sa_qs").val()
+	    		var searchUrl = encodeURI("searchResult.html?searchString=" + searchString+"?searchBy="+searchBy+"?searchType="+searchType ); //使用encodeURI编码
+				window.location.href=(searchUrl);
+		    }
+        </script>
+<table id="hp_table" role="none">
+    <tr>
+        <td id="hp_cellCenter" class="hp_hd">
+            <div id="hp_container">
+                <div id="bgDiv">
+                    <div id="hp_vidwrp"></div>
+                    <video id="vid" onended="_w.VM && VM.pause();" autobuffer="autobuffer" preload="auto" oncontextmenu="return false"/>
+                </div>
+                <div id="sbox" class="sw_sform">
+                    <img class="hp_sw_logo hpcLogoWhite" src="../static/img/logo.png" style="height: 100%;margin-top:-40px">
+                    <div id="est_switch">
+                        <div id="est_paper" class="est_selected" onclick="changeselect(this)" name="paper">文献</div>
+                        <div id="est_patent" class="est_unselected" onclick="changeselect(this)" name="patent">专利</div>
+                        <div id="est_expert" class="est_unselected" onclick="changeselect(this)" name="expert">专家</div>
+                    </div>
+                    <div class="search_controls">
+                        <a id="hpinsthk" aria-hidden="true" tabindex="-1" href="javascript:void(0)" h="ID=SERP,5092.1">
+                            <span></span>
+                        </a>
+                        <form action="../static/searchResult.html" role="none" id="sb_form" class="sw_box">
+                            <div class="b_searchboxForm" role="search">
+                                <input class="b_searchbox" id="sb_form_q" name="searchString" title="输入搜索词" type="search" value="" maxlength="100" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"
+                                       style="width:450px"/>
+                                <select id="sa_qs" name="searchType" value="ds" style="height: 45px;width: 130px;border: none;">
+                                    <option value="all">全部</option>
+                                    <option value="title">标题</option>
+                                    <option value="author">作者</option>
+                                    <option value="keyword">关键词</option>
+                                </select>
+                                <input type="hidden" id="sa_st" name="searchType" value="paper">
+                                <input type="button" class="b_searchboxSubmit" id="sb_form_go" title="搜索" tabIndex="0" name="go"
+                                       style="background: transparent url(../static/img/search.png) no-repeat;background-image: url(../static/img/search.png);background-size: 100% 100%;" onclick="submitsearch()"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="shader_left"></div>
+                <div class="shader_right" style="opacity: .68">
+                    <div>
+                        <div id="main" style="border-radius: 5px;width: 490px;height: 520px;margin-top: 125px;margin-left: 260px;background: #fff">
+                        </div>
+                        <script type="text/javascript">
+							        // 基于准备好的dom，初始化echarts实例
+							        var myChart = echarts.init(document.getElementById('main'));
+							        // 指定图表的配置项和数据
+							        var option = {
+									    dataset: {
+									        source: [
+									            ['score', 'amount', 'product'],
+									            [99.6, 101852, '浙江大学'],
+									            [89.6, 91852, '上海交通大学'],
+									            [78.1, 79146, '北京师范大学'],
+									            [67.1, 78254, '南京大学'],
+									            [59.3, 58212, '北京航空航天大学'],
+									            [44.4, 41032, '清华大学'],
+									            [39.7, 20145, '北京大学'],
+									            [22.7, 20112, '中国人民大学'],
+									            [10.1, 12755, '复旦大学']
+									        ]
+									    },
+									    grid: {containLabel: true,
+									    	   left: '3%',   //距离左边的距离
+        									   right: '12%', //距离右边的距离
+        									   bottom: '13%',//距离下边的距离
+        									   top: '12%' //距离上边的距离
+        								},
+									    xAxis: {name: '被引量'},
+									    yAxis: {type: 'category',inverse:"true",triggerEvent:'true'},
+									    visualMap: {
+									        orient: 'horizontal',
+									        left: 'center',
+									        min: 10,
+									        max: 100,
+									        text: ['High Score', 'Low Score'],
+									        // Map the score column to color
+									        dimension: 0,
+									        inRange: {
+									            color: ['#D7DA8B', '#E15457']
+									        }
+									    },
+									    series: [
+									        {
+									            type: 'bar',
+									            encode: {
+									                // Map the "amount" column to X axis.
+									                x: 'amount',
+									                // Map the "product" column to Y axis
+									                y: 'product'
+									            }
+									        }
+									    ]
+									};
+							        // 使用刚指定的配置项和数据显示图表。
+							        myChart.setOption(option);
+							        myChart.on('click', function (params) {
+									    if (params.componentType === 'series') {
+									        // 点击到了 xAxis 上
+									    	alert(params.value[2]);
+									        if (params.value[2] === 5) {
+									            // 点击到了 index 为 5 的 series 的 markPoint 上。
+									            alert(5);
+									        }
+									    }
+									    else if(params.componentType === 'yAxis'){
+									    	// window.open("https://www.buaa.edu.cn/");
+									    	var institutionUrl = encodeURI("institution.html?name=" + params.value); //使用encodeURI编码
+											window.location.href=(institutionUrl);
+									    }
+									});
+							    </script>
+                    </div>
+                </div>
+                <div id="hp_sw_hdr" class="hp_hor_hdr">
+                    <div class="sw_tb">
+                        <div id="hp_id_hdr">
+                            <div id="id_h" role="complementary" aria-label="帐户奖励和偏好设置" data-priority="2">
+                                <a id="id_l" class="id_button" role="button" aria-haspopup="true" aria-controls="id_d" aria-expanded="false" data-clarity-mask="true" href="javascript:void(0);" h="ID=SERP,5057.1">
+                                    <span id="id_s" aria-hidden="false">登录</span>
+                                    <span class="sw_spd id_avatar" id="id_a" aria-hidden="false" aria-label="默认个人资料图片" style="content: url(../static/img/user.png);"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="hp_bottomCell">
+                    <div id="hp_ctrls" class=" cnhpCtrls" data-tbarhidden="">
+                        <div id="sh_rdiv" style="margin-left: 50px;margin-top: -20px;">
+                            <a role="button" id="sh_igl" title="上一个图像" aria-label="上一个图像">
+                                <div class="sc_lightdis" style="opacity: 1;">
+                                    <div id="sh_lt" class="hpcPrevious" style="background: transparent url(../static/img/arrow-left.png) no-repeat;background-size: 100% 100%;opacity: .7;width:50px;height:50px;" onclick="changebackground(this)"></div>
+                                </div>
+                            </a>
+                            <a role="button" id="sh_igr" title="下一个图像" aria-label="下一个图像">
+                                <div class="sc_lightdis" style="opacity: 1;">
+                                    <div id="sh_rt" class="hpcNext" style="background: transparent url(../static/img/arrow-right.png) no-repeat;background-size: 100% 100%;opacity: 1;width:50px;height:50px;margin-left:25px;cursor: pointer;" onclick="changebackground(this)"></div>
+                                </div>
+                            </a>
+                            <a id="sh_cp" class="sc_light" role="button" style="cursor: pointer;">
+                                <div style="opacity: 1;">
+                                    <div id="sh_cp_in" class="hpcCopyInfo"  style="background: transparent url(../static/img/info.png) no-repeat;background-size: 100% 100%;opacity: 1;width:50px;height:50px;margin-left:25px;"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="hp_notf"></div>
+                        <div id="hp_tbar" class=" hp_cnCarousel"></div>
+                    </div>
+                    <footer id="b_footer" class="b_footer" role="contentinfo" aria-label="页脚" data-priority="0">
+                        <div id="b_footerItems">
+                                    <span>
+                                        <script>
+                                            var myDate = new Date();
+                                            document.write(myDate.getFullYear(),"/",myDate.getMonth()+1,"/",myDate.getDate())
+                                       </script>
+                                    </span>
+                            <ul>
+                                <li>
+                                    <a id="sb_ICPLicenseText" href="https://www.buaa.edu.cn/" h="ID=SERP,5071.1">北京航空航天大学</a>
+                                </li>
+                                <li>
+                                    <a id="sb_ICPFilingText" href="https://www.buaa.edu.cn/" h="ID=SERP,5072.1">1621 进击的发际线</a>
+                                </li>
+                                <li>
+                                    <a id="sb_MMAIS" href="https://www.buaa.edu.cn/" h="ID=SERP,5073.1">关于我们</a>
+                                </li>
+                                <li>
+                                    <a id="sb_privacy" href="https://www.buaa.edu.cn/" h="ID=SERP,5074.1">联系我们</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--foo-->
+                    </footer>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

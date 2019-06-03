@@ -143,4 +143,21 @@ public class testController {
     public String charge() {
         return "charge";
     }
+
+    @RequestMapping(path = {"/login"}, method = {RequestMethod.GET})
+    public String testLogin() {
+        return "login";
+    }
+
+    @RequestMapping(path = {"/institution"},method = {RequestMethod.GET})
+    public String institution(){
+        return "insit";
+    }
+
+
+    @RequestMapping(path = {"/search"}, method = {RequestMethod.GET})
+    public String testFreeMarker() {
+        return "search";
+    }
+
 }

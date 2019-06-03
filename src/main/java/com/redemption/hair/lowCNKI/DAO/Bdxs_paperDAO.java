@@ -1,6 +1,5 @@
 package com.redemption.hair.lowCNKI.DAO;
 
-import com.redemption.hair.lowCNKI.model.Bdxs_author;
 import com.redemption.hair.lowCNKI.model.Bdxs_paper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

@@ -14,6 +14,15 @@ public class Bdxs_paper {
     private String journalTitle;
     private String journalPicture;
     private String fields;
+    private int pub_year;
+
+    public int getPub_year() {
+        return pub_year;
+    }
+
+    public void setPub_year(int pub_year) {
+        this.pub_year = pub_year;
+    }
 
     public int getPaperId() {
         return paperId;
