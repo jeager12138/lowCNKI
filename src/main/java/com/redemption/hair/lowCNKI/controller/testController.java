@@ -12,10 +12,7 @@ import org.apache.solr.common.SolrDocumentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -92,7 +89,7 @@ public class testController {
     @RequestMapping(path = {"/testSolr"}, method = {RequestMethod.GET})
     @ResponseBody
     public String testSolr() {
-        final String SOLR_URL = "http://127.0.0.1:8983/solr/lowCNKI";
+        final String SOLR_URL = "http://10.135.204.4:8983/solr/lowCNKI";
         HttpSolrClient client = new HttpSolrClient.Builder(SOLR_URL).build();
 
             List<Bdxs_paper> questionList = new ArrayList<>();
@@ -102,7 +99,7 @@ public class testController {
             query.setHighlight(true);
             //query.set("q","Title_paper:决策树算法的系统实现与修剪优化");
         String keyword = "人工智能";
-        query.set("q", "Title_paper:" + keyword + " OR AuthorName_paper:" + keyword + " OR keywords_paper:" + keyword);
+        query.set("q", "Title_paper:" + keyword);
             //query.set("df", "title_paper");
             QueryResponse response = null;
             try {
@@ -129,15 +126,8 @@ public class testController {
         return "test";
     }
 
-    @RequestMapping(path = {"/essay"}, method = {RequestMethod.GET})
-    public String essay() {
-        return "essay";
-    }
-
     @RequestMapping(path = {"/expertInfo"},method = {RequestMethod.GET})
     public String expertInfo(){return "expert";}
-
-
 
     @RequestMapping(path = {"/charge"}, method = {RequestMethod.GET})
     public String charge() {
@@ -153,7 +143,6 @@ public class testController {
     public String institution(){
         return "insit";
     }
-
 
     @RequestMapping(path = {"/search"}, method = {RequestMethod.GET})
     public String testFreeMarker() {

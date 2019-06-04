@@ -29,5 +29,6 @@ public class PaperDetailsController {
         List<Bdxs_paper> list = new ArrayList<>();
         list = solrService.searchPaper("title", paper.getTitle(), (page-1)*10 ,10);
         model.addAttribute("refEssayList", list);
+        return "essay";
     }
 }
