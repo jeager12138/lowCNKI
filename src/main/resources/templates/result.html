@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="../static/css/result.css" rel="stylesheet">
     <link href="../static/css/button.css" rel="stylesheet">
+    <link href="../static/css/searchbox.css" rel="stylesheet">
     <!-- Scripts -->
     <script type="text/javascript" src="../static/js/expert/echarts.js"></script>
     <script type="text/javascript" src="../static/js/expert/dataTool.js"></script>
@@ -147,71 +148,43 @@
                 <div class="ace-nav-btm"></div>
             </div><!-- .ace-nav-wrap -->
 
-            <!--<script type="text/javascript">-->
-            <!--var background_cnt=1;-->
-            <!--div_select_id="est_paper";-->
-            <!--function changeselect(div_select) {-->
-            <!--var otherdiv=$(".est_selected");-->
-            <!--otherdiv.removeClass('est_selected');-->
-            <!--otherdiv.addClass('est_unselected');-->
-            <!--var div = $(div_select);-->
-            <!--div.removeClass('est_unselected');-->
-            <!--div.addClass('est_selected');-->
-            <!--var id=$(div_select).attr("id");-->
-            <!--if(div_select_id!=id && id =="est_expert"){-->
-            <!--$("#sa_qs").empty();-->
-            <!--$("#sa_qs").append('<option value="name">姓名</option>');-->
-            <!--$("#sa_qs").append('<option value="field">领域</option>');-->
-            <!--$("#sa_qs").append('<option value="institution">机构</option>');-->
-            <!--}-->
-            <!--else if(div_select_id=='est_expert' && div_select_id!=id){-->
-            <!--$("#sa_qs").empty();-->
-            <!--$("#sa_qs").append('<option value="all">全部</option>');-->
-            <!--$("#sa_qs").append('<option value="title">标题</option>');-->
-            <!--$("#sa_qs").append('<option value="author">作者</option>');-->
-            <!--$("#sa_qs").append('<option value="keyword">关键词</option>');-->
-            <!--}-->
-            <!--div_select_id=id;-->
-            <!--$("#sa_st").attr("value",$(".est_selected").attr("name"));-->
-            <!--}-->
-            <!--function changebackground(div_arrow){-->
-            <!--if($(div_arrow).attr("id")=="sh_rt"){-->
-            <!--if (background_cnt==3){-->
-            <!--return ;-->
-            <!--}-->
-            <!--background_cnt++;-->
-            <!--$('#sh_lt').css("cursor","pointer");-->
-            <!--$('#sh_lt').css("opacity","1");-->
-            <!--var url='url(../static/img/background'+background_cnt+'.png)'-->
-            <!--$('#bgDiv').css("background-image",url);-->
-            <!--if (background_cnt==3){-->
-            <!--$(div_arrow).css("cursor","default");-->
-            <!--$(div_arrow).css("opacity",".7");-->
-            <!--}-->
-            <!--}-->
-            <!--else{-->
-            <!--if (background_cnt==1){-->
-            <!--return ;-->
-            <!--}-->
-            <!--background_cnt&#45;&#45;;-->
-            <!--$('#sh_rt').css("cursor","pointer");-->
-            <!--$('#sh_rt').css("opacity","1");-->
-            <!--var url='url(../static/img/background'+background_cnt+'.png)'-->
-            <!--$('#bgDiv').css("background-image",url);-->
-            <!--if (background_cnt==1){-->
-            <!--$(div_arrow).css("cursor","default");-->
-            <!--$(div_arrow).css("opacity",".7");-->
-            <!--}-->
-            <!--}-->
-            <!--}-->
-            <!--function submitsearch(){-->
-            <!--var searchType=$(".est_selected").attr("name");-->
-            <!--var searchString=$("#sb_form_q").val()-->
-            <!--var searchBy=$("#sa_qs").val()-->
-            <!--var searchUrl = encodeURI("searchResult.html?searchString=" + searchString+"?searchBy="+searchBy+"?searchType="+searchType ); //使用encodeURI编码-->
-            <!--window.location.href=(searchUrl);-->
-            <!--}-->
-            <!--</script>-->
+            <script type="text/javascript">
+                var background_cnt = 1;
+                div_select_id = "est_paper";
+
+                function changeselect(div_select) {
+                    var otherdiv = $(".est_selected");
+                    otherdiv.removeClass('est_selected');
+                    otherdiv.addClass('est_unselected');
+                    var div = $(div_select);
+                    div.removeClass('est_unselected');
+                    div.addClass('est_selected');
+                    var id = $(div_select).attr("id");
+                    if (div_select_id != id && id == "est_expert") {
+                        $("#sa_qs").empty();
+                        $("#sa_qs").append('<option value="name">姓名</option>');
+                        $("#sa_qs").append('<option value="field">领域</option>');
+                        $("#sa_qs").append('<option value="institution">机构</option>');
+                    }
+                    else if (div_select_id == 'est_expert' && div_select_id != id) {
+                        $("#sa_qs").empty();
+                        $("#sa_qs").append('<option value="all">全部</option>');
+                        $("#sa_qs").append('<option value="title">标题</option>');
+                        $("#sa_qs").append('<option value="author">作者</option>');
+                        $("#sa_qs").append('<option value="keyword">关键词</option>');
+                    }
+                    div_select_id = id;
+                    $("#sa_st").attr("value", $(".est_selected").attr("name"));
+                }
+
+                function submitsearch() {
+                    var searchType = $(".est_selected").attr("name");
+                    var searchString = $("#sb_form_q").val()
+                    var searchBy = $("#sa_qs").val()
+                    var searchUrl = encodeURI("result.html?searchString=" + searchString + "?searchBy=" + searchBy + "?searchType=" + searchType); //使用encodeURI编码
+                    window.location.href = (searchUrl);
+                }
+            </script>
 
             <div class="ace-paper-stock">
                 <main class="ace-paper clearfix">
@@ -220,38 +193,39 @@
                         <!-- START: PAGE CONTENT -->
                         <div class="padd-box clear-mrg">
                             <section class="section brd-btm">
-
-                                <!--此处放搜索框-->
-                                <!--<div id="sbox" class="sw_sform">-->
-                                <!--<div id="est_switch">-->
-                                <!--<div id="est_paper" class="est_selected" onclick="changeselect(this)" name="paper">文献</div>-->
-                                <!--<div id="est_patent" class="est_unselected" onclick="changeselect(this)" name="patent">专利</div>-->
-                                <!--<div id="est_expert" class="est_unselected" onclick="changeselect(this)" name="expert">专家</div>-->
-                                <!--</div>-->
-                                <!--<div class="search_controls">-->
-                                <!--<a id="hpinsthk" aria-hidden="true" tabindex="-1" href="javascript:void(0)" h="ID=SERP,5092.1">-->
-                                <!--<span></span>-->
-                                <!--</a>-->
-                                <!--<form action="../static/searchResult.html" role="none" id="sb_form" class="sw_box">-->
-                                <!--<div class="b_searchboxForm" role="search">-->
-                                <!--<input class="b_searchbox" id="sb_form_q" name="searchString" title="输入搜索词" type="search" value="" maxlength="100" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"-->
-                                <!--style="width:450px"/>-->
-                                <!--<select id="sa_qs" name="searchType" value="ds" style="height: 45px;width: 130px;border: none;">-->
-                                <!--<option value="all">全部</option>-->
-                                <!--<option value="title">标题</option>-->
-                                <!--<option value="author">作者</option>-->
-                                <!--<option value="keyword">关键词</option>-->
-                                <!--</select>-->
-                                <!--<input type="hidden" id="sa_st" name="searchType" value="paper">-->
-                                <!--<input type="button" class="b_searchboxSubmit" id="sb_form_go" title="搜索" tabIndex="0" name="go"-->
-                                <!--style="background: transparent url(../static/img/search.png) no-repeat;background-image: url(../static/img/search.png);background-size: 100% 100%;" onclick="submitsearch()"/>-->
-                                <!--</div>-->
-                                <!--</form>-->
-                                <!--</div>-->
-                                <!--</div>-->
+                                <div class="row">
+                                    <!--此处放搜索框-->
+                                    <div id="sbox" class="sw_sform" >
+                                        <div id="est_switch">
+                                            <div id="est_paper" class="est_selected" onclick="changeselect(this)" name="paper">文献</div>
+                                            <div id="est_patent" class="est_unselected" onclick="changeselect(this)" name="patent">专利</div>
+                                            <div id="est_expert" class="est_unselected" onclick="changeselect(this)" name="expert">专家</div>
+                                        </div>
+                                        <div class="search_controls">
+                                            <a id="hpinsthk" aria-hidden="true" tabindex="-1" href="javascript:void(0)" h="ID=SERP,5092.1">
+                                                <span></span>
+                                            </a>
+                                            <form action="./searchResult.html" role="none" id="sb_form" class="sw_box">
+                                                <div class="b_searchboxForm" role="search">
+                                                    <input class="b_searchbox" id="sb_form_q" name="searchString" title="输入搜索词" type="search" value="" maxlength="100" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"
+                                                           style="width:450px"/>
+                                                    <select id="sa_qs" name="searchType" value="ds" style="height: 45px;width: 130px;border: none;">
+                                                        <option value="all">全部</option>
+                                                        <option value="title">标题</option>
+                                                        <option value="author">作者</option>
+                                                        <option value="keyword">关键词</option>
+                                                    </select>
+                                                    <input type="hidden" id="sa_st" name="searchType" value="paper">
+                                                    <input type="button" class="b_searchboxSubmit" id="sb_form_go" title="搜索" tabIndex="0" name="go"
+                                                           style="background: transparent url(./img/search.png) no-repeat;background-image: url(./img/search.png);background-size: 100% 100%;" onclick="submitsearch()"/>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div><!-- .row -->
                             </section><!-- .section -->
 
-                            <section class="section brd-btm">
+                            <section class="section brd-btm" style="margin-top: 125px">
                                 <div class="row">
 
                                 </div><!-- .row -->
