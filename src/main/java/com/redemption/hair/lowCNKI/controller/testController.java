@@ -40,6 +40,8 @@ public class testController {
     Bdxs_authorDAO bdxs_authorDAO;
     @Autowired
     Patent_CNKIDAO patent_cnkiDAO;
+    @Autowired
+    UsersDAO usersDAO;
 
     @RequestMapping(path = {"/", "/index"}, method = {RequestMethod.GET})
     public String index() {
@@ -129,10 +131,6 @@ public class testController {
     public String expertInfo(){return "expert";}
 
 
-    @RequestMapping(path = {"/result"}, method = {RequestMethod.GET})
-    public String result() {
-        return "result";
-    }
 
     @RequestMapping(path = {"/charge"}, method = {RequestMethod.GET})
     public String charge() {
@@ -141,6 +139,7 @@ public class testController {
 
     @RequestMapping(path = {"/login"}, method = {RequestMethod.GET})
     public String testLogin() {
+
         return "login";
     }
 
@@ -154,4 +153,14 @@ public class testController {
         return "search";
     }
 
+
+    @RequestMapping(path = {"/testblad"}, method = RequestMethod.GET)
+    @ResponseBody
+    public String testbla() {
+        Users user = usersDAO.selectByName("gbodjf");
+        if (user == null) {
+            System.out.print("1321");
+        }
+        return "123";
+    }
 }

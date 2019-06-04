@@ -34,7 +34,10 @@ public class SearchResultController {
 
 
     @RequestMapping(path = {"/SearchPaperResult"},method = {RequestMethod.GET})
-    public String SearchPaperResult(Model model, String searchString, String searchBy, int page) throws Exception {
+    public String SearchPaperResult(Model model,
+                                    @RequestParam("searchString")String searchString,
+                                    @RequestParam("searchBy")String searchBy,
+                                    @RequestParam("page")int page) throws Exception {
         searchString=URLDecoder.decode(searchString, "UTF-8");
         System.out.println(searchString);
         System.out.println(searchBy);
