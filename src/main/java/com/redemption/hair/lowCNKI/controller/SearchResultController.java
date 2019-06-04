@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.redemption.hair.lowCNKI.DAO.*;
 import com.redemption.hair.lowCNKI.model.*;
 import com.redemption.hair.lowCNKI.service.SolrService;
+import com.redemption.hair.lowCNKI.utils.JedisAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,30 +26,51 @@ public class SearchResultController {
     Bdxs_authorDAO bdxs_authorDAO;
     @Autowired
     SolrService solrService;
+    @Autowired
+    JedisAdapter jedisAdapter;
+    @Autowired
+    HostHolder hostHolder;
 
 
     @RequestMapping(path = {"/SearchPaperResult"},method = {RequestMethod.POST})
-    @ResponseBody
-    public String SearchPaperResult(String searchString,String searchBy) throws Exception {
-        List<Bdxs_paper> paperList = solrService.searchPaper(searchBy, searchString, 0, 100);
+    public String SearchPaperResult(Model model, String searchString, String searchBy, int page) throws Exception {
+        List<Bdxs_paper> paperList = solrService.searchPaper(searchBy, searchString, (page-1)*10, 10);
 
-        return JSON.toJSONString(paperList);
+        model.addAttribute("paperList", paperList);
+        if(hostHolder.getUser() != null) {
+            jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
+        }
+        return "";
     }
 
     @RequestMapping(path = {"/SearchPatentResult"},method = {RequestMethod.POST})
-    @ResponseBody
-    public String SearchPatentResult(String searchString,String searchBy) throws Exception {
-        List<Patent_CNKI> patent_cnkiList = solrService.searchPatent(searchBy, searchString, 0, 100);
+    public String SearchPatentResult(Model model, String searchString, String searchBy, int page) throws Exception {
+        List<Patent_CNKI> patent_cnkiList = solrService.searchPatent(searchBy, searchString, (page-1)*10, 10);
 
-        return JSON.toJSONString(patent_cnkiList);
+        model.addAttribute("patentList", patent_cnkiList);
+        if(hostHolder.getUser() != null) {
+            jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
+        }
+        return "";
     }
 
 
     @RequestMapping(path = {"/SearchExpertResult"},method = {RequestMethod.POST})
-    @ResponseBody
-    public String SearchExpertResult(String searchString,String searchBy) throws Exception {
-        List<Bdxs_author> bdxs_authorList = solrService.searchAuthor(searchBy, searchString, 0, 100);
+    public String SearchExpertResult(Model model, String searchString, String searchBy, int page) throws Exception {
+        List<Bdxs_author> bdxs_authorList = solrService.searchAuthor(searchBy, searchString, (page-1)*10, 10);
 
-        return  JSON.toJSONString(bdxs_authorList);
+        model.addAttribute("expertList", bdxs_authorList);
+        if(hostHolder.getUser() != null) {
+            jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
+        }
+        return  "";
+    }
+
+    @RequestMapping(path = {"/Recommend"}, method = RequestMethod.GET)
+    public String Recommend(Model model) throws Exception{
+        List<Bdxs_paper> bdxs_paperList = solrService.searchPaper("title", "人工智能", 0, 10);
+
+        model.addAttribute("recommendPaper", bdxs_paperList);
+        return "";
     }
 }
