@@ -77,7 +77,7 @@
 		    	var searchType=$(".est_selected").attr("name");
 		    	var searchString=$("#sb_form_q").val()
 		    	var searchBy=$("#sa_qs").val()
-	    		var searchUrl = encodeURI("searchResult.html?searchString=" + searchString+"?searchBy="+searchBy+"?searchType="+searchType ); //使用encodeURI编码
+	    		var searchUrl = encodeURI("result.html?searchString=" + searchString+"?searchBy="+searchBy+"?searchType="+searchType ); //使用encodeURI编码
 				window.location.href=(searchUrl);
 		    }
         </script>
@@ -100,7 +100,7 @@
                         <a id="hpinsthk" aria-hidden="true" tabindex="-1" href="javascript:void(0)" h="ID=SERP,5092.1">
                             <span></span>
                         </a>
-                        <form action="../static/searchResult.html" role="none" id="sb_form" class="sw_box">
+                        <form action="../static/result.html" role="none" id="sb_form" class="sw_box">
                             <div class="b_searchboxForm" role="search">
                                 <input class="b_searchbox" id="sb_form_q" name="searchString" title="输入搜索词" type="search" value="" maxlength="100" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"
                                        style="width:450px"/>
