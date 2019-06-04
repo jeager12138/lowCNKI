@@ -97,7 +97,7 @@ public class SolrService {
     }
 
     public List<Patent_CNKI> searchPatent(String searchBy, String keyword, int offset, int count) throws Exception {
-        List<Patent_CNKI> authorList = new ArrayList<>();
+        List<Patent_CNKI> patentList = new ArrayList<>();
         SolrQuery query = new SolrQuery();
         query.setRows(count);
         query.setStart(offset);
@@ -111,7 +111,7 @@ public class SolrService {
         } else if (searchBy.equals("keyword")) {
             query.set("q", "abstract_patent:" + keyword);
         } else {
-            query.set("q", "Field_author:" + keyword + " OR Name_author:" + keyword + " OR Affiliate_author:" + keyword);
+            query.set("q", "Name_patent:" + keyword + " OR invent_name_patent:" + keyword + " OR apply_name_patent:" + keyword + " OR abstract_patent:" + keyword);
         }
 
         QueryResponse response = null;
@@ -125,10 +125,10 @@ public class SolrService {
             patent.setAddress((String)solrDocument.getFirstValue("Address_patent"));
             patent.setName((String)solrDocument.getFirstValue("Name_patent"));
             patent.setAgent_name((String)solrDocument.getFirstValue("agent_name_patent"));
-            authorList.add(patent);
+            patentList.add(patent);
         }
 
-        return authorList;
+        return patentList;
     }
 
 }
