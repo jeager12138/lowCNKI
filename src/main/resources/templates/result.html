@@ -199,7 +199,7 @@
                             <section class="section brd-btm">
                                 <div class="row">
                                     <!--此处放搜索框-->
-                                    <div id="sbox" class="sw_sform" >
+                                    <div id="sbox" class="sw_sform" style="position:absolute;left:100px;top:120px;">
                                         <div id="est_switch">
                                             <div id="est_paper" class="est_selected" onclick="changeselect(this)" name="paper">文献</div>
                                             <div id="est_patent" class="est_unselected" onclick="changeselect(this)" name="patent">专利</div>
@@ -209,11 +209,12 @@
                                             <a id="hpinsthk" aria-hidden="true" tabindex="-1" href="javascript:void(0)" h="ID=SERP,5092.1">
                                                 <span></span>
                                             </a>
-                                            <form action="./searchResult.html" role="none" id="sb_form" class="sw_box">
+                                            <form action="/SearchPaperResult.html" role="none" id="sb_form" class="sw_box">
                                                 <div class="b_searchboxForm" role="search">
                                                     <input class="b_searchbox" id="sb_form_q" name="searchString" title="输入搜索词" type="search" value="" maxlength="100" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"
                                                            style="width:450px"/>
-                                                    <select id="sa_qs" name="searchType" value="ds" style="height: 45px;width: 130px;border: none;">
+                                                    <input type="hidden" name="page" value="1"/>
+                                                    <select id="sa_qs" name="searchBy" value="ds" style="height: 45px;width: 130px;border: none;">
                                                         <option value="all">全部</option>
                                                         <option value="title">标题</option>
                                                         <option value="author">作者</option>
@@ -221,7 +222,7 @@
                                                     </select>
                                                     <input type="hidden" id="sa_st" name="searchType" value="paper">
                                                     <input type="button" class="b_searchboxSubmit" id="sb_form_go" title="搜索" tabIndex="0" name="go"
-                                                           style="background: transparent url(./img/search.png) no-repeat;background-image: url(./img/search.png);background-size: 100% 100%;" onclick="submitsearch()"/>
+                                                           style="background: transparent url(../static/img/search.png) no-repeat;background-image: url(../static/img/search.png);background-size: 100% 100%;" onclick="submitsearch()"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -244,7 +245,7 @@
                                         <#list paperList as paper>
                                             <div class="ref-box brd-btm hreview">
                                                 <div class="ref-author">
-                                                    <strong><a herf="essay?paperId=${(paper.paperId)?c}&page=1">${paper.title} </a></strong>
+                                                    <strong><a href="essay?paperId=${(paper.paperId)?c}&page=1">${paper.title} </a></strong>
                                                     <span>${paper.authorName}</span>
                                                 </div>
                                                 <blockquote class="ref-cont clear-mrg">

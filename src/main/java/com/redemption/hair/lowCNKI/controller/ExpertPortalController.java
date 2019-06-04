@@ -57,11 +57,15 @@ public class ExpertPortalController {
         int patentNumber = 0;  //专著
 
         System.out.println(author.getBookRatio());
-        otherNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getOtherRtio().replace("%",""))*0.01);
-        journalNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getJournalRatio().replace("%",""))*0.01);
-        meetingNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getMeetingRatio().replace("%",""))*0.01);
-        patentNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getBookRatio().replace("%",""))*0.01);
-        System.out.println(journalNumber);
+        try {
+            otherNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getOtherRtio().replace("%",""))*0.01);
+            journalNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getJournalRatio().replace("%",""))*0.01);
+            meetingNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getMeetingRatio().replace("%",""))*0.01);
+            patentNumber = (int)(Integer.parseInt(author.getPaperNum()) * Double.parseDouble(author.getBookRatio().replace("%",""))*0.01);
+            System.out.println(journalNumber);
+        } catch (Exception e){
+
+        }
         model.addAttribute("masterNumber", otherNumber);  //其他数
         model.addAttribute("journalNumber", journalNumber); //期刊数
         model.addAttribute("meetingNumber", meetingNumber); // 会议数

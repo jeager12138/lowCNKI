@@ -1,5 +1,6 @@
 package com.redemption.hair.lowCNKI.controller;
 
+import com.redemption.hair.lowCNKI.DAO.Bdxs_authorDAO;
 import com.redemption.hair.lowCNKI.DAO.Bdxs_paperDAO;
 import com.redemption.hair.lowCNKI.model.Bdxs_paper;
 import com.redemption.hair.lowCNKI.service.SolrService;
@@ -19,6 +20,8 @@ public class PaperDetailsController {
     Bdxs_paperDAO bdxs_paperDAO;
     @Autowired
     SolrService solrService;
+    @Autowired
+    Bdxs_authorDAO bdxs_authorDAO;
 
     @RequestMapping(path = {"/essay"}, method = RequestMethod.GET)
     public String essay(Model model, @RequestParam("paperId")int paperId, @RequestParam("page")int page) throws Exception {
@@ -29,9 +32,20 @@ public class PaperDetailsController {
         int refNumber = Integer.parseInt(paper.getCited())/10 > 10 ? 10 : Integer.parseInt(paper.getCited())/10;
         model.addAttribute("refNumber",refNumber);
 
+
+        String ScholarID = "CN-B07300AJ";
+        try {
+            List<String> slist = bdxs_authorDAO.getAuthorIdName(paper.getAuthorName());
+            if (slist != null)
+                ScholarID = slist.get(0);
+        }
+        catch (Exception ex){
+            ScholarID = " ";
+        }
         List<Bdxs_paper> list = new ArrayList<>();
         list = solrService.searchPaper("title", paper.getTitle(), (page-1)*10 ,10);
         model.addAttribute("refEssayList", list);
+        model.addAttribute("scholarId",ScholarID);
         return "essay";
     }
 }

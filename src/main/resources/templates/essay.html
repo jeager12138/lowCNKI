@@ -140,7 +140,7 @@
                                                 <section class="section brd-btm">
                                                     <div class="row">
                                                         <div class="col-sm-12 clear-mrg text-box">
-                                                            <h2 class="title-lg text-upper">文献名</h2>
+                                                            <h2 class="title-lg text-upper">${essayInfo.title}</h2>
                                                             <button style="margin-right: 20px" class="button button-pill button-tiny">下载</button>
                                                             <button style="margin-right: 20px" class="button button-pill button-tiny">分享</button>
                                                         </div>
@@ -154,7 +154,7 @@
 
                                                             <dl class="dl-horizontal clear-mrg">
                                                                 <dt class="text-upper">作者</dt>
-                                                                <dd>${essayInfo.authorName}</dd>
+                                                                <dd><a href="expert?ExpertId=${scholarId}" >${essayInfo.authorName}</a></dd>
 
                                                                 <dt class="text-upper">关键词</dt>
                                                                 <dd>${essayInfo.keywords}</dd>
@@ -213,7 +213,7 @@
                                                     <div class="padd-box-sm clear-mrg">
                                                         <div class="ref-box brd-btm hreview">
                                                             <div class="ref-author">
-                                                                <strong>文献名：${paper.title}</strong>
+                                                                <strong><a href="eassy?paperId=${(paper.paperId)?c}" >文献名：${paper.title}</a></strong>
                                                                 <span>作者:${paper.authorName}</span>
                                                             </div>
                                                             <blockquote class="ref-cont clear-mrg">

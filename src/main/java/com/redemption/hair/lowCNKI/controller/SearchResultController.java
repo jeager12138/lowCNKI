@@ -37,47 +37,50 @@ public class SearchResultController {
     public String SearchPaperResult(Model model,
                                     @RequestParam("searchString")String searchString,
                                     @RequestParam("searchBy")String searchBy,
+                                    @RequestParam("searchType")String searchType,
                                     @RequestParam("page")int page) throws Exception {
         searchString=URLDecoder.decode(searchString, "UTF-8");
-        System.out.println(searchString);
-        System.out.println(searchBy);
-        System.out.println(page);
-        List<Bdxs_paper> paperList = solrService.searchPaper(searchBy, searchString, (page-1)*10, 10);
 
-        model.addAttribute("paperList", paperList);
-        if(hostHolder.getUser() != null) {
-            jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
+        if(searchType.equals("paper")) {
+            List<Bdxs_paper> paperList = solrService.searchPaper(searchBy, searchString, (page-1)*10, 10);
+
+            model.addAttribute("paperList", paperList);
+            if(hostHolder.getUser() != null) {
+                jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
+            }
+        } else if (searchType.equals("patent")) {
+            List<Patent_CNKI> patent_cnkiList = solrService.searchPatent(searchBy, searchString, (page-1)*10, 10);
+
+            model.addAttribute("patentList", patent_cnkiList);
+            if(hostHolder.getUser() != null) {
+                jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
+            }
+        } else {
+            List<Bdxs_author> bdxs_authorList = solrService.searchAuthor(searchBy, searchString, (page-1)*10, 10);
+
+            model.addAttribute("expertList", bdxs_authorList);
+            if(hostHolder.getUser() != null) {
+                jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
+            }
         }
-        for(Bdxs_paper paper:paperList){
-            System.out.println(paper.getPaperId());
-        }
+
         return "result";
     }
 
-    @RequestMapping(path = {"/SearchPatentResult"},method = {RequestMethod.GET})
-    public String SearchPatentResult(Model model, String searchString, String searchBy, int page) throws Exception {
-        searchString=URLDecoder.decode(searchString, "UTF-8");
-        List<Patent_CNKI> patent_cnkiList = solrService.searchPatent(searchBy, searchString, (page-1)*10, 10);
-
-        model.addAttribute("patentList", patent_cnkiList);
-        if(hostHolder.getUser() != null) {
-            jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
-        }
-        return "result";
-    }
-
-
-    @RequestMapping(path = {"/SearchExpertResult"},method = {RequestMethod.GET})
-    public String SearchExpertResult(Model model, String searchString, String searchBy, int page) throws Exception {
-        searchString=URLDecoder.decode(searchString, "UTF-8");
-        List<Bdxs_author> bdxs_authorList = solrService.searchAuthor(searchBy, searchString, (page-1)*10, 10);
-
-        model.addAttribute("expertList", bdxs_authorList);
-        if(hostHolder.getUser() != null) {
-            jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
-        }
-        return  "result";
-    }
+//    @RequestMapping(path = {"/SearchPatentResult"},method = {RequestMethod.GET})
+//    public String SearchPatentResult(Model model, String searchString, String searchBy, int page) throws Exception {
+//        searchString=URLDecoder.decode(searchString, "UTF-8");
+//
+//        return "result";
+//    }
+//
+//
+//    @RequestMapping(path = {"/SearchExpertResult"},method = {RequestMethod.GET})
+//    public String SearchExpertResult(Model model, String searchString, String searchBy, int page) throws Exception {
+//        searchString=URLDecoder.decode(searchString, "UTF-8");
+//
+//        return  "result";
+//    }
 
     @RequestMapping(path = {"/Recommend"}, method = RequestMethod.GET)
     public String Recommend(Model model) throws Exception{

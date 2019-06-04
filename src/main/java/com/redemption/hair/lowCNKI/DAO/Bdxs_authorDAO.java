@@ -22,4 +22,7 @@ public interface Bdxs_authorDAO {
 
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where scholarId=#{id}"})
     Bdxs_author selectAuthorById(String id);
+
+    @Select({"select scholarId from ", TABLE_NAME, " where name=#{name}"})
+    List<String> getAuthorIdName(String name);
 }
