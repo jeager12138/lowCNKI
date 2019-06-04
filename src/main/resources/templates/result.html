@@ -276,7 +276,6 @@
 
                             <section class="section brd-btm" style="margin-top: 125px">
                                 <div class="row">
-
                                 </div><!-- .row -->
                             </section><!-- .section -->
                             <section class="section brd-btm">
@@ -285,15 +284,41 @@
                             <section class="section clear-mrg">
                                 <h2 class="title-lg text-upper">搜索结果</h2>
                                 <div class="padd-box-sm clear-mrg">
-                                    <div class="ref-box brd-btm hreview">
-                                        <div class="ref-author">
-                                            <strong>文献名：XX</strong>
-                                            <span>作者:XX</span>
-                                        </div>
-                                        <blockquote class="ref-cont clear-mrg">
-                                            <p>摘要：XX</p>
-                                        </blockquote>
-                                    </div>
+                                    <#if paperList?? >
+                                        <#list paperList as paper>
+                                            <div class="ref-box brd-btm hreview">
+                                                <div class="ref-author">
+                                                    <strong><a herf="essay?paperId=${paper.paperId}&page=1">${paper.title}</strong>
+                                                    <span>${paper.authorName}</span>
+                                                </div>
+                                                <blockquote class="ref-cont clear-mrg">
+                                                    <p class="summary_limit">摘要：${paper.summary}</p>
+                                                </blockquote>
+                                            </div>
+                                        </#list>
+                                    <#elseif patentList??>
+                                        <#list patentList as patent>
+                                            <div class="ref-box brd-btm hreview">
+                                                <div class="ref-author">
+                                                    <strong>${patent.name}</strong>
+                                                    <span>申请人：${patent.apply_name}</span>
+                                                </div>
+                                                <blockquote class="ref-cont clear-mrg">
+                                                    <p class="summary_limit">摘要：${patent.abstract_}</p>
+                                                </blockquote>
+                                            </div>
+                                        </#list>
+                                    <#elseif expertList??>
+                                        <#list expertList as expert>
+                                            <div class="ref-box brd-btm hreview">
+                                                <div class="ref-author">
+                                                    <strong>${expert.name}</strong>
+                                                    <span>${expert.field}</span>
+                                                    <span>${expert.affiliate}</span>
+                                                </div>
+                                            </div>
+                                        </#list>
+                                     </#if>
                                 </div>
                             </section><!-- .section -->
                             <section class="section brd-btm">
@@ -307,40 +332,6 @@
                                     <a class="next page-numbers" href=""><i class="ace-icon ace-icon-chevron-right"></i></a>
                                 </div>
                             </section>
-                            <!--<section class="section">-->
-                            <!--<h2 class="title-thin text-muted">Awards and Achievements</h2>-->
-
-                            <!--<div class="row">-->
-                            <!--<div class="col-sm-6 clear-mrg">-->
-                            <!--<div class="award-box">-->
-                            <!--<figure class="award-img">-->
-                            <!--<img src="../static/img/uploads/awards/award-01.png" alt="">-->
-                            <!--</figure>-->
-
-                            <!--<h3 class="award-title">Lake Marcelview</h3>-->
-
-                            <!--<div class="award-text text-muted clear-mrg">-->
-                            <!--<p>Your brand is the core of your marketing, the central theme around your products and services.-->
-                            <!--Your brand is not your Logo or your Company Name</p>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--</div>&lt;!&ndash; .col-sm-6 &ndash;&gt;-->
-
-                            <!--<div class="col-sm-6 clear-mrg">-->
-                            <!--<div class="award-box">-->
-                            <!--<figure class="award-img">-->
-                            <!--<img src="../static/img/uploads/awards/award-02.png" alt="">-->
-                            <!--</figure>-->
-
-                            <!--<h3 class="award-title">Lake Marcel Awards</h3>-->
-
-                            <!--<div class="award-text text-muted clear-mrg">-->
-                            <!--<p>Your brand is the core of your marketing, the central theme around your products and services.</p>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--</div>&lt;!&ndash; .col-sm-6 &ndash;&gt;-->
-                            <!--</div>&lt;!&ndash; .row &ndash;&gt;-->
-                            <!--</section>&lt;!&ndash; .section &ndash;&gt;-->
                         </div><!-- .padd-box -->
                         <!-- END: PAGE CONTENT -->
 
