@@ -33,7 +33,7 @@ public class SearchResultController {
     HostHolder hostHolder;
 
 
-    @RequestMapping(path = {"/SearchPaperResult"},method = {RequestMethod.POST})
+    @RequestMapping(path = {"/SearchPaperResult"},method = {RequestMethod.GET})
     public String SearchPaperResult(Model model, String searchString, String searchBy, int page) throws Exception {
         searchString=URLDecoder.decode(searchString, "UTF-8");
         System.out.println(searchString);
@@ -51,7 +51,7 @@ public class SearchResultController {
         return "result";
     }
 
-    @RequestMapping(path = {"/SearchPatentResult"},method = {RequestMethod.POST})
+    @RequestMapping(path = {"/SearchPatentResult"},method = {RequestMethod.GET})
     public String SearchPatentResult(Model model, String searchString, String searchBy, int page) throws Exception {
         searchString=URLDecoder.decode(searchString, "UTF-8");
         List<Patent_CNKI> patent_cnkiList = solrService.searchPatent(searchBy, searchString, (page-1)*10, 10);
@@ -64,7 +64,7 @@ public class SearchResultController {
     }
 
 
-    @RequestMapping(path = {"/SearchExpertResult"},method = {RequestMethod.POST})
+    @RequestMapping(path = {"/SearchExpertResult"},method = {RequestMethod.GET})
     public String SearchExpertResult(Model model, String searchString, String searchBy, int page) throws Exception {
         searchString=URLDecoder.decode(searchString, "UTF-8");
         List<Bdxs_author> bdxs_authorList = solrService.searchAuthor(searchBy, searchString, (page-1)*10, 10);
