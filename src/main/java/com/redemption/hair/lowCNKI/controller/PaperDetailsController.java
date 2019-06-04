@@ -29,9 +29,9 @@ public class PaperDetailsController {
         int refNumber = Integer.parseInt(paper.getCited())/10 > 10 ? 10 : Integer.parseInt(paper.getCited())/10;
         model.addAttribute("refNumber",refNumber);
 
-        List<Bdxs_paper> list = new ArrayList<>();
-        list = solrService.searchPaper("title", paper.getTitle(), (page-1)*10 ,10);
-        model.addAttribute("refEssayList", list);
+//        List<Bdxs_paper> list = new ArrayList<>();
+//        list = solrService.searchPaper("title", paper.getTitle(), (page-1)*10 ,10);
+//        model.addAttribute("refEssayList", list);
         return "essay";
     }
 }
