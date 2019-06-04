@@ -20,7 +20,7 @@ import java.util.List;
 public class SolrService {
     //private final String SOLR_URL = "http://10.72.148.82:8983/solr/lowCNKI";
     //private final String SOLR_URL = "http://10.135.204.4:8983/solr/lowCNKI";
-    private final String SOLR_URL = "192.168.1.110:8983/solr/lowCNKI";
+    private final String SOLR_URL = "http://192.144.201.108:8983/solr/lowCNKI";
 
     private HttpSolrClient client = new HttpSolrClient.Builder(SOLR_URL).build();
 
