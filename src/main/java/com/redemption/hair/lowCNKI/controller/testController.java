@@ -42,7 +42,6 @@ public class testController {
     Patent_CNKIDAO patent_cnkiDAO;
 
     @RequestMapping(path = {"/", "/index"}, method = {RequestMethod.GET})
-    @ResponseBody
     public String index() {
 
         /*test bdxs_authorDAO
@@ -67,7 +66,7 @@ public class testController {
         System.out.println(JSON.toJSONString(bdxs_paperDAO.getPaperByTitle("马克思主义")));
          */
 
-        return "";
+        return "search";
     }
 
     @RequestMapping(path = {"/blabla"}, method = {RequestMethod.GET})
