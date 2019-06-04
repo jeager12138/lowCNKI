@@ -43,7 +43,6 @@ public class SearchResultController {
 
         if(searchType.equals("paper")) {
             List<Bdxs_paper> paperList = solrService.searchPaper(searchBy, searchString, (page-1)*10, 10);
-
             model.addAttribute("paperList", paperList);
             if(hostHolder.getUser() != null) {
                 jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);

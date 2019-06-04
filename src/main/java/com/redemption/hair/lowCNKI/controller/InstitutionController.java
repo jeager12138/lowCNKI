@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -15,8 +16,9 @@ public class InstitutionController {
     @Autowired
     Wf_organizationDAO wf_organizationDAO;
     @RequestMapping(path = {"/institutionInfo"}, method = {RequestMethod.GET})
-    public String institutionInfo(Model model){
-        String institution = "四川旅游学院";
+    public String institutionInfo(Model model,
+                                  @RequestParam("institution")String institution){
+        //String institution = "四川旅游学院";
         int index = institution.indexOf("大学");
         String name = institution;
         if(index != 0){
