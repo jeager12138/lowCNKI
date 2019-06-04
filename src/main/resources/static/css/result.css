@@ -86,22 +86,6 @@ a:hover {
     text-decoration: none;
 }
 
-
-.ace-icon {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 /*  Typography */
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     font-weight: 700;
@@ -696,8 +680,8 @@ button {
 /**
  * Address inconsistent `text-transform` inheritance for `button` and `select`.
  * All other form control elements do not inherit `text-transform` values.
- * Correct `button` css inheritance in Firefox, IE 8/9/10/11, and Opera.
- * Correct `select` css inheritance in Firefox.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
  */
 button,
 select {
@@ -707,8 +691,8 @@ select {
 /**
  * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
  *    and `video` controls.
- * 2. Correct inability to css clickable `input` types in iOS.
- * 3. Improve usability and consistency of cursor css between image-type
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
  *    `input` and others.
  */
 button,
@@ -747,7 +731,7 @@ input {
 }
 
 /**
- * It's recommended that you don't attempt to css these elements.
+ * It's recommended that you don't attempt to style these elements.
  * Firefox's implementation doesn't respect box-sizing, padding, or width.
  *
  * 1. Address box sizing set to `content-box` in IE 8/9/10.
@@ -762,8 +746,8 @@ input[type="radio"] {
 }
 
 /**
- * Fix the cursor css for Chrome's increment/decrement buttons. For certain
- * `font-size` values of the `input`, it causes the cursor css of the
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
  * decrement button to change from `default` to `text`.
  */
 input[type="number"]::-webkit-inner-spin-button,
@@ -938,12 +922,12 @@ submit
   font-family: 'loraitalic';
   font-weight: 400;
   font-size: 14px;
-  font-css: normal;
+  font-style: normal;
 
   background-color: transparent;
   background-image: none;
   border-width: 0 0 2px 0;
-  border-css: solid;
+  border-style: solid;
   border-color: #d0d0d0;
   border-color: rgba(255,255,255,0.39);
 
@@ -1103,7 +1087,7 @@ submit
     }
 
     .col-xs-4 {
-        width: 25%;
+        width: 33.33333%;
     }
 
     .col-xs-5 {
@@ -2450,8 +2434,6 @@ img.aligncenter {
     display: inline-block;
     vertical-align: middle;
 }
-
-
 
 .page-numbers.current {
     color: #010101;
@@ -4810,7 +4792,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .ace-container {
     width: 100%;
-    max-width: 1240px;
+    max-width: 940px;
     margin: 0 auto;
 }
 
@@ -4853,7 +4835,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .ace-card-on .ace-container-shift {
-        margin-left: 28px;
+        margin-left: 288px;
     }
 
     .ace-card-on .ace-paper-cont {
@@ -4900,7 +4882,6 @@ h1, h2, h3, h4, h5, h6 {
     #ace-card {
         float: left;
         width: 288px;
-        margin-left: 30px;
     }
 }
 
@@ -6561,10 +6542,4 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateZ(0px);
     transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
     z-index: 1200;
-}
-
-.summary_limit{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }

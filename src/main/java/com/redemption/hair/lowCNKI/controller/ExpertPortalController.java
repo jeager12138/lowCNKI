@@ -112,9 +112,4 @@ public class ExpertPortalController {
         return ret ? "success" : "fail: please follow later";
     }
 
-    @RequestMapping(path = {"/queryIfFollow"}, method = {RequestMethod.GET})
-    @ResponseBody
-    public int queryIfFollow(@RequestParam("ExpertId")int expertId) {
-        return -1;
-    }
 }
