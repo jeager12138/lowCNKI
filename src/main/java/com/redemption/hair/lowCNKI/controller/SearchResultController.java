@@ -49,7 +49,7 @@ public class SearchResultController {
             jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
         }
         for(Bdxs_paper paper:paperList){
-            System.out.println(paper.getTitle());
+            System.out.println(paper.getPaperId());
         }
         return "result";
     }

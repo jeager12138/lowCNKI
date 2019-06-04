@@ -238,23 +238,13 @@
                             </section>
                             <section class="section clear-mrg">
                                 <h2 class="title-lg text-upper">搜索结果</h2>
-                                <#list paperList as paper>
-                                    <div class="ref-box brd-btm hreview">
-                                        <div class="ref-author">
-                                            <strong><a herf="essay?paperId=${paper.paperId}&page=1">${paper.title}</strong>
-                                            <span>${paper.authorName}</span>
-                                        </div>
-                                        <blockquote class="ref-cont clear-mrg">
-                                            <p class="summary_limit">摘要：${paper.summary}</p>
-                                        </blockquote>
-                                    </div>
-                                </#list>
+
                                 <div class="padd-box-sm clear-mrg">
                                     <#if paperList?? >
                                         <#list paperList as paper>
                                             <div class="ref-box brd-btm hreview">
                                                 <div class="ref-author">
-                                                    <strong><a herf="essay?paperId=${paper.paperId}&page=1">${paper.title}</strong>
+                                                    <strong><a herf="essay?paperId=${(paper.paperId)?c}&page=1">${paper.title} </a></strong>
                                                     <span>${paper.authorName}</span>
                                                 </div>
                                                 <blockquote class="ref-cont clear-mrg">
