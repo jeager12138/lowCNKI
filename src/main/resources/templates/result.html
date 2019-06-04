@@ -64,13 +64,13 @@
             page:1
         }
         if(st=="paper"){
-            $.post("/SearchPaperResult",data);
+            $.get("/SearchPaperResult",data);
         }
         else if(st=="patent"){
-            $.post("/SearchPatentResult",data)
+            $.get("/SearchPatentResult",data)
         }
         else if(st=="expert"){
-            $.post("/SearchExpertResult",data)
+            $.get("/SearchExpertResult",data)
         }
         else{
             window.location.href="error/4xx.html";
