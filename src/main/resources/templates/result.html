@@ -141,15 +141,12 @@
 
     <article id="ace-card" class="ace-card bg-primary">
         <div class="ace-card-inner text-center">
-            <h1>检索历史</h1>
             <p class="text-muted">为我推荐</p>
-            <ul class="ace-social clear-list">
-                <li><a><span class="ace-icon ace-icon-facebook"></span></a></li>
-                <li><a><span class="ace-icon ace-icon-twitter"></span></a></li>
-                <li><a><span class="ace-icon ace-icon-google-plus"></span></a></li>
-                <li><a><span class="ace-icon ace-icon-instagram"></span></a></li>
-                <li><a><span class="ace-icon ace-icon-pinterest"></span></a></li>
-            </ul>
+            <#if recommendPaper??>
+                <#list recommendPaper as recommend>
+                    <a>recommend.title</a>
+                </#list>
+            </#if>
         </div>
 
     </article><!-- #ace-card -->
@@ -244,7 +241,7 @@
                             <section class="section brd-btm">
                                 <div class="row">
                                     <!--此处放搜索框-->
-                                    <div id="sbox" class="sw_sform" >
+                                    <div id="sbox" class="sw_sform" style="position: absolute;left:100px;top:120px;">
                                         <div id="est_switch">
                                             <div id="est_paper" class="est_selected" onclick="changeselect(this)" name="paper">文献</div>
                                             <div id="est_patent" class="est_unselected" onclick="changeselect(this)" name="patent">专利</div>
@@ -323,13 +320,14 @@
                             </section><!-- .section -->
                             <section class="section brd-btm">
                                 <div class="pagination">
-                                    <a class="next page-numbers" href=""><i class="ace-icon ace-icon-chevron-left"></i></a>
-                                    <span class="page-numbers current">1</span>
-                                    <a class="page-numbers" href="">2</a>
-                                    <a class="page-numbers" href="">3</a>
-                                    <a class="page-numbers" href="">4</a>
-                                    <a class="page-numbers" href="">5</a>
-                                    <a class="next page-numbers" href=""><i class="ace-icon ace-icon-chevron-right"></i></a>
+                                    参数：${RequestParameters.searchString}
+                                    <#list pageLeft..pageRight as i>
+                                        <#if (i==pageCur)>
+                                            <span class="page-numbers current"> ${i}</span>
+                                        <#else>
+                                            <a class="page-numbers"  href="SearchPaperResult?searchString=${RequestParameters.searchString}&page=${i}&searchBy=${RequestParameters.searchBy}&searchType=${RequestParameters.searchType}">${i}</a>
+                                        </#if>
+                                    </#list>
                                 </div>
                             </section>
                         </div><!-- .padd-box -->
