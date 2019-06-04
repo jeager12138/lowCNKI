@@ -9,7 +9,7 @@
     <link href="https://cdn.bootcss.com/bootstrap-select/1.12.4/css/bootstrap-select.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <title>Low CNKI搜索-国内版</title>
+    <title>Low CNKI搜索-体验版</title>
     <meta name="theme-color" content="#4F4F4F"/>
     <meta content="Low CNKI是宿舍领先的搜索引擎，为软院用户提供文献、期刊、博硕士论文、会议、专利、专家等全球信息搜索服务。" name="description"/>
     <meta content="NOODP" name="ROBOTS"/>
@@ -79,6 +79,12 @@
 		    	var searchBy=$("#sa_qs").val()
 	    		var searchUrl = encodeURI("result.html?searchString=" + searchString+"&searchBy="+searchBy+"&searchType="+searchType ); //使用encodeURI编码
 				window.location.href=(searchUrl);
+		    }
+		    function tryjumplogin(){
+		        status=$("#id_s").text()
+		        if(status=="登录"){
+		            window.location.href="login.html"
+		        }
 		    }
         </script>
 <table id="hp_table" role="none">
@@ -198,7 +204,7 @@
                         <div id="hp_id_hdr">
                             <div id="id_h" role="complementary" aria-label="帐户奖励和偏好设置" data-priority="2">
                                 <a id="id_l" class="id_button" role="button" aria-haspopup="true" aria-controls="id_d" aria-expanded="false" data-clarity-mask="true" href="javascript:void(0);" h="ID=SERP,5057.1">
-                                    <span id="id_s" aria-hidden="false">登录</span>
+                                    <span id="id_s" aria-hidden="false" onclick="tryjumplogin()">登录</span>
                                     <span class="sw_spd id_avatar" id="id_a" aria-hidden="false" aria-label="默认个人资料图片" style="content: url(../static/img/user.png);"></span>
                                 </a>
                             </div>
@@ -239,16 +245,16 @@
                                     </span>
                             <ul>
                                 <li>
-                                    <a id="sb_ICPLicenseText" href="https://www.buaa.edu.cn/" h="ID=SERP,5071.1">北京航空航天大学</a>
+                                    <a id="sb_ICPLicenseText" href="https://www.buaa.edu.cn/">北京航空航天大学</a>
                                 </li>
                                 <li>
-                                    <a id="sb_ICPFilingText" href="https://www.buaa.edu.cn/" h="ID=SERP,5072.1">1621 进击的发际线</a>
+                                    <a id="sb_ICPFilingText" href="https://www.buaa.edu.cn/">1621 进击的发际线</a>
                                 </li>
                                 <li>
-                                    <a id="sb_MMAIS" href="https://www.buaa.edu.cn/" h="ID=SERP,5073.1">关于我们</a>
+                                    <a id="sb_MMAIS" href="https://www.buaa.edu.cn/">关于我们</a>
                                 </li>
                                 <li>
-                                    <a id="sb_privacy" href="https://www.buaa.edu.cn/" h="ID=SERP,5074.1">联系我们</a>
+                                    <a id="sb_privacy" href="https://www.buaa.edu.cn/">联系我们</a>
                                 </li>
                             </ul>
                         </div>

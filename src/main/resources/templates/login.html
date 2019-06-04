@@ -28,6 +28,10 @@
 <!--    $.ajaxSetup({-->
 <!--      contentType: "application/x-www-form-urlencoded; charset=utf-8"-->
 <!--    });-->
+
+    function jumptoindex(){
+        window.location.href="search.html"
+    }
     function keybuttonclick(){
         $("#showerror").text("");
         un=$("#usernameinput").val()
@@ -49,7 +53,7 @@
         else{
             $.post("/reg/",data,function(ret){
                 if(ret=="successs"){
-                    window.history.go(-1);
+                    jumptoindex();
                 }
                 else{
                     $("#showerror").text(ret);
@@ -69,9 +73,6 @@
             $('#changebutton').text("登录")
             $('#keybutton').text("注册")
         }
-    }
-    function jumptoindex(){
-        window.location.href="search.html"
     }
 </script>
 <body class="login-page sidebar-collapse">
