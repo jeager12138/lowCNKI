@@ -254,7 +254,7 @@
                                         <#list patentList as patent>
                                             <div class="ref-box brd-btm hreview">
                                                 <div class="ref-author">
-                                                    <strong>${patent.name}</strong>
+                                                    <strong><a href="patent?pubNum=${patent.pub_number}">${patent.name}</a></strong>
                                                     <#if patent.apply_name??><span>申请人：${patent.apply_name}</span></#if>
                                                 </div>
                                                 <blockquote class="ref-cont clear-mrg">

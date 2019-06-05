@@ -126,6 +126,8 @@ public class SolrService {
             patent.setAddress((String)solrDocument.getFirstValue("Address_patent"));
             patent.setName((String)solrDocument.getFirstValue("Name_patent"));
             patent.setAgent_name((String)solrDocument.getFirstValue("agent_name_patent"));
+            patent.setApply_name((String)solrDocument.getFirstValue("apply_name_patent"));
+            patent.setPub_number((String)solrDocument.getFirstValue("pub_number_patent"));
             patentList.add(patent);
         }
 
