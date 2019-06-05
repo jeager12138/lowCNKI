@@ -77,7 +77,7 @@
         var searchType=$(".est_selected").attr("name");
         var searchString=$("#sb_form_q").val()
         var searchBy=$("#sa_qs").val()
-        var searchUrl = encodeURI("SearchPaperResult.html?searchString=" + searchString+"&searchBy="+searchBy+"&searchType="+searchType+"page=1" ); //使用encodeURI编码
+        var searchUrl = encodeURI("SearchPaperResult.html?searchString=" + searchString+"&searchBy="+searchBy+"&searchType="+searchType+"&page=1" ); //使用encodeURI编码
         window.location.href=(searchUrl);
     }
     function tryjumplogin(){
@@ -87,13 +87,13 @@
         }
     }
     function show_settings(){
-        if($(".id_hbfo").hasClass("slide_down")){
-            $(".id_hbfo").removeClass("slide_down");
-            $(".id_hbfo").addClass("slide_up");
+        if($("#id_hbfo").hasClass("slide_down")){
+            $("#id_hbfo").removeClass("slide_down");
+            $("#id_hbfo").addClass("slide_up");
         }
         else{
-            $(".id_hbfo").removeClass("slide_up");
-            $(".id_hbfo").addClass("slide_down");
+            $("#id_hbfo").removeClass("slide_up");
+            $("#id_hbfo").addClass("slide_down");
         }
     }
 

@@ -439,6 +439,30 @@
         <polygon points="0,0,633,0,633,536" style="fill:#c0e3e7;stroke:purple;stroke-width:0" />
     </svg>
 </div><!-- .ace-wrapper -->
+<div id="hidden-para" style="display:none" ss=${RequestParameters.searchString} st=${RequestParameters.searchType} sb=${RequestParameters.searchBy} >
+
+</div>
+<script>
+    var searchBy=$("#hidden-para").attr("sb");
+    var searchType=$("#hidden-para").attr("st");
+    var searchString=$("#hidden-para").attr("ss");
+    if(searchType=="patent"){
+        var otherdiv=$(".est_selected");
+        $("#est_patent").addClass("est_selected");
+        $("#est_paper").removeClass("est_selected");
+    }
+    else if(searchType=="expert"){
+        var otherdiv=$(".est_selected");
+        $("#est_expert").addClass("est_selected");
+        $("#est_paper").removeClass("est_selected");
+        $("#sa_qs").empty();
+        $("#sa_qs").append('<option value="name">姓名</option>');
+        $("#sa_qs").append('<option value="field">领域</option>');
+        $("#sa_qs").append('<option value="institution">机构</option>');
+    }
+    $("#sa_qs option[value="+searchBy+"]").attr("selected", true);
+    $("#sb_form_q").val(searchString);
+</script>
 
 
 </body>
