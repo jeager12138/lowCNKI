@@ -42,8 +42,8 @@
         }
         if($('#keybutton').text()=="登录"){
             $.post("/log/",data,function(ret){
-                if(ret=="successs"){
-                    window.location.href="search.html"
+                if(ret=="success"){
+                    jumptoindex();
                 }
                 else{
                     $("#showerror").text(ret);
@@ -52,7 +52,7 @@
         }
         else{
             $.post("/reg/",data,function(ret){
-                if(ret=="successs"){
+                if(ret=="success"){
                     jumptoindex();
                 }
                 else{
