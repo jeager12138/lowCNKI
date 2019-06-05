@@ -44,17 +44,21 @@ public class LoginController {
                         @RequestParam("password") String password,
                         HttpServletResponse response) {
         try {
+            System.out.println(1211);
             Map<String, Object> map = userService.login(username, password);
             if (map.containsKey("ticket")) {
+                System.out.println(1111111);
                 Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
                 cookie.setPath("/");
                 response.addCookie(cookie);
                 return "success";
             } else {
+                System.out.println(map.get("msg").toString());
                 return map.get("msg").toString();
             }
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return "服务器错误";
         }
     }

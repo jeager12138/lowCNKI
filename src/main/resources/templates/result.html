@@ -30,52 +30,7 @@
     <script type="text/javascript" src="../static/js/expert/options.js"></script>
     <script type="text/javascript" src="../static/js/expert/main.js"></script>
 
-    <script>
-        function GetUrlParam(paraName) {
-            var url = window.location.href;
-            var arrObj = url.split("?");
 
-            if (arrObj.length > 1) {
-                var arrPara = arrObj[1].split("&");
-                var arr;
-
-                for (var i = 0; i < arrPara.length; i++) {
-                    arr = arrPara[i].split("=");
-
-                    if (arr != null && arr[0] == paraName) {
-                        return arr[1];
-                    }
-                }
-                return "";
-            }
-            else {
-                return "";
-            }
-        }
-        ss=GetUrlParam("searchString");
-        sb=GetUrlParam("searchBy");
-        st=GetUrlParam("searchType");
-        if(ss==""){
-            window.location.href="error/4xx.html";
-        }
-        var data={
-            searchString:ss,
-            searchBy:sb,
-            page:1
-        }
-        if(st=="paper"){
-            $.get("/SearchPaperResult",data);
-        }
-        else if(st=="patent"){
-            $.get("/SearchPatentResult",data)
-        }
-        else if(st=="expert"){
-            $.get("/SearchExpertResult",data)
-        }
-        else{
-            window.location.href="error/4xx.html";
-        }
-    </script>
 
 
 </head>
@@ -251,11 +206,12 @@
                                             <a id="hpinsthk" aria-hidden="true" tabindex="-1" href="javascript:void(0)" h="ID=SERP,5092.1">
                                                 <span></span>
                                             </a>
-                                            <form action="./searchResult.html" role="none" id="sb_form" class="sw_box">
+                                            <form action="/SearchPaperResult.html" role="none" id="sb_form" class="sw_box">
                                                 <div class="b_searchboxForm" role="search">
                                                     <input class="b_searchbox" id="sb_form_q" name="searchString" title="输入搜索词" type="search" value="" maxlength="100" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"
                                                            style="width:450px"/>
-                                                    <select id="sa_qs" name="searchType" value="ds" style="height: 45px;width: 130px;border: none;">
+                                                    <input type="hidden" name="page" value="1"/>
+                                                    <select id="sa_qs" name="searchBy" value="ds" style="height: 45px;width: 130px;border: none;">
                                                         <option value="all">全部</option>
                                                         <option value="title">标题</option>
                                                         <option value="author">作者</option>
@@ -263,7 +219,7 @@
                                                     </select>
                                                     <input type="hidden" id="sa_st" name="searchType" value="paper">
                                                     <input type="button" class="b_searchboxSubmit" id="sb_form_go" title="搜索" tabIndex="0" name="go"
-                                                           style="background: transparent url(./img/search.png) no-repeat;background-image: url(./img/search.png);background-size: 100% 100%;" onclick="submitsearch()"/>
+                                                           style="background: transparent url(../static/img/search.png) no-repeat;background-image: url(../static/img/search.png);background-size: 100% 100%;" onclick="submitsearch()"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -280,16 +236,17 @@
                             </section>
                             <section class="section clear-mrg">
                                 <h2 class="title-lg text-upper">搜索结果</h2>
+
                                 <div class="padd-box-sm clear-mrg">
-                                    <#if paperList?? >
+                                    <#if paperList??>
                                         <#list paperList as paper>
                                             <div class="ref-box brd-btm hreview">
                                                 <div class="ref-author">
-                                                    <strong><a herf="essay?paperId=${paper.paperId}&page=1">${paper.title}</strong>
-                                                    <span>${paper.authorName}</span>
+                                                    <strong><a href="essay?paperId=${(paper.paperId)?c}&page=1">${paper.title} </a></strong>
+                                                    <#if paper.authorName??><span>${paper.authorName}</span></#if>
                                                 </div>
                                                 <blockquote class="ref-cont clear-mrg">
-                                                    <p class="summary_limit">摘要：${paper.summary}</p>
+                                                    <#if paper.summary??><p class="summary_limit">摘要：${paper.summary}</p></#if>
                                                 </blockquote>
                                             </div>
                                         </#list>
@@ -298,10 +255,10 @@
                                             <div class="ref-box brd-btm hreview">
                                                 <div class="ref-author">
                                                     <strong>${patent.name}</strong>
-                                                    <span>申请人：${patent.apply_name}</span>
+                                                    <#if patent.apply_name??><span>申请人：${patent.apply_name}</span></#if>
                                                 </div>
                                                 <blockquote class="ref-cont clear-mrg">
-                                                    <p class="summary_limit">摘要：${patent.abstract_}</p>
+                                                    <#if patent.abstract_??><p class="summary_limit">摘要：${patent.abstract_}</p></#if>
                                                 </blockquote>
                                             </div>
                                         </#list>
@@ -309,7 +266,7 @@
                                         <#list expertList as expert>
                                             <div class="ref-box brd-btm hreview">
                                                 <div class="ref-author">
-                                                    <strong>${expert.name}</strong>
+                                                    <a href="expert.html?ExpertId=${expert.scholarId}"> <strong>${expert.name}</strong></a>
                                                     <span>${expert.field}</span>
                                                     <span>${expert.affiliate}</span>
                                                 </div>
