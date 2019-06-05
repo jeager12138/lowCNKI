@@ -478,8 +478,10 @@
 			<article class="ace-card bg-primary">
 				<div class="ace-card-inner text-center">
 					<img class="avatar avatar-195" src="" width="195" height="195" alt="">
-					<h1>XXX</h1>
-					<p class="text-muted">积分:XXX</p>
+					<#if user??><h1>${user.nickname}</h1>
+					<p class="text-muted">积分:${user.balance}</p>
+					<#else><h1>未登录</h1>
+				</#if>
 					<ul class="ace-social clear-list">
 						<li><a><span class="ace-icon ace-icon-facebook"></span></a></li>
 						<li><a><span class="ace-icon ace-icon-twitter"></span></a></li>

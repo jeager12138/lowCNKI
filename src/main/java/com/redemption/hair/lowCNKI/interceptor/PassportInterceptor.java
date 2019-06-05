@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -40,11 +41,11 @@ public class PassportInterceptor implements HandlerInterceptor {
 
         if (ticket != null) {
             Token loginTicket = tokenDAO.selectByToken(ticket);
-            if (loginTicket == null || loginTicket.getToken_time().before(new Date()) || loginTicket.getToken_valid() != 0) {
+            if (loginTicket == null || tokenDAO.selectDate(ticket).before(new Date()) || tokenDAO.selectValid(ticket) != 0) {
                 return true;
             }
 
-            Users user = usersDAO.selectById(loginTicket.getUser_id());
+            Users user = usersDAO.selectById(tokenDAO.selectUserId(ticket));
             hostHolder.setUser(user);
         }
         return true;

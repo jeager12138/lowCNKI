@@ -1,12 +1,13 @@
 package com.redemption.hair.lowCNKI.model;
 
+import java.util.Date;
 import java.sql.Timestamp;
 
 public class Token {
     private int id;
     private int user_id;
     private String token;
-    private Timestamp token_time;
+    private Date token_time;
     private int token_valid;
 
     public Token() {
@@ -32,11 +33,11 @@ public class Token {
         this.token = token;
     }
 
-    public Timestamp getToken_time() {
+    public Date getToken_time() {
         return token_time;
     }
 
-    public void setToken_time(Timestamp token_time) {
+    public void setToken_time(Date token_time) {
         this.token_time = token_time;
     }
 

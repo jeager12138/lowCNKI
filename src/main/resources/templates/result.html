@@ -96,10 +96,10 @@
 
     <article id="ace-card" class="ace-card bg-primary">
         <div class="ace-card-inner text-center">
-            <p class="text-muted">为我推荐</p>
+            <span><p class="text-muted">为我推荐</p></span>
             <#if recommendPaper??>
                 <#list recommendPaper as recommend>
-                    <a>recommend.title</a>
+                    <p><li><a href="essay?paperId=${(recommend.paperId)?c}&page=1" style="text-decoration:none">${recommend.title}</a></li></p>
                 </#list>
             </#if>
         </div>
@@ -305,8 +305,11 @@
             <article class="ace-card bg-primary">
                 <div class="ace-card-inner text-center">
                     <img class="avatar avatar-195" src="../static/img/uploads/avatar/avatar-58x58-default.png" width="195" height="195" alt="">
-                    <h1>XX</h1>
-                    <p class="text-muted">XX</p>
+                    <#if user??><h1>${user.nickname}</h1>
+                    <p class="text-muted">积分:${user.balance}</p>
+                    <#else><h1>未登录</h1>
+                    </#if>
+
                     <ul class="ace-social clear-list">
                         <li><a><span class="ace-icon ace-icon-facebook"></span></a></li>
                         <li><a><span class="ace-icon ace-icon-twitter"></span></a></li>

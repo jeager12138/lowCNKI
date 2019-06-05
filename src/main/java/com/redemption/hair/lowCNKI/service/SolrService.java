@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SolrService {
@@ -24,8 +26,11 @@ public class SolrService {
     private HttpSolrClient client = new HttpSolrClient.Builder(SOLR_URL).build();
 
 
-    public List<Bdxs_paper> searchPaper(String searchBy, String keyword, int offset, int count) throws Exception {
+    public Map<String, Object> searchPaper(String searchBy, String keyword, int offset, int count) throws Exception {
         List<Bdxs_paper> paperList = new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+
+
         SolrQuery query = new SolrQuery();
         query.setRows(count);
         query.setStart(offset);
@@ -42,8 +47,9 @@ public class SolrService {
         QueryResponse response = null;
         response = client.query(query);
 
+
         SolrDocumentList list = response.getResults();
-        //long num = list.getNumFound();
+        long num = list.getNumFound();
         for (SolrDocument solrDocument : list) {
             // Todo
             Bdxs_paper paper = new Bdxs_paper();
@@ -59,11 +65,16 @@ public class SolrService {
             paperList.add(paper);
         }
 
-        return paperList;
+        map.put("paperList", paperList);
+        map.put("num", num);
+
+        return map;
     }
 
-    public List<Bdxs_author> searchAuthor(String searchBy, String keyword, int offset, int count) throws Exception {
+    public Map<String, Object> searchAuthor(String searchBy, String keyword, int offset, int count) throws Exception {
         List<Bdxs_author> authorList = new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+
         SolrQuery query = new SolrQuery();
         query.setRows(count);
         query.setStart(offset);
@@ -82,6 +93,7 @@ public class SolrService {
         response = client.query(query);
 
         SolrDocumentList list = response.getResults();
+        long num = list.getNumFound();
         for (SolrDocument solrDocument : list) {
             //Todo
             Bdxs_author author = new Bdxs_author();
@@ -94,11 +106,16 @@ public class SolrService {
             authorList.add(author);
         }
 
-        return authorList;
+        map.put("authorList", authorList);
+        map.put("num", num);
+
+        return map;
     }
 
-    public List<Patent_CNKI> searchPatent(String searchBy, String keyword, int offset, int count) throws Exception {
+    public Map<String, Object> searchPatent(String searchBy, String keyword, int offset, int count) throws Exception {
         List<Patent_CNKI> patentList = new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+
         SolrQuery query = new SolrQuery();
         query.setRows(count);
         query.setStart(offset);
@@ -119,6 +136,7 @@ public class SolrService {
         response = client.query(query);
 
         SolrDocumentList list = response.getResults();
+        long num = list.getNumFound();
         for (SolrDocument solrDocument : list) {
             //Todo
             Patent_CNKI patent = new Patent_CNKI();
@@ -126,12 +144,15 @@ public class SolrService {
             patent.setAddress((String)solrDocument.getFirstValue("Address_patent"));
             patent.setName((String)solrDocument.getFirstValue("Name_patent"));
             patent.setAgent_name((String)solrDocument.getFirstValue("agent_name_patent"));
-            patent.setApply_name((String)solrDocument.getFirstValue("apply_name_patent"));
-            patent.setPub_number((String)solrDocument.getFirstValue("pub_number_patent"));
             patentList.add(patent);
         }
 
-        return patentList;
+        map.put("patentList", patentList);
+        map.put("num", num);
+
+        return map;
     }
+
+
 
 }

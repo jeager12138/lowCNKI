@@ -42,45 +42,67 @@ public class SearchResultController {
         searchString=URLDecoder.decode(searchString, "UTF-8");
 
         if(searchType.equals("paper")) {
-            List<Bdxs_paper> paperList = solrService.searchPaper(searchBy, searchString, (page-1)*10, 10);
-//          int pageNum = (int)(Math.ceil(paperList.size()/10.0));
-            int pageNum = 15;
-            int pageLeft = (page-5)>=1?page-2:1;
-            int pageRight = (page+5)<=pageNum?page+5:pageNum;
+            List<Bdxs_paper> paperList = (List<Bdxs_paper>)solrService.searchPaper(searchBy, searchString, (page-1)*10, 10).get("paperList");
 
+            long Num = (long)(solrService.searchPaper(searchBy, searchString, (page-1)*10, 10).get("num"));
+            long pageNum = (long)(Math.ceil(Num/10.0));
+            long pageLeft = (page-5)>=1?page-2:1;
+            long pageRight = (page+5)<=pageNum?page+5:pageNum;
+            model.addAttribute("user", hostHolder.getUser());
+
+            System.out.println(pageNum);
+            System.out.println(pageLeft);
+            System.out.println(pageRight);
+            System.out.println(page);
             model.addAttribute("pageCur",page);
             model.addAttribute("pageLeft",pageLeft);
             model.addAttribute("pageRight",pageRight);
             model.addAttribute("paperList", paperList);
 
+            List<Bdxs_paper> recommendPaper = (List<Bdxs_paper>)solrService.searchPaper("title", "人工智能", 0, 10).get("paperList");
+
+            model.addAttribute("recommendPaper", recommendPaper);
+
             if(hostHolder.getUser() != null) {
                 jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
             }
         } else if (searchType.equals("patent")) {
-            List<Patent_CNKI> patent_cnkiList = solrService.searchPatent(searchBy, searchString, (page-1)*10, 10);
-         //  int pageNum = (int)(Math.ceil(patent_cnkiList.size()/10.0));
-            int pageNum = 15;
-            int pageLeft = (page-5)>=1?page-2:1;
-            int pageRight = (page+5)<=pageNum?page+5:pageNum;
+            List<Patent_CNKI> patent_cnkiList = (List<Patent_CNKI>) solrService.searchPatent(searchBy, searchString, (page-1)*10, 10).get("patentList");
 
+            long Num = (long)solrService.searchPatent(searchBy, searchString, (page-1)*10, 10).get("num");
+            long pageNum = (long)(Math.ceil(Num/10.0));
+            long pageLeft = (page-5)>=1?page-2:1;
+            long pageRight = (page+5)<=pageNum?page+5:pageNum;
+            model.addAttribute("user", hostHolder.getUser());
+//            System.out.println("print id"+hostHolder.getUser().getId());
             model.addAttribute("pageCur",page);
             model.addAttribute("pageLeft",pageLeft);
             model.addAttribute("pageRight",pageRight);
             model.addAttribute("patentList", patent_cnkiList);
+
+            List<Bdxs_paper> recommendPaper =  (List<Bdxs_paper>)solrService.searchPaper("title", "人工智能", 0, 10).get("paperList");
+
+            model.addAttribute("recommendPaper", recommendPaper);
+
             if(hostHolder.getUser() != null) {
                 jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
             }
         } else {
-            List<Bdxs_author> bdxs_authorList = solrService.searchAuthor(searchBy, searchString, (page-1)*10, 10);
-            //int pageNum = (int)(Math.ceil(bdxs_authorList.size()/10.0));
-            int pageNum = 15;
-            int pageLeft = (page-5)>=1?page-2:1;
-            int pageRight = (page+5)<=pageNum?page+5:pageNum;
-
+            List<Bdxs_author> bdxs_authorList = (List<Bdxs_author>) solrService.searchAuthor(searchBy, searchString, (page-1)*10, 10).get("authorList");
+            long Num = (long)solrService.searchAuthor(searchBy, searchString, (page-1)*10, 10).get("num");
+            long pageNum = (long)(Math.ceil(Num/10.0));
+            long pageLeft = (page-5)>=1?page-2:1;
+            long pageRight = (page+5)<=pageNum?page+5:pageNum;
+            model.addAttribute("user", hostHolder.getUser());
             model.addAttribute("pageCur",page);
             model.addAttribute("pageLeft",pageLeft);
             model.addAttribute("pageRight",pageRight);
             model.addAttribute("expertList", bdxs_authorList);
+
+            List<Bdxs_paper> recommendPaper = (List<Bdxs_paper>)solrService.searchPaper("title", "人工智能", 0, 10).get("paperList");
+
+            model.addAttribute("recommendPaper", recommendPaper);
+
             if(hostHolder.getUser() != null) {
                 jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
             }

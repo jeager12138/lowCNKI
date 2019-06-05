@@ -99,12 +99,13 @@ public class UserService {
         Token ticket = new Token();
         ticket.setUser_id(userId);
         Date date = new Date();
-        Timestamp ts = new Timestamp(date.getTime() + 1000*3600*24);
-        ticket.setToken_time(ts);
+        date.setTime(date.getTime() + 1000*3600*24);
+        ticket.setToken_time(date);
         ticket.setToken_valid(0);
         ticket.setToken(UUID.randomUUID().toString().replaceAll("-", ""));
         tokenDAO.addToken(ticket);
         return ticket.getToken();
+
     }
 
     public Users getUser(int id) {

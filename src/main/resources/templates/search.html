@@ -9,6 +9,7 @@
     <link href="https://cdn.bootcss.com/bootstrap-select/1.12.4/css/bootstrap-select.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://www.bootcdn.cn/bootstrap-switch/" type="text/css"/>
     <title>Low CNKI搜索-体验版</title>
     <meta name="theme-color" content="#4F4F4F"/>
     <meta content="Low CNKI是宿舍领先的搜索引擎，为软院用户提供文献、期刊、博硕士论文、会议、专利、专家等全球信息搜索服务。" name="description"/>
@@ -98,7 +99,49 @@
             $("#id_hbfo").addClass("slide_down");
         }
     }
-
+    function addFavorite(){
+        try
+        {
+            window.external.addFavorite(window.location, document.title);
+        }
+        catch (e)
+        {
+            try
+            {
+                window.sidebar.addPanel(document.title, window.location.href, "");
+            }
+            catch (e)
+            {
+                alert("您的浏览器不支持直接加入收藏，请使用Ctrl+D进行添加");
+            }
+        }
+    }
+    function showranking(){
+        str_now=$("#hpqs_DisableNav_label").text();
+        if(str_now=="隐藏排行榜"){
+            $("#hpqs_DisableNav_label").text("显示排行榜");
+            $("#main").hide();
+        }
+        else{
+            $("#hpqs_DisableNav_label").text("隐藏排行榜");
+            $("#main").show();
+        }
+    }
+    function searchbackground(){
+        var searchString;
+        var searchBy="all"
+        var searchType="paper"
+        if(background_cnt==1){
+            searchString="海岸";
+        }
+        else if(background_cnt==2){
+            searchString="旅行";
+        }
+        else{
+            searchString="鸟类";
+        }
+        window.location.href=encodeURI("SearchPaperResult.html?searchString=" + searchString + "&searchBy=" + searchBy + "&searchType=" + searchType + "&page=1"); //使用encodeURI编码
+    }
 </script>
 
 
@@ -160,15 +203,15 @@
                                 dataset: {
                                     source: [
                                         ['score', 'amount', 'product'],
-                                        [99.6, 101852, '浙江大学'],
-                                        [89.6, 91852, '上海交通大学'],
-                                        [78.1, 79146, '北京师范大学'],
-                                        [67.1, 78254, '南京大学'],
-                                        [59.3, 58212, '北京航空航天大学'],
-                                        [44.4, 41032, '清华大学'],
-                                        [39.7, 20145, '北京大学'],
-                                        [22.7, 20112, '中国人民大学'],
-                                        [10.1, 12755, '复旦大学']
+                                        [100, 940761, '中国科学院'],
+                                        [48.2, 453133, '浙江大学'],
+                                        [44.9, 422469, '上海交通大学'],
+                                        [43.6, 410051, '北京大学'],
+                                        [41.8, 392783, '华中科技大学'],
+                                        [40.9, 384788, '吉林大学'],
+                                        [37.4, 352148, '武汉大学'],
+                                        [33.2, 312068, '电子科技大学'],
+                                        [32.3, 304110, '山东大学']
                                     ]
                                 },
                                 grid: {
@@ -178,7 +221,7 @@
                                     bottom: '13%',//距离下边的距离
                                     top: '12%' //距离上边的距离
                                 },
-                                xAxis: {name: '被引量'},
+                                xAxis: {name: '文献总量'},
                                 yAxis: {type: 'category', inverse: "true", triggerEvent: 'true'},
                                 visualMap: {
                                     orient: 'horizontal',
@@ -209,11 +252,8 @@
                             myChart.on('click', function (params) {
                                 if (params.componentType === 'series') {
                                     // 点击到了 xAxis 上
-                                    alert(params.value[2]);
-                                    if (params.value[2] === 5) {
-                                        // 点击到了 index 为 5 的 series 的 markPoint 上。
-                                        alert(5);
-                                    }
+                                    var institutionUrl = encodeURI("institutionInfo?institution=" + params.value[2]); //使用encodeURI编码
+                                    window.location.href = (institutionUrl);
                                 } else if (params.componentType === 'yAxis') {
                                     // window.open("https://www.buaa.edu.cn/");
                                     var institutionUrl = encodeURI("institutionInfo?institution=" + params.value); //使用encodeURI编码
@@ -231,19 +271,43 @@
                                 <a id="id_l" class="id_button" role="button" aria-haspopup="true" aria-controls="id_d"
                                    aria-expanded="false" data-clarity-mask="true" href="javascript:void(0);"
                                    h="ID=SERP,5057.1">
-                                    <#if user??>
-                                        <span id="id_s" aria-hidden="false" onclick="tryjumplogin()">${user.nickname}</span>
-                                        <span class="sw_spd id_avatar" id="id_a" aria-hidden="false" aria-label="默认个人资料图片"
-                                              style="content: url(${user.avator});"
-                                              onclick="show_settings()"></span>
-                                    <#else>
-                                        <span id="id_s" aria-hidden="false" onclick="tryjumplogin()">登录</span>
-                                        <span class="sw_spd id_avatar" id="id_a" aria-hidden="false" aria-label="默认个人资料图片"
-                                              style="content: url(../static/img/user.png);"
-                                              onclick="show_settings()"></span>
-                                    </#if>
+                                    <!--<#if user??>-->
+                                    <!--<span id="id_s" aria-hidden="false" onclick="tryjumplogin()">${user.nickname}</span>-->
+                                    <!--<span class="sw_spd id_avatar" id="id_a" aria-hidden="false" aria-label="默认个人资料图片"-->
+                                    <!--style="content: url(${user.avator});"-->
+                                    <!--onclick="show_settings()"></span>-->
+                                    <!--<#else>-->
+                                    <!--<span id="id_s" aria-hidden="false" onclick="tryjumplogin()">登录</span>-->
+                                    <!--<span class="sw_spd id_avatar" id="id_a" aria-hidden="false" aria-label="默认个人资料图片"-->
+                                    <!--style="content: url(../static/img/user.png);"-->
+                                    <!--onclick="show_settings()"></span>-->
+                                    <!--</#if>-->
+                                    <span id="id_s" aria-hidden="false" onclick="tryjumplogin()">登录</span>
+                                    <span class="sw_spd id_avatar" id="id_a" aria-hidden="false" aria-label="默认个人资料图片"
+                                          style="content: url(../static/img/user.png);"
+                                          onclick="show_settings()"></span>
                                 </a>
-                                <span id="id_hbfo" _iid="SERP.5064" class="hpfo hb_hpqexp slide_up" aria-hidden="true" aria-labelledby="id_sc" role="menu"><div id="HBContent" data-bm="23"><div class="hb_sect_container"><div class="hb_section hb_top_sec" id="hbsettings" tabindex="-1" role="menuitem" aria-haspopup="true" aria-expanded="false" aria-controls="hbsettree"><div class="hb_titlerow"><div class="hbic_col"><span class="hbic_setting"></span></div><div class="hb_title_col">设置</div><div class="hb_value_col"><span class="hbic_chevdown"></span><span class="hbic_chevup b_hide"></span></div></div></div><div id="hbsettree" class="hb_expandible slide_up" aria-hidden="true" aria-labelledby="hbsettings"><a class="hb_section" tabindex="-1" role="menuitem" href="/account/general?ru=https%3a%2f%2fcn.bing.com%2f&amp;FORM=O2HV65&amp;id=language_section#language-section" h="ID=SERP.5064,5066.1"><div class="hb_titlerow"><div class="hbic_col"></div><div class="hb_title_col">语言</div><div class="hb_value_col"></div></div><div class="hb_detrow">简体中文</div></a><a class="hb_section" tabindex="-1" role="menuitem" href="/account/general?ru=https%3a%2f%2fcn.bing.com%2f&amp;FORM=O2HV65&amp;id=region_section#region-section" h="ID=SERP.5064,5067.1"><div class="hb_titlerow"><div class="hbic_col"></div><div class="hb_title_col">国家/地区</div><div class="hb_value_col"></div></div><div class="hb_detrow">中国</div></a><a class="hb_section" tabindex="-1" role="menuitem" href="/account/general?ru=https%3a%2f%2fcn.bing.com%2f&amp;FORM=O2HV65" h="ID=SERP.5064,5069.1"><div class="hb_titlerow"><div class="hbic_col"></div><div class="hb_title_col">更多</div><div class="hb_value_col"></div></div></a></div></div><a class="hb_section" tabindex="-1" role="menuitem" href="/profile/history?FORM=O2HV46" h="ID=SERP.5064,5018.1"><div class="hb_titlerow"><div class="hbic_col"><span class="hbic_history"></span></div><div class="hb_title_col">搜索历史记录</div><div class="hb_value_col"></div></div></a><a class="hb_section" tabindex="-1" role="menuitem" href="/saves?FORM=O2HV46" h="ID=SERP.5064,5019.1"><div class="hb_titlerow"><div class="hbic_col"><span class="hbic_saves"></span></div><div class="hb_title_col">我的收藏项</div><div class="hb_value_col"></div></div></a><a id="hb_feedback" class="sb_feedback hb_section feedback-binded" tabindex="-1" href="javascript:void(0)" h="ID=SERP.5064,5074.1"><div class="hb_titlerow"><div class="hbic_col"><span class="hbic_feedback"></span></div><div class="hb_title_col">反馈</div></div></a><div class="hb_sect_container"><div id="hbquickset" class="hb_expandible slide_down" aria-hidden="false" aria-labelledby="hbqs_head"><div class="hb_section" role="menuitem" tabindex="-1"><div class="hb_titlerow"><div class="toggle_item" id="hpqs_DisableNav" role="button" aria-pressed="true"><div class="hbic_col"></div><div class="hpqs_label toggle_label hb_title_col" id="hpqs_DisableNav_label" style="width: 190px;">显示排行榜</div><div class="hb_value_col toggle_ctrl"><div id="hpqs_DisableNav_ctrl" class="hpqs_img toggle_img toggle_enabled"><img calleranswer="Shared" role="presentation" class="rms_img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAgCAYAAAB+ZAqzAAACH0lEQVRYw9WYzS8DURTFh4WFj4XYaITEwr4Rmy5Ek0YaYoEdO4mk7aIVG2XDzsaf0n+BjYQQjY+IhCrSWGMs0LTacU7dJ6NqwZsxo8kvue30zTu9b+69JzUsyzIU2Wy2D6xm318meAGvLlGWPY7BIuiya1GCmsE4OAU7YAYEgOEyAdmLe16CcL2wSclOqtEN7L/EKRrsw73vQaQmDEE/yIEEP0in01GQB9YP4ZqopsgEOOOx8s062OQF3DgISr8QpeDaoKa4LbBsiMIpEZbREKXIaB4vtRwZUhmdIsx0QJipKYxaHhhUVRodEFXDgYIoGtJTfJkx9o9pnz1jtWBFKsFPVbnAoB1cgbhP+lgBtKkLEXDTqPP/UdcnSXANBj5Gknw5BG7BLpj1YFaegOFPs9ImrkXSecDKkIqtuIRyF9tgDrR+cRd+5H8IQzq7OUA5q+Qoyy4axSJ4BHsgDXoaCsOFCWkbXhlFJiMMmuxGcQw8e9wuUqIhrIxir4yluI6YkVghCvLA+iFcExXBCclcD99sqJGkISoISr8QpeDaoGigaV1SQ3xK59hw04yGKEXGNsQPGDwp26MhzHRAmGmzPabyY4amMMsJbIVQNaQS/JaxMoNznz1jNK2HDNZ8VpXUMs+gA9xJD/G6j7GX5uydf1CcY9Ljvwj4WIXqZ+UouJC59ZdGcVbMKUUNfecu2kBMJr4p7qLiInQX+zSK9Rl9A06ZKdzn8f+3AAAAAElFTkSuQmCC" data-bm="21"></div></div><a class="toggle_hidden" id="hpqs_DisableNav_on" href="javascript:void(0)" h="ID=SERP.5064,5075.1"></a><a class="toggle_hidden" id="hpqs_DisableNav_off" href="javascript:void(0)" h="ID=SERP.5064,5076.1"></a></div></div></div><div class="hb_section" role="menuitem" tabindex="-1"><div class="hb_titlerow"><div class="toggle_item" id="hpqs_DisableIOTD" role="button" aria-pressed="true"><div class="hbic_col"></div><div class="hpqs_label toggle_label hb_title_col" id="hpqs_DisableIOTD_label" style="width: 190px;">显示主页图片</div><div class="hb_value_col toggle_ctrl"><div id="hpqs_DisableIOTD_ctrl" class="hpqs_img toggle_img toggle_enabled"><img calleranswer="Shared" role="presentation" class="rms_img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAgCAYAAAB+ZAqzAAACH0lEQVRYw9WYzS8DURTFh4WFj4XYaITEwr4Rmy5Ek0YaYoEdO4mk7aIVG2XDzsaf0n+BjYQQjY+IhCrSWGMs0LTacU7dJ6NqwZsxo8kvue30zTu9b+69JzUsyzIU2Wy2D6xm318meAGvLlGWPY7BIuiya1GCmsE4OAU7YAYEgOEyAdmLe16CcL2wSclOqtEN7L/EKRrsw73vQaQmDEE/yIEEP0in01GQB9YP4ZqopsgEOOOx8s062OQF3DgISr8QpeDaoKa4LbBsiMIpEZbREKXIaB4vtRwZUhmdIsx0QJipKYxaHhhUVRodEFXDgYIoGtJTfJkx9o9pnz1jtWBFKsFPVbnAoB1cgbhP+lgBtKkLEXDTqPP/UdcnSXANBj5Gknw5BG7BLpj1YFaegOFPs9ImrkXSecDKkIqtuIRyF9tgDrR+cRd+5H8IQzq7OUA5q+Qoyy4axSJ4BHsgDXoaCsOFCWkbXhlFJiMMmuxGcQw8e9wuUqIhrIxir4yluI6YkVghCvLA+iFcExXBCclcD99sqJGkISoISr8QpeDaoGigaV1SQ3xK59hw04yGKEXGNsQPGDwp26MhzHRAmGmzPabyY4amMMsJbIVQNaQS/JaxMoNznz1jNK2HDNZ8VpXUMs+gA9xJD/G6j7GX5uydf1CcY9Ljvwj4WIXqZ+UouJC59ZdGcVbMKUUNfecu2kBMJr4p7qLiInQX+zSK9Rl9A06ZKdzn8f+3AAAAAElFTkSuQmCC" data-bm="22"></div></div><a class="toggle_hidden" id="hpqs_DisableIOTD_on" href="javascript:void(0)" h="ID=SERP.5064,5077.1"></a><a class="toggle_hidden" id="hpqs_DisableIOTD_off" href="javascript:void(0)" h="ID=SERP.5064,5078.1"></a></div></div></div></div></div></div><style type="text/css">#id_hbfo {
+                                <span id="id_hbfo" _iid="SERP.5064" class="hpfo hb_hpqexp slide_up" aria-hidden="true"
+                                      aria-labelledby="id_sc" role="menu"><div id="HBContent" data-bm="23"><a
+                                        class="hb_section" tabindex="-1" role="menuitem"
+                                        h="ID=SERP.5064,5019.1"><div class="hb_titlerow"><div class="hbic_col"><span
+                                        class="hbic_saves"></span></div><div class="hb_title_col" style="cursor:pointer;" onclick="addFavorite();">加入收藏</div><div
+                                        class="hb_value_col"></div></div></a><div class="hb_sect_container"><div
+                                        id="hbquickset" class="hb_expandible slide_down" aria-hidden="false"
+                                        aria-labelledby="hbqs_head"><div class="hb_section" role="menuitem"
+                                                                         tabindex="-1"><div class="hb_titlerow"><div
+                                        class="toggle_item" id="hpqs_DisableNav" role="button" aria-pressed="true"><div
+                                        class="hbic_col"></div>
+                                    <div class="hpqs_label toggle_label hb_title_col"
+                                                                    id="hpqs_DisableNav_label" style="width: 190px;" onclick="showranking();">隐藏排行榜
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div><style
+                                        type="text/css">#id_hbfo {
                                     position: absolute;
                                     z-index: 1000;
                                     background-color: #fff;
@@ -327,7 +391,7 @@
                                 }
 
                                 .hbic_setting, .hbic_history, .hbic_interests, .hbic_saves, .hbic_myplaces, .hbic_bingfun, .hbic_feedback, .hbic_safesearch, .hbic_homepage, .hbic_sign, .hbic_rewards, .hbic_chevdown, .hbic_chevup {
-                                    background-image: url(/sa/simg/hamburger_flyout_desktop-2x.png);
+
                                     background-repeat: no-repeat;
                                     position: absolute;
                                     background-size: 210px 16px
@@ -576,14 +640,6 @@
                                     background-color: #ececec
                                 }
 
-                                .noBg .idp_ham, .noBg #sc_closer > div, .noBg #sc_hide > div, .noBg #sc_opener > div, .noBg #sc_interests_edit > div, .noBg .hpcCaroNavLeft, .noBg .hpcCaroNavRight, .noBg .sw_spd, .noBg .sw_meIc {
-                                    background-image: url(/sa/simg/hpc26i.png)
-                                }
-
-                                .noBg.themeApplied .idp_ham {
-                                    background-image: url(/sa/simg/hpc26.png)
-                                }
-
                                 .noBg .ezp_icon {
                                     background-color: #fff
                                 }
@@ -602,41 +658,22 @@
                                     color: #333
                                 }
 
-                                .noBg .ezp_option_control {
-                                    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAVCAYAAACOleY7AAAAQ0lEQVRo3u3UMQ0AQQwDwfCHcjKWUPK3zyEz0gJw4xkAAAAAbtjdJunutu1c6ur2/+5J0veeDpakHuD6AwAAAABwwwfZjID938CtIgAAAABJRU5ErkJggg==)
-                                }
-
-                                .noBg .oms .oml_img {
-                                    background-image: url(/rms/rms%20answers%20Homepage%20QuickSettings$hp_officemenu_sprite3_INVERSE/ic/c0e08fd9/df0af980.png)
-                                }
-
-                                .noBg .ezp_panel_close, .noBg .ezp_location #locclose {
-                                    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAcklEQVQYGYXByw2CQBQAwOlpN0HoACQRKcIWaMFS4VmEksAFw2fG7IPKuQphViNQ2lciUFs1CJS2bgg0/rQIFBYFAncHWgReCLQuDPhicCEj8EYgO5AReFh0CGR/EiZ0tjpMSFYJI5729ZiQzEb0zvUYfxBLHVhwXQv/AAAAAElFTkSuQmCC)
-                                }
-
-                                .noBg .ezp_openicon, .noBg .ezp_closeicon {
-                                    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAAAgBAMAAAC/cQiJAAAALVBMVEUAAAD///8AAABAQEAtLS08PDwnJycwMDAxMTEvLy8wMDAvLy8vLy8wMDAxMTFM+bfdAAAAD3RSTlMAAAEIEREa5eXu7vf+/v43FJfoAAAAoklEQVQ4T+3OoRHCQBRF0cvkx8PQAgUsCruDYVgVmRrQSBzQARa3wW06oABaWBpgqAJHXgyouDz558ydz+zPpoxiGAEUwOR7LQAKeqL2KjYeqCsV1kYR88MFrD2qCM/spbHNnpC1YemWoghLcZEa/SPkdchVJwh5l70Iu0YsNSIs3SMiVg8P4bXsBOHtVdgeKM/SoDyhAgfgVOB64tdGMYD4ABlSXGIGdhcqAAAAAElFTkSuQmCC)
-                                }
-
                                 .noBg #ezp_weather img {
                                     width: 0;
                                     height: 0;
                                     padding: 50px 0 0 50px;
-                                    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAwFBMVEUAAAD///8AAAAAAAAzMzMAAAAAAACVlZWVlZV+fn4AAAAAAAAAAAAAAAAAAAA5OTkAAAAAAAAAAAAAAAAAAACNjY0AAAAAAAAAAAAAAAAAAAAAAAAAAACEhIQAAAAAAAAAAAAAAAAAAAB/f39/f395eXl5eXkAAAAAAABtbW0AAAAAAABtbW0AAAAAAABmZmYAAABeXl4AAAAAAAAAAAAAAAAAAAAAAABVVVUAAAAAAAAAAABKSkoAAAAAAAAzMzPkF/BJAAAAP3RSTlMAAAECAwYJGyEmKissLi9HVldaW1xcYGFihoeIjo6PkJSVmJ2jqba7vdPU1tbX2OPt7e/w8fLz9PX4+fr6/P0c9qTEAAABe0lEQVRIx+3VbU/CMBAH8Bs4PQEfZxWB8aB1INwYAx8KFvr9v5XtBjoBOzHxjeGShaTZj9x/13Xg7FywJ/+eEO1MpNyJ4IrgT4mvMCWo/HzCIzR3UkrIWIy5lQRK6LsiiUl8GWshVWBvjLQBxiEpzkALysuSmFIjnE4HjRLAptgkQPduezGsed7tcHF3yAnsJPAdALf77BVNX0Vv3DsGcHxuIVJJDp3JKSzrZNIGrhdtjfnxQ3l+BR91MS8HsZ+XpRkWPklh0IT8+GEdMlUPbYSULgGzapZUZyDMOm0lPNZFMLv5Ql6AzDq3NlbLklo/NwsercVvIVoJI/VYyT7k8/kZKWIWomMy6IzTUR7oUY46oP/GNkqGDqDbffKS3greqOciOMjsc0FJyba8vK4P9LaMBObG17sdoNwavr32WxUAUsIefyl4lIaP/G0G1l8wM2Yh9CXT3+XS94SZ95wpnh4XXJngnOUfSkyuDiXB/vC0/CXh/v7Dtyeb9Q55xzaTZ1hmnAAAAABJRU5ErkJggg==)
                                 }
 
                                 .noBg #ezp_localnews img {
                                     width: 0;
                                     height: 0;
                                     padding: 50px 0 0 50px;
-                                    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEX///+7u7u1tbWYmJiRkZGJiYl3d3czMzMSJ6j4AAAAB3RSTlMAGBmjtsfkasDM/AAAAEJJREFUOI1jYBgFgwaYl8NBAKoMQqK8gGgZOL+8qJxYGQQgXgZsWiFOewpwyuA2bcjZQ0y4FaDKuCNkElBlRsGAAgC5XVOJyJTMwgAAAABJRU5ErkJggg==)
                                 }
 
                                 .noBg .ezp_icon {
                                     width: 0;
                                     height: 0;
                                     padding: 40px 0 0 40px;
-                                    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoAQMAAAC2MCouAAAABlBMVEX///93d3eqY6YFAAAAAXRSTlMAQObYZgAAACJJREFUCJljYKAuYAKT7P8fwNmowAEuC2GjAAGEXgib+gAABiAGV0eEI+YAAAAASUVORK5CYII=)
                                 }
 
                                 .noBg .ezp_showless, .noBg .ezp_showmore, .noBg .ezp_location {
@@ -680,10 +717,6 @@
                                     background: #fff;
                                     background: rgba(255, 255, 255, .8);
                                     opacity: 1
-                                }
-
-                                .noBg #sbox .hpcLogoWhite {
-                                    background: transparent url(/sa/simg/hpc26i.png) no-repeat
                                 }
 
                                 .noBg #id_h a#id_l, .noBg .openfo #id_rc, .noBg .b_idOpen a#id_l {
@@ -797,17 +830,15 @@
 
                                 @media (-webkit-min-device-pixel-ratio: 1.25),(min-resolution: 192dpi) {
                                     .noBg .idp_ham, .noBg #sc_closer > div, .noBg #sc_hide > div, .noBg #sc_opener > div, .noBg #sc_interests_edit > div, .noBg .hpcCaroNavLeft, .noBg .hpcCaroNavRight, .noBg .sw_spd, .noBg .sw_meIc {
-                                        background-image: url(/sa/simg/hpc26i_2x.png);
+
                                         background-size: 241px 224px
                                     }
 
                                     .noBg.themeApplied .idp_ham {
-                                        background-image: url(/sa/simg/hpc26_2x.png);
                                         background-size: 241px 224px
                                     }
 
                                     .noBg #sbox .hpcLogoWhite {
-                                        background: transparent url(/sa/simg/hpc26i_2x.png) no-repeat;
                                         background-size: 241px 224px
                                     }
                                 }
@@ -872,7 +903,7 @@
                                          onclick="changebackground(this)"></div>
                                 </div>
                             </a>
-                            <a id="sh_cp" class="sc_light" role="button" style="cursor: pointer;">
+                            <a id="sh_cp" class="sc_light" role="button" style="cursor: pointer;" onclick="searchbackground();">
                                 <div style="opacity: 1;">
                                     <div id="sh_cp_in" class="hpcCopyInfo"
                                          style="background: transparent url(../static/img/info.png) no-repeat;background-size: 100% 100%;opacity: 1;width:50px;height:50px;margin-left:25px;"></div>
@@ -916,14 +947,11 @@
 </table>
 </body>
 <script>
-
-    var user =${user}
-    if (user == null) {
-
-    } else {
-        $("#id_s").text("您好," + user);
+    var from=(document.referrer);
+    if(from.indexOf("login")>-1){
+        $("#id_s").text("欢迎");
+        $("a").removeAttr("onclick");
     }
-
 
 </script>
 </html>

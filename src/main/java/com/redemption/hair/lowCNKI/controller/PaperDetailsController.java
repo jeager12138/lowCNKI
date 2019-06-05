@@ -3,6 +3,7 @@ package com.redemption.hair.lowCNKI.controller;
 import com.redemption.hair.lowCNKI.DAO.Bdxs_authorDAO;
 import com.redemption.hair.lowCNKI.DAO.Bdxs_paperDAO;
 import com.redemption.hair.lowCNKI.model.Bdxs_paper;
+import com.redemption.hair.lowCNKI.model.HostHolder;
 import com.redemption.hair.lowCNKI.service.SolrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ public class PaperDetailsController {
     @Autowired
     Bdxs_paperDAO bdxs_paperDAO;
     @Autowired
+    HostHolder hostHolder;
+    @Autowired
     SolrService solrService;
     @Autowired
     Bdxs_authorDAO bdxs_authorDAO;
@@ -29,9 +32,11 @@ public class PaperDetailsController {
         paper = bdxs_paperDAO.getPaperById(paperId);
         model.addAttribute("essayInfo", paper);
 
+        List<Bdxs_paper> list = (List<Bdxs_paper>)solrService.searchPaper("title", paper.getTitle(), (page-1)*10 ,10).get("paperList");
+
         int refNumber = Integer.parseInt(paper.getCited())/10 > 10 ? 10 : Integer.parseInt(paper.getCited())/10;
         model.addAttribute("refNumber",refNumber);
-
+        model.addAttribute("user", hostHolder.getUser());
 
         String ScholarID = "CN-B07300AJ";
         try {
@@ -42,15 +47,14 @@ public class PaperDetailsController {
         catch (Exception ex){
             ScholarID = " ";
         }
-        List<Bdxs_paper> list = new ArrayList<>();
-        list = solrService.searchPaper("title", paper.getTitle(), (page-1)*10 ,10);
         model.addAttribute("refEssayList", list);
         model.addAttribute("scholarId",ScholarID);
 
         //int pageNum = (int)(Math.ceil(list.size()/10.0));
-        int pageNum = 15;
-        int pageLeft = (page-5)>=1?page-2:1;
-        int pageRight = (page+5)<=pageNum?page+5:pageNum;
+        long Num = (long)solrService.searchPaper("title", paper.getTitle(), (page-1)*10 ,10).get("num");
+        long pageNum = (long)(Math.ceil(Num/10.0));
+        long pageLeft = (page-5)>=1?page-2:1;
+        long pageRight = (page+5)<=pageNum?page+5:pageNum;
 
         model.addAttribute("pageCur",page);
         model.addAttribute("pageLeft",pageLeft);
