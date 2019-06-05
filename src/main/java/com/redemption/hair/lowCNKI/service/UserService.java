@@ -43,7 +43,6 @@ public class UserService {
         }
 
         // 密码强度
-        System.out.println("--1---");
         user = new Users();
         user.setNickname(username);
         user.setSalt(UUID.randomUUID().toString().substring(0, 5));
@@ -51,10 +50,10 @@ public class UserService {
         user.setAvator(head);
         user.setPassword(lowCNKIutils.MD5(password+user.getSalt()));
         usersDAO.addUser(user);
-        System.out.println("----2----");
+
 
         // 登陆
-        String ticket = addLoginTicket(user.getId());
+        String ticket = addLoginTicket(usersDAO.selectByName(username).getId());
         map.put("ticket", ticket);
         return map;
     }
@@ -96,6 +95,7 @@ public class UserService {
     }
 
     private String addLoginTicket(int userId) {
+
         Token ticket = new Token();
         ticket.setUser_id(userId);
         Date date = new Date();

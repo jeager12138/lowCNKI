@@ -43,20 +43,43 @@ public class SearchResultController {
 
         if(searchType.equals("paper")) {
             List<Bdxs_paper> paperList = solrService.searchPaper(searchBy, searchString, (page-1)*10, 10);
+//          int pageNum = (int)(Math.ceil(paperList.size()/10.0));
+            int pageNum = 15;
+            int pageLeft = (page-5)>=1?page-2:1;
+            int pageRight = (page+5)<=pageNum?page+5:pageNum;
+
+            model.addAttribute("pageCur",page);
+            model.addAttribute("pageLeft",pageLeft);
+            model.addAttribute("pageRight",pageRight);
             model.addAttribute("paperList", paperList);
+
             if(hostHolder.getUser() != null) {
                 jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
             }
         } else if (searchType.equals("patent")) {
             List<Patent_CNKI> patent_cnkiList = solrService.searchPatent(searchBy, searchString, (page-1)*10, 10);
+         //  int pageNum = (int)(Math.ceil(patent_cnkiList.size()/10.0));
+            int pageNum = 15;
+            int pageLeft = (page-5)>=1?page-2:1;
+            int pageRight = (page+5)<=pageNum?page+5:pageNum;
 
+            model.addAttribute("pageCur",page);
+            model.addAttribute("pageLeft",pageLeft);
+            model.addAttribute("pageRight",pageRight);
             model.addAttribute("patentList", patent_cnkiList);
             if(hostHolder.getUser() != null) {
                 jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
             }
         } else {
             List<Bdxs_author> bdxs_authorList = solrService.searchAuthor(searchBy, searchString, (page-1)*10, 10);
+            //int pageNum = (int)(Math.ceil(bdxs_authorList.size()/10.0));
+            int pageNum = 15;
+            int pageLeft = (page-5)>=1?page-2:1;
+            int pageRight = (page+5)<=pageNum?page+5:pageNum;
 
+            model.addAttribute("pageCur",page);
+            model.addAttribute("pageLeft",pageLeft);
+            model.addAttribute("pageRight",pageRight);
             model.addAttribute("expertList", bdxs_authorList);
             if(hostHolder.getUser() != null) {
                 jedisAdapter.addSearchHistory(String.valueOf(hostHolder.getUser().getId()), searchString);
@@ -65,6 +88,7 @@ public class SearchResultController {
 
         return "result";
     }
+
 
 //    @RequestMapping(path = {"/SearchPatentResult"},method = {RequestMethod.GET})
 //    public String SearchPatentResult(Model model, String searchString, String searchBy, int page) throws Exception {
@@ -81,11 +105,4 @@ public class SearchResultController {
 //        return  "result";
 //    }
 
-    @RequestMapping(path = {"/Recommend"}, method = RequestMethod.GET)
-    public String Recommend(Model model) throws Exception{
-        List<Bdxs_paper> bdxs_paperList = solrService.searchPaper("title", "人工智能", 0, 10);
-
-        model.addAttribute("recommendPaper", bdxs_paperList);
-        return "result";
-    }
 }

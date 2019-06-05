@@ -3,6 +3,7 @@ package com.redemption.hair.lowCNKI.model;
 import java.sql.Timestamp;
 
 public class Token {
+    private int id;
     private int user_id;
     private String token;
     private Timestamp token_time;
@@ -10,6 +11,10 @@ public class Token {
 
     public Token() {
     }
+
+    public int getId() {return id;}
+    public void setId(int id) { this.id=id;}
+
 
     public int getUser_id() {
         return user_id;
