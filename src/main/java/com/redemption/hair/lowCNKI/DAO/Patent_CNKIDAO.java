@@ -26,4 +26,41 @@ public interface Patent_CNKIDAO {
 
     @Select({"select",SELECT_FIELDS ,"from",  TABLE_NAME, "where locate(#{abstract_},abstract_)>0"})
     List<Patent_CNKI> getPatentByKeyword(String abstract_);
+
+    @Select({"select",SELECT_FIELDS ,"from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    Patent_CNKI getPatentByPubNum(String pub_number);
+
+    @Select({"select apply_num from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatentapply_numByPubNum(String pub_number);
+
+    @Select({"select apply_date from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatentapply_dateByPubNum(String pub_number);
+
+    @Select({"select pub_date from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatentpub_dateByPubNum(String pub_number);
+
+    @Select({"select apply_name from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatentapply_nameByPubNum(String pub_number);
+
+    @Select({"select address from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatentaddressByPubNum(String pub_number);
+
+    @Select({"select invent_name from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatentinvent_nameByPubNum(String pub_number);
+
+    @Select({"select agent_name from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatentagent_nameByPubNum(String pub_number);
+
+    @Select({"select agent_man from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatentagent_manByPubNum(String pub_number);
+
+    @Select({"select abstract_ from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatentabstract_ByPubNum(String pub_number);
+
+    @Select({"select pages from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatentpagesByPubNum(String pub_number);
+
+    @Select({"select typenum from",  TABLE_NAME, "where pub_number = #{pub_number}"})
+    String getPatenttypenumagent_manByPubNum(String pub_number);
+
 }

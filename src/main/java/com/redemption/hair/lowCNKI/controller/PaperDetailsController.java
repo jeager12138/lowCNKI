@@ -46,6 +46,15 @@ public class PaperDetailsController {
         list = solrService.searchPaper("title", paper.getTitle(), (page-1)*10 ,10);
         model.addAttribute("refEssayList", list);
         model.addAttribute("scholarId",ScholarID);
+
+        //int pageNum = (int)(Math.ceil(list.size()/10.0));
+        int pageNum = 15;
+        int pageLeft = (page-5)>=1?page-2:1;
+        int pageRight = (page+5)<=pageNum?page+5:pageNum;
+
+        model.addAttribute("pageCur",page);
+        model.addAttribute("pageLeft",pageLeft);
+        model.addAttribute("pageRight",pageRight);
         return "essay";
     }
 }
