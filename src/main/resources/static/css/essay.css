@@ -1217,7 +1217,7 @@ submit
     }
 
     .col-sm-6 {
-        width: 50%;
+        width: 70%;
     }
 
     .col-sm-7 {
@@ -6564,7 +6564,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .summary_limit{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+ }
