@@ -5,7 +5,7 @@
     <link rel="preload" href="../static/img/search.png" as="image"/>
     <link rel="preload" href="../static/img/logo.png" as="image"/>
     <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
-    <link rel="stylesheet" href="../static/css/bing.css" type="text/css" />
+    <link rel="stylesheet" href="../static/css/bing.css" type="text/css"/>
     <link href="https://cdn.bootcss.com/bootstrap-select/1.12.4/css/bootstrap-select.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
@@ -86,6 +86,17 @@
             window.location.href="login.html"
         }
     }
+    function show_settings(){
+        if($(".id_hbfo").hasClass("slide_down")){
+            $(".id_hbfo").removeClass("slide_down");
+            $(".id_hbfo").addClass("slide_up");
+        }
+        else{
+            $(".id_hbfo").removeClass("slide_up");
+            $(".id_hbfo").addClass("slide_down");
+        }
+    }
+
 </script>
 
 
@@ -95,10 +106,12 @@
             <div id="hp_container">
                 <div id="bgDiv">
                     <div id="hp_vidwrp"></div>
-                    <video id="vid" onended="_w.VM && VM.pause();" autobuffer="autobuffer" preload="auto" oncontextmenu="return false"/>
+                    <video id="vid" onended="_w.VM && VM.pause();" autobuffer="autobuffer" preload="auto"
+                           oncontextmenu="return false"/>
                 </div>
                 <div id="sbox" class="sw_sform">
-                    <img class="hp_sw_logo hpcLogoWhite" src="../static/img/logo.png" style="height: 100%;margin-top:-40px">
+                    <img class="hp_sw_logo hpcLogoWhite" src="../static/img/logo.png"
+                         style="height: 100%;margin-top:-40px">
                     <div id="est_switch">
                         <div id="est_paper" class="est_selected" onclick="changeselect(this)" name="paper">文献</div>
                         <div id="est_patent" class="est_unselected" onclick="changeselect(this)" name="patent">专利</div>
@@ -110,18 +123,23 @@
                         </a>
                         <form action="/SearchPaperResult.html" role="none" id="sb_form" class="sw_box">
                             <div class="b_searchboxForm" role="search">
-                                <input class="b_searchbox" id="sb_form_q" name="searchString" title="输入搜索词" type="search" value="" maxlength="100" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false"
+                                <input class="b_searchbox" id="sb_form_q" name="searchString" title="输入搜索词"
+                                       type="search" value="" maxlength="100" autocapitalize="off" autocorrect="off"
+                                       autocomplete="off" spellcheck="false"
                                        style="width:450px"/>
                                 <input type="hidden" name="page" value="1"/>
-                                <select id="sa_qs" name="searchBy" value="ds" style="height: 45px;width: 130px;border: none;">
+                                <select id="sa_qs" name="searchBy" value="ds"
+                                        style="height: 45px;width: 130px;border: none;">
                                     <option value="all">全部</option>
                                     <option value="title">标题</option>
                                     <option value="author">作者</option>
                                     <option value="keyword">关键词</option>
                                 </select>
                                 <input type="hidden" id="sa_st" name="searchType" value="paper">
-                                <input type="button" class="b_searchboxSubmit" id="sb_form_go" title="搜索" tabIndex="0" name="go"
-                                       style="background: transparent url(../static/img/search.png) no-repeat;background-image: url(../static/img/search.png);background-size: 100% 100%;" onclick="submitsearch()"/>
+                                <input type="button" class="b_searchboxSubmit" id="sb_form_go" title="搜索" tabIndex="0"
+                                       name="go"
+                                       style="background: transparent url(../static/img/search.png) no-repeat;background-image: url(../static/img/search.png);background-size: 100% 100%;"
+                                       onclick="submitsearch()"/>
                             </div>
                         </form>
                     </div>
@@ -129,7 +147,8 @@
                 <div class="shader_left"></div>
                 <div class="shader_right" style="opacity: .68">
                     <div>
-                        <div id="main" style="border-radius: 5px;width: 490px;height: 520px;margin-top: 125px;margin-left: 260px;background: #fff">
+                        <div id="main"
+                             style="border-radius: 5px;width: 490px;height: 520px;margin-top: 125px;margin-left: 260px;background: #fff">
                         </div>
                         <script type="text/javascript">
                             // 基于准备好的dom，初始化echarts实例
@@ -199,6 +218,7 @@
                                     window.location.href=(institutionUrl);
                                 }
                             });
+
                         </script>
                     </div>
                 </div>
@@ -206,10 +226,105 @@
                     <div class="sw_tb">
                         <div id="hp_id_hdr">
                             <div id="id_h" role="complementary" aria-label="帐户奖励和偏好设置" data-priority="2">
-                                <a id="id_l" class="id_button" role="button" aria-haspopup="true" aria-controls="id_d" aria-expanded="false" data-clarity-mask="true" href="javascript:void(0);" h="ID=SERP,5057.1">
+                                <a id="id_l" class="id_button" role="button" aria-haspopup="true" aria-controls="id_d"
+                                   aria-expanded="false" data-clarity-mask="true" href="javascript:void(0);"
+                                   h="ID=SERP,5057.1">
                                     <span id="id_s" aria-hidden="false" onclick="tryjumplogin()">登录</span>
-                                    <span class="sw_spd id_avatar" id="id_a" aria-hidden="false" aria-label="默认个人资料图片" style="content: url(../static/img/user.png);"></span>
+                                    <span class="sw_spd id_avatar" id="id_a" aria-hidden="false" aria-label="默认个人资料图片"
+                                          style="content: url(../static/img/user.png);" onclick="show_settings()"></span>
                                 </a>
+                                <span id="id_hbfo" _iid="SERP.5064" class=" hpfo hb_hpqexp                    slide_up"
+                                      aria-hidden="true" aria-labelledby="id_sc" role="menu"><div id="HBContent"
+                                                                                                  data-bm="23"><div
+                                        class="hb_sect_container"><div class="hb_section hb_top_sec" id="hbsettings"
+                                                                       tabindex="-1" role="menuitem"
+                                                                       aria-haspopup="true" aria-expanded="false"
+                                                                       aria-controls="hbsettree"><div
+                                        class="hb_titlerow"><div class="hbic_col"><span
+                                        class="hbic_setting"></span></div><div class="hb_title_col">设置</div><div
+                                        class="hb_value_col"><span class="hbic_chevdown"></span><span
+                                        class="hbic_chevup b_hide"></span></div></div></div><div id="hbsettree"
+                                                                                                 class="hb_expandible slide_up"
+                                                                                                 aria-hidden="true"
+                                                                                                 aria-labelledby="hbsettings"><a
+                                        class="hb_section" tabindex="-1" role="menuitem"
+                                        href="/account/general?ru=https%3a%2f%2fcn.bing.com%2f&amp;FORM=O2HV65&amp;id=language_section#language-section"
+                                        h="ID=SERP.5064,5066.1"><div class="hb_titlerow"><div class="hbic_col"></div><div
+                                        class="hb_title_col">语言</div><div class="hb_value_col"></div></div><div
+                                        class="hb_detrow">简体中文</div></a><a class="hb_section" tabindex="-1"
+                                                                           role="menuitem"
+                                                                           href="/account/general?ru=https%3a%2f%2fcn.bing.com%2f&amp;FORM=O2HV65&amp;id=region_section#region-section"
+                                                                           h="ID=SERP.5064,5067.1"><div
+                                        class="hb_titlerow"><div class="hbic_col"></div><div
+                                        class="hb_title_col">国家/地区</div><div class="hb_value_col"></div></div><div
+                                        class="hb_detrow">中国</div></a><a class="hb_section" tabindex="-1"
+                                                                         role="menuitem"
+                                                                         href="/account/general?ru=https%3a%2f%2fcn.bing.com%2f&amp;FORM=O2HV65"
+                                                                         h="ID=SERP.5064,5069.1"><div
+                                        class="hb_titlerow"><div class="hbic_col"></div><div
+                                        class="hb_title_col">更多</div><div
+                                        class="hb_value_col"></div></div></a></div></div><a class="hb_section"
+                                                                                            tabindex="-1"
+                                                                                            role="menuitem"
+                                                                                            href="/profile/history?FORM=O2HV46"
+                                                                                            h="ID=SERP.5064,5018.1"><div
+                                        class="hb_titlerow"><div class="hbic_col"><span
+                                        class="hbic_history"></span></div><div class="hb_title_col">搜索历史记录</div><div
+                                        class="hb_value_col"></div></div></a><a class="hb_section" tabindex="-1"
+                                                                                role="menuitem"
+                                                                                href="/saves?FORM=O2HV46"
+                                                                                h="ID=SERP.5064,5019.1"><div
+                                        class="hb_titlerow"><div class="hbic_col"><span class="hbic_saves"></span></div><div
+                                        class="hb_title_col">我的收藏项</div><div class="hb_value_col"></div></div></a><a
+                                        id="hb_feedback" class="sb_feedback hb_section feedback-binded" tabindex="-1"
+                                        href="javascript:void(0)" h="ID=SERP.5064,5074.1"><div class="hb_titlerow"><div
+                                        class="hbic_col"><span class="hbic_feedback"></span></div><div
+                                        class="hb_title_col">反馈</div></div></a><a class="hb_section" tabindex="-1"
+                                                                                  role="menuitem"
+                                                                                  href="/account/general?ru=https%3a%2f%2fcn.bing.com%2f&amp;FORM=O2HV46&amp;sh=0"
+                                                                                  h="ID=SERP.5064,5070.1"><div
+                                        class="hb_titlerow"><div class="hbic_col"><span class="hbic_safesearch"></span></div><div
+                                        class="hb_title_col" style="width: 202px;">安全搜索</div><div class="hb_value_col">严格</div></div></a><div
+                                        class="hb_sect_container"><div class="hb_section hb_top_sec hb_expanded"
+                                                                       id="hbqs_head" tabindex="-1" role="menuitem"
+                                                                       aria-controls="hbquickset" aria-expanded="true"
+                                                                       aria-haspopup="true"><div class="hb_titlerow"><div
+                                        class="hbic_col"><span class="hbic_homepage"></span></div><div
+                                        class="hb_title_col">自定义主页</div><div class="hb_value_col"><span
+                                        class="hbic_chevdown b_hide"></span><span
+                                        class="hbic_chevup"></span></div></div></div><div id="hbquickset"
+                                                                                          class="hb_expandible slide_down"
+                                                                                          aria-hidden="false"
+                                                                                          aria-labelledby="hbqs_head"><div
+                                        class="hb_section" role="menuitem" tabindex="-1"><div class="hb_titlerow"><div
+                                        class="toggle_item" id="hpqs_DisableNav" role="button" aria-pressed="true"><div
+                                        class="hbic_col"></div><div class="hpqs_label toggle_label hb_title_col"
+                                                                    id="hpqs_DisableNav_label" style="width: 190px;">显示菜单栏</div><div
+                                        class="hb_value_col toggle_ctrl"><div id="hpqs_DisableNav_ctrl"
+                                                                              class="hpqs_img toggle_img toggle_enabled"><img
+                                        calleranswer="Shared" role="presentation" class="rms_img"
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAgCAYAAAB+ZAqzAAACH0lEQVRYw9WYzS8DURTFh4WFj4XYaITEwr4Rmy5Ek0YaYoEdO4mk7aIVG2XDzsaf0n+BjYQQjY+IhCrSWGMs0LTacU7dJ6NqwZsxo8kvue30zTu9b+69JzUsyzIU2Wy2D6xm318meAGvLlGWPY7BIuiya1GCmsE4OAU7YAYEgOEyAdmLe16CcL2wSclOqtEN7L/EKRrsw73vQaQmDEE/yIEEP0in01GQB9YP4ZqopsgEOOOx8s062OQF3DgISr8QpeDaoKa4LbBsiMIpEZbREKXIaB4vtRwZUhmdIsx0QJipKYxaHhhUVRodEFXDgYIoGtJTfJkx9o9pnz1jtWBFKsFPVbnAoB1cgbhP+lgBtKkLEXDTqPP/UdcnSXANBj5Gknw5BG7BLpj1YFaegOFPs9ImrkXSecDKkIqtuIRyF9tgDrR+cRd+5H8IQzq7OUA5q+Qoyy4axSJ4BHsgDXoaCsOFCWkbXhlFJiMMmuxGcQw8e9wuUqIhrIxir4yluI6YkVghCvLA+iFcExXBCclcD99sqJGkISoISr8QpeDaoGigaV1SQ3xK59hw04yGKEXGNsQPGDwp26MhzHRAmGmzPabyY4amMMsJbIVQNaQS/JaxMoNznz1jNK2HDNZ8VpXUMs+gA9xJD/G6j7GX5uydf1CcY9Ljvwj4WIXqZ+UouJC59ZdGcVbMKUUNfecu2kBMJr4p7qLiInQX+zSK9Rl9A06ZKdzn8f+3AAAAAElFTkSuQmCC"
+                                        data-bm="21"></div></div><a class="toggle_hidden" id="hpqs_DisableNav_on"
+                                                                    href="javascript:void(0)"
+                                                                    h="ID=SERP.5064,5075.1"></a><a class="toggle_hidden"
+                                                                                                   id="hpqs_DisableNav_off"
+                                                                                                   href="javascript:void(0)"
+                                                                                                   h="ID=SERP.5064,5076.1"></a></div></div></div><div
+                                        class="hb_section" role="menuitem" tabindex="-1"><div class="hb_titlerow"><div
+                                        class="toggle_item" id="hpqs_DisableIOTD" role="button" aria-pressed="true"><div
+                                        class="hbic_col"></div><div class="hpqs_label toggle_label hb_title_col"
+                                                                    id="hpqs_DisableIOTD_label" style="width: 190px;">显示主页图片</div><div
+                                        class="hb_value_col toggle_ctrl"><div id="hpqs_DisableIOTD_ctrl"
+                                                                              class="hpqs_img toggle_img toggle_enabled"><img
+                                        calleranswer="Shared" role="presentation" class="rms_img"
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAgCAYAAAB+ZAqzAAACH0lEQVRYw9WYzS8DURTFh4WFj4XYaITEwr4Rmy5Ek0YaYoEdO4mk7aIVG2XDzsaf0n+BjYQQjY+IhCrSWGMs0LTacU7dJ6NqwZsxo8kvue30zTu9b+69JzUsyzIU2Wy2D6xm318meAGvLlGWPY7BIuiya1GCmsE4OAU7YAYEgOEyAdmLe16CcL2wSclOqtEN7L/EKRrsw73vQaQmDEE/yIEEP0in01GQB9YP4ZqopsgEOOOx8s062OQF3DgISr8QpeDaoKa4LbBsiMIpEZbREKXIaB4vtRwZUhmdIsx0QJipKYxaHhhUVRodEFXDgYIoGtJTfJkx9o9pnz1jtWBFKsFPVbnAoB1cgbhP+lgBtKkLEXDTqPP/UdcnSXANBj5Gknw5BG7BLpj1YFaegOFPs9ImrkXSecDKkIqtuIRyF9tgDrR+cRd+5H8IQzq7OUA5q+Qoyy4axSJ4BHsgDXoaCsOFCWkbXhlFJiMMmuxGcQw8e9wuUqIhrIxir4yluI6YkVghCvLA+iFcExXBCclcD99sqJGkISoISr8QpeDaoGigaV1SQ3xK59hw04yGKEXGNsQPGDwp26MhzHRAmGmzPabyY4amMMsJbIVQNaQS/JaxMoNznz1jNK2HDNZ8VpXUMs+gA9xJD/G6j7GX5uydf1CcY9Ljvwj4WIXqZ+UouJC59ZdGcVbMKUUNfecu2kBMJr4p7qLiInQX+zSK9Rl9A06ZKdzn8f+3AAAAAElFTkSuQmCC"
+                                        data-bm="22"></div></div><a class="toggle_hidden" id="hpqs_DisableIOTD_on"
+                                                                    href="javascript:void(0)"
+                                                                    h="ID=SERP.5064,5077.1"></a><a class="toggle_hidden"
+                                                                                                   id="hpqs_DisableIOTD_off"
+                                                                                                   href="javascript:void(0)"
+                                                                                                   h="ID=SERP.5064,5078.1"></a></div></div></div></div></div></div><style
+                                        type="text/css">#id_hbfo{position:absolute;z-index:1000;background-color:#fff;text-align:left;width:320px;line-height:normal}.nohpfo{top:46px;right:-1px}.hpfo{top:43px;right:23px}#HBContent{padding:12px 0}.hb_section{display:block;position:relative;padding:12px 20px}.hb_section:active,.hb_section:hover,.hb_section:visited{outline:none;background-color:#f5f5f5}.hb_section:focus{background-color:#f5f5f5}.hb_titlerow{display:block;position:relative;font-size:13px;height:17px;line-height:17px}.hbic_col,.hb_title_col,.hb_value_col{display:inline-block;font-size:13px;height:17px;color:#444;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.hbic_col{width:20px}.hb_title_col{position:absolute;margin-left:12px;max-width:208px}.hb_value_col{position:absolute;margin-left:20px;right:0}.hb_detrow{display:block;position:relative;font-size:13px;height:17px;margin-left:32px;width:208px;margin-top:8px;color:#666}.hbic_setting,.hbic_history,.hbic_interests,.hbic_saves,.hbic_myplaces,.hbic_bingfun,.hbic_feedback,.hbic_safesearch,.hbic_homepage,.hbic_sign,.hbic_rewards,.hbic_chevdown,.hbic_chevup{background-image:url(/sa/simg/hamburger_flyout_desktop-2x.png);background-repeat:no-repeat;position:absolute;background-size:210px 16px}.hbic_feedback,.hbic_setting,.hbic_history,.hbic_interests,.hbic_saves,.hbic_myplaces,.hbic_bingfun,.hbic_safesearch,.hbic_homepage,.hbic_sign,.hbic_rewards{height:16px;width:16px}.hbic_setting{background-position:0 0}.hbic_history{background-position:-18px 0}.hbic_interests{background-position:-36px 0}.hbic_saves{background-position:-54px 0}.hbic_myplaces{background-position:-194px 0}.hbic_feedback{background-position:-72px 0}.hbic_safesearch{background-position:-90px 0}.hbic_homepage{background-position:-108px 0}.hbic_bingfun{background-position:-126px 0}.hbic_sign{background-position:-144px 0}.hbic_rewards{background-position:-162px 0}.hbic_chevdown{background-position:-180px 0}.hbic_chevup{background-position:-180px -9px}.hbic_chevdown,.hbic_chevup{right:0;height:7px;width:12px;top:6px}.slide_down,.slide_up{overflow-y:hidden;-webkit-transition:max-height .4s;transition:max-height .4s}.slide_up{max-height:0;border-width:0}.nohphbtop~.slide_down{max-height:400px}.nohphbtop~.slide_down.hb_setexp{max-height:635px}.hphbtop~.slide_down{max-height:390px}.hphbtop~.slide_down.hb_hpqexp{max-height:516px}.hphbtop~.slide_down.hb_setexp{max-height:632px}.hphbtop~.slide_down.hb_setexp.hb_hpqexp{max-height:755px}#hbsettings~.slide_down{max-height:280px}#hbqs_head~.slide_down{max-height:164px}h2.hb_title_col{line-height:17px;font:Arial,Helvetica}.toggle_ctrl{display:inline-block;top:3px;right:0;width:38px;height:16px;overflow:hidden}.noNav #sc_hdu{display:none !important}.noNav .shader_left{display:none}.noNav.noBg #id_h #id_rc,.noNav.noBg #id_h #id_s{color:#333 !important}.noNav.noBg #hp_sw_hdr .sw_mktsw a,.noNav.noBg #hp_sw_hdr .sw_mktsw span{color:#333}.noNav.noBg #hp_sw_hdr .sw_mktsw a:hover,.noNav.noBg #hp_sw_hdr .sw_mktsw span:hover{color:#000 !important}.noNav.noBg .shader_left,.noNav.noBg .shader_right{display:none}.noBg #hp_container #bgDiv,.noBg #hp_container #bgDivPortrait,.noBg #hp_container #sh_rdiv,.noBg #hp_container #focus_ovr,.noBg #hp_container #musCard{display:none !important}.noBg #hp_container div#sbox.sw_sform{top:20%;left:50%;margin-left:-411px}.noBg #hp_container .b_searchbox{width:600px}@media only screen and (min-device-width:768px) and (max-device-width:1024px){.noBg #hp_container div#sbox.sw_sform{top:30%;left:8%;margin-left:0}.noBg #hp_container .b_searchbox{width:487px}}@media only screen and (max-width:767px){.noBg #hp_container div#sbox.sw_sform{top:30%;left:0;margin-left:0}.noBg #hp_container .b_searchbox{width:270px}}.noBg #hp_cellCenter,.noBg #bgDivPortrait,.noBg #hp_sw_hdr{background-color:#f5f5f5 !important}.noBg #hp_sw_hdr{position:absolute}.noBg #hp_container{max-width:100%;max-height:100%}.noBg #hp_cellCenter #hp_tbar,.noBg #hp_cellCenter #sc_mdCrs{width:100% !important;max-width:100% !important}.noBg #hp_tbar #sc_mdCrs li{background:#fff}.noBg #hp_tbar #sc_mdCrs li.itile{border-color:#ddd}.noBg li#see_more_interests div#tile .see_more_right{background-color:#007daa}.noBg li#see_more_interests div#tile #triangle{border-bottom:solid 132px #007daa}.noBg #hp_tbar .crs_item>span{background:#fff;color:#333}.noBg #hp_tbar .crs_item>span.crs_breaking{background:rgba(232,17,35,.7);color:#fff}.noBg #hp_tbar .crs_wea svg .hpStroke1{stroke:#555}.noBg #hp_tbar .crs_wea svg .hpStroke2{stroke:#da0}.noBg #hp_tbar .crs_item .crs_stk_pos{color:#71ab04}.noBg #id_h #id_a,.noBg #id_h #id_p{background-color:#ececec}.noBg .idp_ham,.noBg #sc_closer>div,.noBg #sc_hide>div,.noBg #sc_opener>div,.noBg #sc_interests_edit>div,.noBg .hpcCaroNavLeft,.noBg .hpcCaroNavRight,.noBg .sw_spd,.noBg .sw_meIc{background-image:url(/sa/simg/hpc26i.png)}.noBg.themeApplied .idp_ham{background-image:url(/sa/simg/hpc26.png)}.noBg .ezp_icon{background-color:#fff}.noBg .ezp_message{color:#333}.noBg #ezp_panel{background-color:#fff;color:#333}.noBg .ezp_location input{background-color:#fff;color:#333}.noBg .ezp_option_control{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAVCAYAAACOleY7AAAAQ0lEQVRo3u3UMQ0AQQwDwfCHcjKWUPK3zyEz0gJw4xkAAAAAbtjdJunutu1c6ur2/+5J0veeDpakHuD6AwAAAABwwwfZjID938CtIgAAAABJRU5ErkJggg==)}.noBg .oms .oml_img{background-image:url(/rms/rms%20answers%20Homepage%20QuickSettings$hp_officemenu_sprite3_INVERSE/ic/c0e08fd9/df0af980.png)}.noBg .ezp_panel_close,.noBg .ezp_location #locclose{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAcklEQVQYGYXByw2CQBQAwOlpN0HoACQRKcIWaMFS4VmEksAFw2fG7IPKuQphViNQ2lciUFs1CJS2bgg0/rQIFBYFAncHWgReCLQuDPhicCEj8EYgO5AReFh0CGR/EiZ0tjpMSFYJI5729ZiQzEb0zvUYfxBLHVhwXQv/AAAAAElFTkSuQmCC)}.noBg .ezp_openicon,.noBg .ezp_closeicon{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAAAgBAMAAAC/cQiJAAAALVBMVEUAAAD///8AAABAQEAtLS08PDwnJycwMDAxMTEvLy8wMDAvLy8vLy8wMDAxMTFM+bfdAAAAD3RSTlMAAAEIEREa5eXu7vf+/v43FJfoAAAAoklEQVQ4T+3OoRHCQBRF0cvkx8PQAgUsCruDYVgVmRrQSBzQARa3wW06oABaWBpgqAJHXgyouDz558ydz+zPpoxiGAEUwOR7LQAKeqL2KjYeqCsV1kYR88MFrD2qCM/spbHNnpC1YemWoghLcZEa/SPkdchVJwh5l70Iu0YsNSIs3SMiVg8P4bXsBOHtVdgeKM/SoDyhAgfgVOB64tdGMYD4ABlSXGIGdhcqAAAAAElFTkSuQmCC)}.noBg #ezp_weather img{width:0;height:0;padding:50px 0 0 50px;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAwFBMVEUAAAD///8AAAAAAAAzMzMAAAAAAACVlZWVlZV+fn4AAAAAAAAAAAAAAAAAAAA5OTkAAAAAAAAAAAAAAAAAAACNjY0AAAAAAAAAAAAAAAAAAAAAAAAAAACEhIQAAAAAAAAAAAAAAAAAAAB/f39/f395eXl5eXkAAAAAAABtbW0AAAAAAABtbW0AAAAAAABmZmYAAABeXl4AAAAAAAAAAAAAAAAAAAAAAABVVVUAAAAAAAAAAABKSkoAAAAAAAAzMzPkF/BJAAAAP3RSTlMAAAECAwYJGyEmKissLi9HVldaW1xcYGFihoeIjo6PkJSVmJ2jqba7vdPU1tbX2OPt7e/w8fLz9PX4+fr6/P0c9qTEAAABe0lEQVRIx+3VbU/CMBAH8Bs4PQEfZxWB8aB1INwYAx8KFvr9v5XtBjoBOzHxjeGShaTZj9x/13Xg7FywJ/+eEO1MpNyJ4IrgT4mvMCWo/HzCIzR3UkrIWIy5lQRK6LsiiUl8GWshVWBvjLQBxiEpzkALysuSmFIjnE4HjRLAptgkQPduezGsed7tcHF3yAnsJPAdALf77BVNX0Vv3DsGcHxuIVJJDp3JKSzrZNIGrhdtjfnxQ3l+BR91MS8HsZ+XpRkWPklh0IT8+GEdMlUPbYSULgGzapZUZyDMOm0lPNZFMLv5Ql6AzDq3NlbLklo/NwsercVvIVoJI/VYyT7k8/kZKWIWomMy6IzTUR7oUY46oP/GNkqGDqDbffKS3greqOciOMjsc0FJyba8vK4P9LaMBObG17sdoNwavr32WxUAUsIefyl4lIaP/G0G1l8wM2Yh9CXT3+XS94SZ95wpnh4XXJngnOUfSkyuDiXB/vC0/CXh/v7Dtyeb9Q55xzaTZ1hmnAAAAABJRU5ErkJggg==)}.noBg #ezp_localnews img{width:0;height:0;padding:50px 0 0 50px;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEX///+7u7u1tbWYmJiRkZGJiYl3d3czMzMSJ6j4AAAAB3RSTlMAGBmjtsfkasDM/AAAAEJJREFUOI1jYBgFgwaYl8NBAKoMQqK8gGgZOL+8qJxYGQQgXgZsWiFOewpwyuA2bcjZQ0y4FaDKuCNkElBlRsGAAgC5XVOJyJTMwgAAAABJRU5ErkJggg==)}.noBg .ezp_icon{width:0;height:0;padding:40px 0 0 40px;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoAQMAAAC2MCouAAAABlBMVEX///93d3eqY6YFAAAAAXRSTlMAQObYZgAAACJJREFUCJljYKAuYAKT7P8fwNmowAEuC2GjAAGEXgib+gAABiAGV0eEI+YAAAAASUVORK5CYII=)}.noBg .ezp_showless,.noBg .ezp_showmore,.noBg .ezp_location{color:#555}.noBg.ezpAnim .sw_sform{transition:top .33s ease-in-out}.noBg.ezpOpen .sw_sform{top:20%}.noBg #sc_closer>div,.noBg #sc_hide>div,.noBg #sc_opener>div,.noBg #sc_interests_edit>div{background-color:#fff}.noBg #sc_hdu li a,.noBg #sc_hdu #hdr_spl,.noBg #sc_mdCrs li.pntile div.hp_text,.noBg #sc_mdCrs li.itile div.hp_text,.noBg #hp_tbar .crs_item .crs_spt_white,.noBg .sc_pc h3,.noBg .sc_pc .scphdr{color:#333}.noBg li#see_more_interests div#tile,.noBg #hp_tbar .crs_item .crs_newsqry{color:#000}.noBg .id_button,.noBg .id_button:visited,.noBg #id_h #id_s,.noBg #id_rh,.noBg #id_h #id_rc,.noBg #id_h #id_l{color:#333 !important}.noBg.themeApplied #b_footerItems a{color:#fff}.noBg.themeApplied #b_footerItems{color:#fff;background-color:rgba(0,0,0,.6)}.noBg .sc_sct,.noBg .sw_tb ul.om{background:#fff;background:rgba(255,255,255,.8);opacity:1}.noBg #sbox .hpcLogoWhite{background:transparent url(/sa/simg/hpc26i.png) no-repeat}.noBg #id_h a#id_l,.noBg .openfo #id_rc,.noBg .b_idOpen a#id_l{color:#333 !important;background-color:transparent !important}.noBg #hp_container #sc_hdu li a:hover,.noBg #hp_container #sc_hdu #hdr_spl:hover,.noBg #hp_container #id_rh:hover{color:#000 !important}.noBg #hp_container #hp_tbar{max-width:100% !important;background:#f5f5f5}.noBg .caroTab{background-color:#ccc;background-color:rgba(204,204,204,.8);color:#333}.noBg .caroTab.selected{background-color:#fff;background-color:rgba(255,255,255,.8);color:#333}.noBg #crsSwitcher{background:#fff;background:rgba(255,255,255,.8)}.noBg .crsSwitcherItem{background:#fff;color:#333}.noBg .crsActive,.noBg .crsSwitcherItem:hover{background:#ddd;color:#333}.noBg .sm_hvr:hover{background:transparent}.noBg .sm_hvr span,.noBg .sm_hvr a,.noBg #hp_tbar #hp_pgbar h3,.noBg #hp_tbar #hp_pgbar a{color:#333}.noBg #hp_sw_hdr .sw_mktsw a,.noBg #hp_sw_hdr .sw_mktsw span{color:#333}.noBg #hp_sw_hdr .sw_mktsw a:hover,.noBg #hp_sw_hdr .sw_mktsw span:hover{color:#000 !important}.noBg #af_controls{display:none !important}.noBg #bday_close,.noBg #bday_edit,.noBg #bday_credits,.noBg #wish_button,.noBg #cake_flame0,.noBg #cake_flame1,.noBg #cake_flame2,.noBg #cake_flame3,.noBg #cake_flame4,.noBg #bmsg_cont{display:none}.noBg #hp_trivia{display:none !important}.noBg .shader_right,.noBg .shader_left{display:none}.noBg.themeApplied #b_footer,.noBg.lightThemeApplied #b_footer,.noBg.themeApplied #hp_sw_hdr,.noBg.lightThemeApplied #hp_sw_hdr{background:none !important}.noBg.lightThemeApplied #attribution,.noBg.themeApplied #attribution{display:block}.noBg #sc_imagecreditslink{visibility:hidden !important}.noBg #sc_md{background-color:#f5f5f5 !important}.noBg .crs_newstm,.noBg .crs_weads,.noBg li#see_more_interests div#tile .see_more_left .date{color:#767676}.noBg .crs_weahl{color:#666}.noBg #id_d,.noBg #bepfo{border:1px solid #ddd}.noBg #hp_bottomCell #b_footer{background-color:#ececec}.noBg #hp_bottomCell #b_footer *,.noBg #hp_bottomCell #b_footer *:hover{color:#767676}@media(-webkit-min-device-pixel-ratio:1.25),(min-resolution:192dpi){.noBg .idp_ham,.noBg #sc_closer>div,.noBg #sc_hide>div,.noBg #sc_opener>div,.noBg #sc_interests_edit>div,.noBg .hpcCaroNavLeft,.noBg .hpcCaroNavRight,.noBg .sw_spd,.noBg .sw_meIc{background-image:url(/sa/simg/hpc26i_2x.png);background-size:241px 224px}.noBg.themeApplied .idp_ham{background-image:url(/sa/simg/hpc26_2x.png);background-size:241px 224px}.noBg #sbox .hpcLogoWhite{background:transparent url(/sa/simg/hpc26i_2x.png) no-repeat;background-size:241px 224px}}.toggle_hidden{display:none}.toggle_ctrl{display:inline-block;vertical-align:middle;margin-left:5px;width:38px;height:16px;overflow:hidden}.toggle_img{position:relative;top:0;left:0}.toggle_img.toggle_enabled{top:-17px;left:0}.toggle_label{display:inline-block;width:173px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.no_outline .toggle_item{outline:none}.toggle_item{cursor:pointer}</style></span>
                             </div>
                         </div>
                     </div>
@@ -219,17 +334,22 @@
                         <div id="sh_rdiv" style="margin-left: 50px;margin-top: -20px;">
                             <a role="button" id="sh_igl" title="上一个图像" aria-label="上一个图像">
                                 <div class="sc_lightdis" style="opacity: 1;">
-                                    <div id="sh_lt" class="hpcPrevious" style="background: transparent url(../static/img/arrow-left.png) no-repeat;background-size: 100% 100%;opacity: .7;width:50px;height:50px;" onclick="changebackground(this)"></div>
+                                    <div id="sh_lt" class="hpcPrevious"
+                                         style="background: transparent url(../static/img/arrow-left.png) no-repeat;background-size: 100% 100%;opacity: .7;width:50px;height:50px;"
+                                         onclick="changebackground(this)"></div>
                                 </div>
                             </a>
                             <a role="button" id="sh_igr" title="下一个图像" aria-label="下一个图像">
                                 <div class="sc_lightdis" style="opacity: 1;">
-                                    <div id="sh_rt" class="hpcNext" style="background: transparent url(../static/img/arrow-right.png) no-repeat;background-size: 100% 100%;opacity: 1;width:50px;height:50px;margin-left:25px;cursor: pointer;" onclick="changebackground(this)"></div>
+                                    <div id="sh_rt" class="hpcNext"
+                                         style="background: transparent url(../static/img/arrow-right.png) no-repeat;background-size: 100% 100%;opacity: 1;width:50px;height:50px;margin-left:25px;cursor: pointer;"
+                                         onclick="changebackground(this)"></div>
                                 </div>
                             </a>
                             <a id="sh_cp" class="sc_light" role="button" style="cursor: pointer;">
                                 <div style="opacity: 1;">
-                                    <div id="sh_cp_in" class="hpcCopyInfo"  style="background: transparent url(../static/img/info.png) no-repeat;background-size: 100% 100%;opacity: 1;width:50px;height:50px;margin-left:25px;"></div>
+                                    <div id="sh_cp_in" class="hpcCopyInfo"
+                                         style="background: transparent url(../static/img/info.png) no-repeat;background-size: 100% 100%;opacity: 1;width:50px;height:50px;margin-left:25px;"></div>
                                 </div>
                             </a>
                         </div>
@@ -269,4 +389,16 @@
     </tr>
 </table>
 </body>
+<script>
+
+    var user=${user}
+    if (user==null){
+
+    }
+    else{
+        $("#id_s").text("您好,"+user);
+    }
+
+
+</script>
 </html>
