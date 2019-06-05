@@ -182,7 +182,7 @@
                     var searchType = $(".est_selected").attr("name");
                     var searchString = $("#sb_form_q").val()
                     var searchBy = $("#sa_qs").val()
-                    var searchUrl = encodeURI("result.html?searchString=" + searchString + "&searchBy=" + searchBy + "&searchType=" + searchType); //使用encodeURI编码
+                    var searchUrl = encodeURI("SearchPaperResult.html?searchString=" + searchString+"&searchBy="+searchBy+"&searchType="+searchType+"&page=1" ); //使用encodeURI编码
                     window.location.href = (searchUrl);
                 }
             </script>

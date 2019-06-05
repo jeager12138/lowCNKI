@@ -24,7 +24,7 @@ public class InstitutionController {
         if(index != 0){
             String substr = institution.substring(index+2);
             name = institution.replace(substr,"");
-            System.out.println(name);
+            //System.out.println(name);
         }
         Wf_organization wf = wf_organizationDAO.getOrganizationByName(name);
         wf.setNum_cited(wf_organizationDAO.getNum_citedByName(name));
