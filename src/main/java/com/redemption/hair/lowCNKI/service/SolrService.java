@@ -43,6 +43,7 @@ public class SolrService {
         response = client.query(query);
 
         SolrDocumentList list = response.getResults();
+        //long num = list.getNumFound();
         for (SolrDocument solrDocument : list) {
             // Todo
             Bdxs_paper paper = new Bdxs_paper();

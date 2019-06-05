@@ -43,7 +43,7 @@ public class SearchResultController {
 
         if(searchType.equals("paper")) {
             List<Bdxs_paper> paperList = solrService.searchPaper(searchBy, searchString, (page-1)*10, 10);
-//            int pageNum = (int)(Math.ceil(paperList.size()/10.0));
+//          int pageNum = (int)(Math.ceil(paperList.size()/10.0));
             int pageNum = 15;
             int pageLeft = (page-5)>=1?page-2:1;
             int pageRight = (page+5)<=pageNum?page+5:pageNum;

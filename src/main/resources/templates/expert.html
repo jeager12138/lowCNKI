@@ -93,7 +93,7 @@
 			<div class="ace-card-inner text-center">
 				<img class="avatar avatar-195" src="../static/img/uploads/avatar/avatar-58x58-default.png" width="195" height="195" alt="">
 				<h1>${expert.name}</h1>
-				<p class="text-muted">${expert.affiliate}</p>
+				<p class="text-muted"><a href="institutionInfo?institution=${expert.affiliate}">${expert.affiliate}</a></p>
 				<ul class="ace-social clear-list">
 					<li><a><span class="ace-icon ace-icon-facebook"></span></a></li>
 					<li><a><span class="ace-icon ace-icon-twitter"></span></a></li>
@@ -193,7 +193,7 @@
 
                     <dl class="dl-horizontal clear-mrg">
                         <dt class="text-upper">机构</dt>
-                        <dd>${expert.name}</dd>
+						<dd><a href="institutionInfo?institution=${expert.affiliate}">${expert.affiliate}</a></dd>
 
                         <dt class="text-upper">专家ID</dt>
                         <dd>${expert.scholarId}</dd>
@@ -283,7 +283,7 @@
 							<div class="padd-box-sm clear-mrg">
 								<div class="ref-box brd-btm hreview">
 									<div class="ref-author">
-										<strong><a href="/essay?paperId=${paper.paperId}&page=1">文献名：${paper.title}</a></strong>
+										<strong><a href="/essay?paperId=${paper.paperId?c}&page=1">${paper.title}</a></strong>
 										<span>${paper.keywords}</span>
 									</div>
 									<blockquote class="ref-cont clear-mrg">
